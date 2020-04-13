@@ -54,7 +54,7 @@ void testDrawDot()
     for ( int i = 0 ; i < 1000; i ++ )
     {
         d.setPoint(random(480),random(320));
-        d.setColor((uint32_t)random(0xFFFF)+1);
+        d.setColor((uint32_t)random(0xFFFF));
         d.draw ( scr ) ;
     }
 
@@ -72,7 +72,7 @@ void testDrawLine()
     {
         l.setPoint(random(480),random(320));
         l.setEndPoint(random(480),random(320));
-        l.setColor((uint32_t)random(0xFFFF)+1);
+        l.setColor((uint32_t)random(0xFFFF));
         l.draw ( scr ) ;
     }
 
@@ -90,7 +90,7 @@ void testDrawRect ( )
     {
         r.setPoint(random(480),random(320));
         r.setEndPoint(random(480),random(320));
-        r.setColor((uint32_t)random(0xFFFF)+1);
+        r.setColor((uint32_t)random(0xFFFF));
         r.draw(scr);
     }
 
@@ -107,7 +107,7 @@ void testFillRect ( )
     {
         r.setPoint(random(480),random(320));
         r.setEndPoint(random(480),random(320));
-        r.setColor((uint32_t)random(0xFFFF)+1);
+        r.setColor((uint32_t)random(0xFFFF));
         r.fill(scr);
     }
 
@@ -178,7 +178,7 @@ void testBuffer()
         d.setX(75);
         for ( int x = 0 ; x < 50 ; x ++ )
         {
-            d.setColor((uint32_t)random(0xFFFF)+1);
+            d.setColor((uint32_t)random(0xFFFF));
             d.draw(scr);
             d.move(90,1);
         }
@@ -195,7 +195,7 @@ void testBuffer()
         d.setX(0);
         for ( int x = 0 ; x < 50 ; x ++ )
         {
-            d.setColor((uint32_t)random(0xFFFF)+1);
+            d.setColor((uint32_t)random(0xFFFF));
             d.draw(buf);
             d.move(90,1);
         }
@@ -257,12 +257,31 @@ void testDrawCircle ( )
     {
         c.setPoint(random(480),random(320));
         c.setRadius(random(160));
-        c.setColor((uint32_t)random(0xFFFF)+1);
+        c.setColor((uint32_t)random(0xFFFF));
         c.draw(scr);
     }
 
     scr -> resetCursor ( ) ;
     scr -> println ( "Drawn 50 circles randomly." ) ;
+    delay(5000);
+}
+
+void testDrawEllipse ( )
+{
+    scr -> clear ( ) ;
+
+    Ellipse e;
+    for ( int i = 0 ; i < 50; i ++ )
+    {
+        e.setPoint(random(480),random(320));
+        e.setRx(random(240));
+        e.setRy(random(160));
+        e.setColor((uint32_t)random(0xFFFF));
+        e.draw(scr);
+    }
+
+    scr -> resetCursor ( ) ;
+    scr -> println ( "Drawn 50 ellipses randomly." ) ;
     delay(5000);
 }
 
@@ -275,8 +294,27 @@ void testFillCircle ( )
     {
         c.setPoint(random(480),random(320));
         c.setRadius(random(160));
-        c.setColor((uint32_t)random(0xFFFF)+1);
+        c.setColor((uint32_t)random(0xFFFF));
         c.fill(scr);
+    }
+
+    scr -> resetCursor ( ) ;
+    scr -> println ( "Filled 50 circles randomly." ) ;
+    delay(5000);
+}
+
+void testFillEllipse ( )
+{
+    scr -> clear ( ) ;
+
+    Ellipse e;
+    for ( int i = 0 ; i < 50; i ++ )
+    {
+        e.setPoint(random(480),random(320));
+        e.setRx(random(240));
+        e.setRy(random(160));		
+        e.setColor((uint32_t)random(0xFFFF));
+        e.fill(scr);
     }
 
     scr -> resetCursor ( ) ;
@@ -295,7 +333,7 @@ void testDrawTriangle ( )
         t.setPoint(random(480),random(320));
         t.setP2(Point(random(480),random(320)));
         t.setP3(Point(random(480),random(320)));
-        t.setColor((uint32_t)random(0xFFFF)+1);
+        t.setColor((uint32_t)random(0xFFFF));
         t.draw(scr);
     }
 
@@ -314,7 +352,7 @@ void testFillTriangle ( )
         t.setPoint(random(480),random(320));
         t.setP2(Point ( random(480),random(320)));
         t.setP3(Point(random(480),random(320)));
-        t.setColor((uint32_t)random(0xFFFF)+1);
+        t.setColor((uint32_t)random(0xFFFF));
         t.fill(scr);
     }
 
@@ -332,6 +370,8 @@ void loop()
     testFillRect();
     testDrawCircle();
     testFillCircle();
+    testDrawEllipse();
+    testFillEllipse();
     testDrawTriangle();
     testFillTriangle();
     testAllColor();
