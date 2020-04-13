@@ -610,19 +610,161 @@ void Screen::fillImpl(Triangle* t)
 }
 
 void Screen::drawImpl(Ellipse* e) {
-// .................
+	int16_t cx = e -> getX ( ),
+		cy = e -> getY ( ),
+		rx = e -> getRx ( ),
+		ry = e -> getRy ( );
 
+	if ( ! rx ) { return ; }
+	if ( ! ry ) { return ; }
 
+	int32_t x, y,
+		xChange, yChange,
+		error, aSqr, bSqr, sx, sy, cond;
+		
+	aSqr = (int32_t)2 * rx * rx ;
+	bSqr = (int32_t)2 * ry * ry ;
 
+	x = rx ;
+	y = 0 ;
 
-// .................
+	xChange = 1 - 2*rx ; xChange *= ry; xChange *= ry;
+	yChange = (int32_t) rx * rx ;
+	error = 0;
+	sx = (int32_t)bSqr * rx ;
+	sy = 0;
+
+	Dot d;
+	d.setColor ( *e );
+
+	while ( sx >= sy ) {
+		d.setPoint ( cx+x, cy+y ); drawImpl ( &d );
+		d.setPoint ( cx-x, cy+y ); drawImpl ( &d );
+		d.setPoint ( cx-x, cy-y ); drawImpl ( &d );
+		d.setPoint ( cx+x, cy-y ); drawImpl ( &d );
+		
+		y++ ;
+		sy += aSqr ;
+		error += yChange ;
+		yChange += aSqr ;
+
+		cond = error; cond *= 2; cond += xChange;
+		if ( cond > 0 ) {
+			x --;
+			sx -= bSqr ;
+			error += xChange ;
+			xChange += bSqr ;
+		}
+	}
+	
+	x = 0;
+	y = ry;
+	xChange = (int32_t)ry * ry;
+	yChange = 1 - 2*ry ; yChange *= rx; yChange *= rx;
+	error = 0;
+	sx = 0;
+	sy = (int32_t)aSqr * ry ;
+
+	while ( sx <= sy ) {
+		d.setPoint ( cx+x, cy+y ); drawImpl ( &d );
+		d.setPoint ( cx-x, cy+y ); drawImpl ( &d );
+		d.setPoint ( cx-x, cy-y ); drawImpl ( &d );
+		d.setPoint ( cx+x, cy-y ); drawImpl ( &d );
+		
+		x++;
+		sx += bSqr;
+		error += xChange;
+		xChange += bSqr;
+		
+		cond = error; cond *= 2; cond += yChange;
+		if ( cond > 0 ) {
+			y --;
+			sy -= aSqr ;
+			error += yChange ;
+			yChange += aSqr ;
+		}
+	}
 }
 
 void Screen::fillImpl(Ellipse* e) {
-// .................
+	int16_t cx = e -> getX ( ),
+		cy = e -> getY ( ),
+		rx = e -> getRx ( ),
+		ry = e -> getRy ( );
 
+	if ( ! rx ) { return ; }
+	if ( ! ry ) { return ; }
 
+	int32_t x, y,
+		xChange, yChange,
+		error, aSqr, bSqr, sx, sy, cond;
+		
+	aSqr = (int32_t)2 * rx * rx ;
+	bSqr = (int32_t)2 * ry * ry ;
 
+	x = rx ;
+	y = 0 ;
 
-// .................
+	xChange = 1 - 2*rx ; xChange *= ry; xChange *= ry;
+	yChange = (int32_t) rx * rx ;
+	error = 0;
+	sx = (int32_t)bSqr * rx ;
+	sy = 0;
+
+	Line l;
+	l.setColor ( *e );
+
+	while ( sx >= sy ) {
+		l.setPoint ( cx+x, cy+y );
+		l.setEndPoint ( cx-x, cy+y );
+		drawImpl ( &l );
+
+		l.setPoint ( cx-x, cy-y );
+		l.setEndPoint ( cx+x, cy-y );
+		drawImpl ( &l );
+		
+		y++ ;
+		sy += aSqr ;
+		error += yChange ;
+		yChange += aSqr ;
+
+		cond = error; cond *= 2; cond += xChange;
+		if ( cond > 0 ) {
+			x --;
+			sx -= bSqr ;
+			error += xChange ;
+			xChange += bSqr ;
+		}
+	}
+	
+	x = 0;
+	y = ry;
+	xChange = (int32_t)ry * ry;
+	yChange = 1 - 2*ry ; yChange *= rx; yChange *= rx;
+	error = 0;
+	sx = 0;
+	sy = (int32_t)aSqr * ry ;
+
+	while ( sx <= sy ) {
+		l.setPoint ( cx+x, cy+y );
+		l.setEndPoint ( cx-x, cy+y );
+		drawImpl ( &l );
+
+		l.setPoint ( cx-x, cy-y );
+		l.setEndPoint ( cx+x, cy-y );
+		drawImpl ( &l );
+		
+		x++;
+		sx += bSqr;
+		error += xChange;
+		xChange += bSqr;
+		
+		cond = error; cond *= 2; cond += yChange;
+		if ( cond > 0 ) {
+			y --;
+			sy -= aSqr ;
+			error += yChange ;
+			yChange += aSqr ;
+		}
+	}
 }
