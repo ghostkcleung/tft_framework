@@ -18,9 +18,7 @@ void setup () {
 
 void loop () { delay ( 100000 ) ; }
 ```
-
 # Usage of Point
-
 ```cpp
 Point p1 ( 10, 20 );    // x: 10, y: 20
 
@@ -41,7 +39,6 @@ p2.setPoint ( p1 ) ;    // Set the X, Y of p2 same as p1
 
 Point p3 ( p1 ) ;       // Create the Point and init as p1
 ```
-
 # Usage of Color
 ```cpp
 // The data of Color is stored as 16 bit(565)
@@ -69,3 +66,11 @@ c2.setColor ( c1 );     // Set the color content same as c1
 
 Color c3 ( c1 );        // Create the Color and init as c1
 ```
+# Shape
+The following type is inherit Shape:
+- Dot
+- Line
+- Rectangle
+- Triangle
+- Circle
+- Ellipse
