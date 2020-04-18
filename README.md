@@ -2,7 +2,8 @@
 TFT Framework is the graphic interface for TFT Screen with Arduino.
 
 #Hello World
-`#include <Mega2560_16Bit_ILI9486.h>
+```cpp
+#include <Mega2560_16Bit_ILI9486.h>
 
 using namespace tft_framework;
 
@@ -15,4 +16,5 @@ void setup () {
     scr -> println ( "Hello world" );
 }
 
-void loop () { delay ( 100000 ) ; }`
+void loop () { delay ( 100000 ) ; }
+```
