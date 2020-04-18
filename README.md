@@ -74,3 +74,51 @@ The following type is inherit Shape:
 - Triangle
 - Circle
 - Ellipse
+All of them have the properties of Point and Color.
+They are Drawable. And most of them are Fillable except the Dot and the Line.
+
+# Usage of Dot
+Dot d;
+d.setPoint ( 10, 20 );  // Set the point of the dot.
+d.setRGB ( 0xFF0000 );  // Set the color of the dot.
+d.draw ( scr ) ;        // Draw the dot to the screen.
+
+for ( int x = 15; x < 100; x ++ ) {
+    d.move ( 90, 5 );   // Move to right, distance 5.
+    d.draw ( scr );     // Draw each iterated dot.
+}
+
+# Usage of Line
+Line l;
+l.setPoint ( 10, 20 );      // Start point
+l.setEndPoint ( 50, 60 );   // End point
+l.draw ( scr );
+
+l.lineTo ( 135, 50 );   // Set the end to 135 degree of start point, distance 50
+l.draw ( scr );
+
+# Usage of Rectangle
+Rectangle r;
+r.setPoint ( 10, 20 );       // Start Point
+r.setEndPoint ( 60, 100 ) ;  // End Point
+r.draw ( scr );              // Draw the rectangle to screen
+
+r.setPoint ( 100, 50 );
+r.setWidth ( 60 );           // End point of X: 159
+r.setHeight ( 120 );         // End point of X: 169
+// You may also write it as: r.setSize ( 60, 120 ) ;
+r.fill ( scr );              // Fill to screen
+
+# Usage of Triangle
+Triangle t;
+t.setPoint ( 10, 10 );      // The first point
+t.setP2 ( 10, 40 );         // The second point
+t.setp3 ( 50, 40 );         // The third point
+t.draw ( scr );             // There will be right angle triangle 30, 40, 50 
+
+# Usage of Circle
+Circle c;
+c.setPoint ( 150, 100 );    // Center point
+c.setRadius ( 70 );         // Radius
+c.fill ( scr );             // Fill to screen
+
