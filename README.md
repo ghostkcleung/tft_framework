@@ -168,9 +168,10 @@ f -> draw ( scr ) ;
 delete f;                   // Deallocate
 ```
 
-# Printer
-The Screen class is inherit Printer.
+# Print
+The Screen class is inherit offical Print class.
 So you can print the text easier than draw each font.
+The usage of print just like Serial.print()
 ```cpp
 
 scr -> setFont ( new Font5X7() );               // It's not necessary when using default font.
@@ -179,7 +180,18 @@ scr -> setFontScale ( 3 );                      // Set the font size to 3x.
 scr -> setFontPadding ( 1 ) ;                   // The distance of each char.
 scr -> setCursor ( 18, 24 );                    // Set the print cursor
 
-scr -> println ( "ABCDE" ) ;
+scr -> println ( 78 );              // 78
+scr -> println ( 1.23456 );         // 1.23
+scr -> println ( 'N' );             // N
+scr -> println ( "Hello world." );  // Hello world.
+
+scr -> print(78, BIN);      // 1001110
+scr -> print(78, OCT);      // 116
+scr -> print(78, DEC);      // 78
+scr -> print(78, HEX);      // 4E
+scr -> println(1.23456, 0); // 1
+scr -> println(1.23456, 2); // 1.23
+scr -> println(1.23456, 4); // 1.2346
 ```
 
 # BufferScreen
