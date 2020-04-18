@@ -185,10 +185,10 @@ scr -> println ( 1.23456 );         // 1.23
 scr -> println ( 'N' );             // N
 scr -> println ( "Hello world." );  // Hello world.
 
-scr -> print(78, BIN);      // 1001110
-scr -> print(78, OCT);      // 116
-scr -> print(78, DEC);      // 78
-scr -> print(78, HEX);      // 4E
+scr -> println(78, BIN);      // 1001110
+scr -> println(78, OCT);      // 116
+scr -> println(78, DEC);      // 78
+scr -> println(78, HEX);      // 4E
 scr -> println(1.23456, 0); // 1
 scr -> println(1.23456, 2); // 1.23
 scr -> println(1.23456, 4); // 1.2346
