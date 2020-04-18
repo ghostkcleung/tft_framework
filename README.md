@@ -81,8 +81,10 @@ The following type is inherit Shape:
 - Circle
 - Ellipse
 - Font
+
 All of them have the properties of Point and Color.
 They are Drawable. And most of them are Fillable except:
+
 - Dot
 - Line
 - Font
