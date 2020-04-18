@@ -134,3 +134,13 @@ c.setPoint ( 150, 100 );    // Center point
 c.setRadius ( 70 );         // Radius
 c.fill ( scr );             // Fill to screen
 ```
+
+# Usage of Ellipse
+```cpp
+Ellipse e;
+c.setPoint ( 150, 150 );    // Center point
+e.setRx ( 70 );             // Rx
+e.setRy ( 100 );            // Ry
+e.fill ( scr );             // Fill to screen
+```
+
