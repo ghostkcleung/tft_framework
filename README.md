@@ -13,7 +13,7 @@ void setup () {
     scr = new Mega2560_16Bit_ILI9486 () ;
     scr -> init ();
     scr -> clear ();
-    scr -> println ( "Hello world" );
+    scr -> println ( "Hello world" );   // Print text to the screen
 }
 
 void loop () { delay ( 100000 ) ; }
