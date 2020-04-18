@@ -77,13 +77,17 @@ The following type is inherit Shape:
 - Triangle
 - Circle
 - Ellipse
+- Font
 All of them have the properties of Point and Color.
-They are Drawable. And most of them are Fillable except the Dot and the Line.
+They are Drawable. And most of them are Fillable except:
+- Dot
+- Line
+- Font
 
 # Usage of Dot
 ```cpp
 Dot d;
-d.setPoint ( 10, 20 );  // Set the point of the dot.
+d.setPoint ( 10, 20 );  // Set the position of the dot.
 d.setRGB ( 0xFF0000 );  // Set the color of the dot.
 d.draw ( scr ) ;        // Draw the dot to the screen.
 
@@ -141,6 +145,34 @@ Ellipse e;
 c.setPoint ( 150, 150 );    // Center point
 e.setRx ( 70 );             // Rx
 e.setRy ( 100 );            // Ry
-e.fill ( scr );             // Fill to screen
+e.fill ( scr );
 ```
 
+# Font
+```cpp
+Font *f = new Font5X7();     // Ussally the font is assigned to pointer.
+f -> setChar ( 'A' );        // Set character
+f -> setRGB ( 0x0000FF );    // Set to Blue
+f -> setPoint ( 10, 20 );
+f -> draw ( scr ) ;
+
+f -> setScale ( 3 );         // Scale the font to 3x.
+f -> setPoint ( 50, 20 );
+f -> draw ( scr ) ;
+
+delete f;                   // Deallocate
+```
+
+# Printer
+The Screen class is inherit Printer.
+So you can print the text easier than draw each font.
+```cpp
+
+scr -> setFont ( new Font5X7() );               // It's not necessary when using default font.
+scr -> setFontColor ( Color ( 0x0000FF ) ) ;    // Set the print color to blue.
+scr -> setFontScale ( 3 );                      // Set the font size to 3x.
+scr -> setFontPadding ( 1 ) ;                   // The distance of each char.
+scr -> setCursor ( 18, 24 );                    // Set the print cursor
+
+scr -> println ( "ABCDE" ) ;
+```
