@@ -183,6 +183,5 @@ scr -> println ( "ABCDE" ) ;
 # BufferScreen
 The buffer is a virtual screen. You can draw something to it to store the content.
 Then fill to the real screen. Sometimes it can be more efficiency. The buffer can be enlarge.
-But be attention for the memory size. It need 2byte per pixel.
-There is 8k byte inside the Arduino Mega 2560.
-That means the maxium bounds of buf can be about 50x50 only.
+But be attention for the limitation of memory size. It need 2byte per pixel. There is 8k byte inside the Arduino Mega 2560. That means the maxium bounds of buf can be about 60x60 only.
+60x60x2 = 7200bytes
