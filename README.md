@@ -155,7 +155,7 @@ e.fill ( scr );
 
 # Font
 ```cpp
-Font *f = new Font5X7();     // Ussally the font is assigned to pointer.
+Font *f = new Font5X7();     // Usually the font is assigned to pointer.
 f -> setChar ( 'A' );        // Set character
 f -> setRGB ( 0x0000FF );    // Set to Blue
 f -> setPoint ( 10, 20 );
