@@ -4,7 +4,7 @@ I've tested it with Arduino Mega 2560 and ILI9486 16bit parallel 3.5inch TFT Scr
 There is a sample:
 https://youtu.be/RjGyStkZ0k4
 
-01.jpg 02.jpg
+https://github.com/ghostkcleung/tft_framework/01.jpg https://github.com/ghostkcleung/tft_framework/02.jpg
 
 # Hello World
 ```cpp
