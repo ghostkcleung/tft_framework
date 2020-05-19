@@ -4,6 +4,8 @@ I've tested it with Arduino Mega 2560 and ILI9486 16bit parallel 3.5inch TFT Scr
 There is a sample:
 https://youtu.be/RjGyStkZ0k4
 
+01.jpg 02.jpg
+
 # Hello World
 ```cpp
 #include <Mega2560_16Bit_ILI9486.h>
