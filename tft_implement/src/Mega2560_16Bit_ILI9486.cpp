@@ -3,7 +3,7 @@
 using namespace tft_framework;
 
 Mega2560_16Bit_ILI9486::Mega2560_16Bit_ILI9486(int16_t w, int16_t h,
-        int rs, int wr, int cs, int rst ):Screen(w,h)
+        uint8_t rs, uint8_t wr, uint8_t cs, uint8_t rst ):Screen(w,h)
 {
 
     DDRA = 0xFF ;

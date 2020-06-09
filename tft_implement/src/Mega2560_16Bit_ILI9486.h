@@ -24,7 +24,7 @@ private:
 public:
 
     Mega2560_16Bit_ILI9486( int16_t w, int16_t h,
-                            int rs, int wr, int cs, int rst );
+        uint8_t rs, uint8_t wr, uint8_t cs, uint8_t rst );
 
     Mega2560_16Bit_ILI9486():Mega2560_16Bit_ILI9486(
             480, 320, 38, 39, 40, 41) {};
