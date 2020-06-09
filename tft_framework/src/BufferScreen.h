@@ -21,7 +21,7 @@ public:
     void init ( ) ;
 
     BufferScreen(uint16_t w, uint16_t h);
-    ~BufferScreen();
+    virtual ~BufferScreen();
 
     void fill(Screen* scr);
 

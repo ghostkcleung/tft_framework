@@ -20,9 +20,6 @@ public:
     void setPoint(int16_t x, int16_t y);
 
     virtual void move(double direction, double distance);
-	
-	bool equals ( Point p ) ;
-	bool equals  ( Point points[], uint16_t count ) ;
 
 };
 

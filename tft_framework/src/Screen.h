@@ -20,7 +20,7 @@ protected:
     virtual void fillRect(Rectangle* rect)=0;
 
 public:
-    ~Screen();
+    virtual ~Screen();
 
     virtual void init();
 

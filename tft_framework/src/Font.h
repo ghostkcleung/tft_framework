@@ -7,6 +7,8 @@ public:
 Font(uint8_t w,uint8_t h)
   :w(w),h(h),scale(1),c('\0'){};
 
+virtual ~Font();
+
 uint8_t getWidth(), getHeight();
 
 char getChar();

@@ -67,17 +67,3 @@ void Point::move(double direction, double distance)
     x = x + round ( distance * sin( direction * M_PI / 180 ) ) ;
     y = y + round ( -distance * cos( direction * M_PI / 180 ) ) ;
 }
-
-
-bool Point::equals ( Point p ) {
-	return ( x == p.x && y == p.y ) ;
-}
-
-bool Point::equals ( Point p[], uint16_t count ) {
-	for ( int i = 0 ; i < count ; i ++ ) {
-		if ( ! equals(p[i] )){
-			return false ;
-		}
-	}
-	return true ;
-}

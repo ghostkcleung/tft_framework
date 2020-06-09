@@ -24,3 +24,7 @@ uint8_t Font::getScale(){
 void Font::setScale(uint8_t s){
   scale=s;
 }
+
+Font::~Font(){
+	
+}
