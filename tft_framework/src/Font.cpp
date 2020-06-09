@@ -24,7 +24,3 @@ uint8_t Font::getScale(){
 void Font::setScale(uint8_t s){
   scale=s;
 }
-
-uint8_t* Font::getMatrix ( ) {
-	return matrix ;
-}

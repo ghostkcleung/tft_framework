@@ -383,19 +383,19 @@ size_t Screen::write(uint8_t data)
     if (printBuffer)
     {
         BufferScreen *bScr = new BufferScreen(_w,_h);
-        bScr -> setColor ( this ) ;
+        bScr -> setColor ( *this ) ;
         bScr -> setScale ( fontScale ) ;
         bScr -> setPoint(*f);
-        bScr -> setColor (*this) ;
         bScr -> clear ( ) ;
         f->setPoint(0,0);
         f->setScale(1);
         f->draw(bScr);
 
         fillImpl (bScr) ;
-        delete bScr ;
 
         f->setPoint(*bScr);
+
+        delete bScr ;
 
         Rectangle r;
         r.setColor(*this);

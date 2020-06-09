@@ -15,10 +15,7 @@ void setChar(char c);
 uint8_t getScale();
 void setScale(uint8_t s);
 
-virtual uint8_t* getMatrix()=0;
-
 private:
-uint8_t* matrix;
 uint8_t w, h, scale;
 char c;
 

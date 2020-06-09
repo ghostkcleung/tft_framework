@@ -1,10 +1,6 @@
 #include "tft_framework.h"
 using namespace tft_framework;
 
-uint8_t* Font5X7::getMatrix(){
-	return Matrix;
-}
-
 void Font5X7::draw(Screen* scr){
 	uint8_t scale = getScale();
 	if ( scale==0 ) { return; }
@@ -21,10 +17,10 @@ void Font5X7::draw(Screen* scr){
 	int16_t _x = getX(),
 		_y = getY();
 
-	uint8_t* matrix = Matrix+(ch-32)*5;
+	uint16_t index = (ch-32)*5;
 
 	for(int x=0;x<5;x++){
-		ch = pgm_read_byte_near(matrix++);
+		ch = pgm_read_byte_near(Matrix[index++]);
 		for(int y=0;y<7;y++){
 			if(ch & (1<<y)){
 				rect.setX(_x+x*scale);
@@ -37,7 +33,7 @@ void Font5X7::draw(Screen* scr){
 	}
 }
 
-static const uint8_t Font5X7::Matrix[] PROGMEM = {
+const uint8_t Font5X7::Matrix[] PROGMEM = {
 	0x00, 0x00, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x5F, 0x00, 0x00,
 	0x00, 0x07, 0x00, 0x07, 0x00,
