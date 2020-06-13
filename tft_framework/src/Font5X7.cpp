@@ -20,7 +20,13 @@ void Font5X7::draw(Screen* scr){
 	uint16_t index = (ch-32)*5;
 
 	for(int x=0;x<5;x++){
+
+		#if !defined(__SAM3X8E__) && !defined(__SAMD21G18A__)
 		ch = pgm_read_byte_near(Matrix[index++]);
+		#else
+		ch = Matrix[index++];
+		#endif
+
 		for(int y=0;y<7;y++){
 			if(ch & (1<<y)){
 				rect.setX(_x+x*scale);
@@ -33,7 +39,11 @@ void Font5X7::draw(Screen* scr){
 	}
 }
 
-const uint8_t Font5X7::Matrix[] PROGMEM = {
+const uint8_t Font5X7::Matrix[] 
+#if !defined(__SAM3X8E__) && !defined(__SAMD21G18A__)
+PROGMEM
+#endif
+= {
 	0x00, 0x00, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x5F, 0x00, 0x00,
 	0x00, 0x07, 0x00, 0x07, 0x00,
