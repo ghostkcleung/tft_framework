@@ -135,7 +135,7 @@ r.fill ( scr );              // Fill to screen
 Triangle t;
 t.setPoint ( 10, 10 );      // The first point
 t.setP2 ( 10, 40 );         // The second point
-t.setp3 ( 50, 40 );         // The third point
+t.setP3 ( 50, 40 );         // The third point
 t.draw ( scr );             // There will be right angle triangle 30, 40, 50 
 ```
 
