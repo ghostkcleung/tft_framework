@@ -99,7 +99,7 @@ d.setPoint ( 10, 20 );  // Set the position of the dot.
 d.setRGB ( 0xFF0000 );  // Set the color of the dot.
 d.draw ( scr ) ;        // Draw the dot to the screen.
 
-for ( int x = 15; x < 100; x ++ ) {
+while ( d.getX ( ) < 400 ) {
     d.move ( 90, 5 );   // Move to right, distance 5.
     d.draw ( scr );     // Draw each iterated dot.
 }
