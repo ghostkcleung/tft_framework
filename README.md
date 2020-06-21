@@ -99,7 +99,7 @@ d.setPoint ( 10, 20 );  // Set the position of the dot.
 d.setRGB ( 0xFF0000 );  // Set the color of the dot.
 d.draw ( scr ) ;        // Draw the dot to the screen.
 
-for ( int x = 15; x < 100; x ++ ) {
+while ( d.getX ( ) < 400 ) {
     d.move ( 90, 5 );   // Move to right, distance 5.
     d.draw ( scr );     // Draw each iterated dot.
 }
@@ -135,7 +135,7 @@ r.fill ( scr );              // Fill to screen
 Triangle t;
 t.setPoint ( 10, 10 );      // The first point
 t.setP2 ( 10, 40 );         // The second point
-t.setp3 ( 50, 40 );         // The third point
+t.setP3 ( 50, 40 );         // The third point
 t.draw ( scr );             // There will be right angle triangle 30, 40, 50 
 ```
 
