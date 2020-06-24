@@ -1,8 +1,8 @@
 # tft_framework
 TFT Framework is the graphic interface for TFT Screen with Arduino.
-I've tested it with Arduino Mega 2560 and ILI9486 16bit parallel 3.5inch TFT Screen.
+I've tested it with Arduino Mega 2560, Arduino Due and ILI9486 16bit parallel 3.5inch TFT Screen.
 There is a sample:
-https://youtu.be/RjGyStkZ0k4
+https://youtu.be/qud3bSVzDqk
 
 ![image](https://github.com/ghostkcleung/tft_framework/blob/master/01.jpg)
 ![image](https://github.com/ghostkcleung/tft_framework/blob/master/02.jpg)
