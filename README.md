@@ -9,14 +9,14 @@ https://youtu.be/RjGyStkZ0k4
 
 # Hello World
 ```cpp
-#include <Mega2560_16Bit_ILI9486.h>
+#include <ILI9486_16Bit.h>
 
 using namespace tft_framework;
 
 Screen* scr;
 
 void setup () {
-    scr = new Mega2560_16Bit_ILI9486 () ;
+    scr = new ILI9486_16Bit ( ) ;
     scr -> init ();
     scr -> clear ();
     scr -> println ( "Hello world" );   // Print text to the screen

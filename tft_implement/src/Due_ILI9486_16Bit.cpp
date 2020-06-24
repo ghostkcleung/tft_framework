@@ -1,14 +1,21 @@
-#include <Mega2560_16Bit_ILI9486.h>
+#if defined ( __SAM3X8E__ )
+#include <Due_ILI9486_16Bit.h>
 
 using namespace tft_framework;
 
-Mega2560_16Bit_ILI9486::Mega2560_16Bit_ILI9486(int16_t w, int16_t h,
+void Due_ILI9486_16Bit::setDirectionRegisters(){
+		REG_PIOA_OER=0x0000c000;
+		REG_PIOB_OER=0x04000000;
+		REG_PIOD_OER=0x0000064f;
+		REG_PIOA_OER=0x00000080;
+		REG_PIOC_OER=0x0000003e;
+}
+
+Due_ILI9486_16Bit::Due_ILI9486_16Bit(int16_t w, int16_t h,
         uint8_t rs, uint8_t wr, uint8_t cs, uint8_t rst ):Screen(w,h)
 {
 
-    DDRA = 0xFF ;
-    DDRC = 0xFF ;
-
+	setDirectionRegisters();
     uint8_t pins[4] = { rs, wr, cs, rst } ;
 
     uint8_t i = 0;
@@ -21,55 +28,45 @@ Mega2560_16Bit_ILI9486::Mega2560_16Bit_ILI9486(int16_t w, int16_t h,
     while ( i++ < 3 ) ;
 }
 
-void Mega2560_16Bit_ILI9486::cbi ( volatile uint8_t *port, uint8_t bitmask )
+void Due_ILI9486_16Bit::cbi ( RegType *port, RegSize bitmask )
 {
     *port &= ~bitmask ;
 }
 
-void Mega2560_16Bit_ILI9486::sbi ( volatile uint8_t *port, uint8_t bitmask )
+void Due_ILI9486_16Bit::sbi ( RegType *port, RegSize bitmask )
 {
     *port |= bitmask ;
 }
 
-void Mega2560_16Bit_ILI9486::pulseHigh ( volatile uint8_t *port, uint8_t bitmask )
+void Due_ILI9486_16Bit::pulseHigh ( RegType *port, RegSize bitmask )
 {
     sbi ( port, bitmask ) ;
     cbi ( port, bitmask ) ;
 }
 
-void Mega2560_16Bit_ILI9486::pulseLow ( volatile uint8_t *port, uint8_t bitmask )
+void Due_ILI9486_16Bit::pulseLow ( RegType *port, RegSize bitmask )
 {
     cbi ( port, bitmask ) ;
     sbi ( port, bitmask ) ;
 }
 
-void Mega2560_16Bit_ILI9486::writeCom ( uint8_t com )
+void Due_ILI9486_16Bit::writeCom ( uint8_t com )
 {
     cbi ( ports[0], bitmasks[0] ) ;
-    PORTA = 0 ;
-    PORTC = com ;
+	feedValue ( 0, com ) ;
     pulseLow ( ports[1], bitmasks[1] ) ;
 }
 
-void Mega2560_16Bit_ILI9486::writeData ( uint8_t data )
+void Due_ILI9486_16Bit::writeData ( uint8_t data )
 {
     sbi ( ports[0], bitmasks[0] ) ;
-    PORTA = 0 ;
-    PORTC = data ;
+	feedValue ( 0, data ) ;
     pulseLow ( ports[1], bitmasks[1] ) ;
 }
 
-void Mega2560_16Bit_ILI9486::writeData ( uint8_t h, uint8_t l )
+void Due_ILI9486_16Bit::init()
 {
-    sbi ( ports[0], bitmasks[0] ) ;
-    PORTA = h ;
-    PORTC = l ;
-}
-
-void Mega2560_16Bit_ILI9486::init()
-{
-    DDRA = 0xFF;
-    DDRC = 0xFF;
+	setDirectionRegisters();
 
     sbi( ports[3], bitmasks[3] );
     delay(5);
@@ -185,7 +182,7 @@ void Mega2560_16Bit_ILI9486::init()
     sbi(ports[2], bitmasks[2]);
 }
 
-void Mega2560_16Bit_ILI9486::setWindow ( Rectangle* r )
+void Due_ILI9486_16Bit::setWindow ( Rectangle* r )
 {
     int16_t x1 = r -> getX(),
             y1 = r -> getY(),
@@ -209,14 +206,23 @@ void Mega2560_16Bit_ILI9486::setWindow ( Rectangle* r )
 
 }
 
-void Mega2560_16Bit_ILI9486::fillRect ( Rectangle* r )
+void Due_ILI9486_16Bit::feedValue ( uint8_t h, uint8_t l ) {
+	REG_PIOA_CODR=0x0000C080;
+	REG_PIOC_CODR=0x0000003E;
+	REG_PIOD_CODR=0x0000064F;
+	REG_PIOA_SODR=((h & 0x06)<<13) | ((l & 0x40)<<1);
+	(h & 0x01) ? REG_PIOB_SODR = 0x4000000 : REG_PIOB_CODR = 0x4000000;
+	REG_PIOC_SODR=((l & 0x01)<<5) | ((l & 0x02)<<3) | ((l & 0x04)<<1) | ((l & 0x08)>>1) | ((l & 0x10)>>3);
+	REG_PIOD_SODR=((h & 0x78)>>3) | ((h & 0x80)>>1) | ((l & 0x20)<<5) | ((l & 0x80)<<2);
+}
+
+void Due_ILI9486_16Bit::fillRect ( Rectangle* r )
 {
 	setWindow ( r );
 
     uint16_t color = r->getColor ( ) ;
 
-    PORTA = color >> 8 ;
-    PORTC = color ;
+	feedValue ( color >> 8, color ) ;
 
     uint32_t count = (uint32_t)r->getWidth() * r->getHeight() ;
     while ( count -- > 0 )
@@ -226,7 +232,7 @@ void Mega2560_16Bit_ILI9486::fillRect ( Rectangle* r )
     sbi ( ports[2], bitmasks[2] );
 }
 
-void Mega2560_16Bit_ILI9486::setRotate(uint8_t rotate)
+void Due_ILI9486_16Bit::setRotate(uint8_t rotate)
 {
     rotate %= 4;
     if (getRotate()==rotate)
@@ -258,7 +264,7 @@ void Mega2560_16Bit_ILI9486::setRotate(uint8_t rotate)
 }
 
 
-void Mega2560_16Bit_ILI9486::fillImpl(BufferScreen* buf)
+void Due_ILI9486_16Bit::fillImpl(BufferScreen* buf)
 {
     uint8_t scale = buf->getScale();
     if ( ! scale )
@@ -291,8 +297,7 @@ void Mega2560_16Bit_ILI9486::fillImpl(BufferScreen* buf)
                 sx = scale ;
                 while ( sx-- > 0 )
                 {
-                    PORTA = value >> 8 ;
-                    PORTC = value ;
+					feedValue ( value >> 8, value ) ;
                     pulseLow ( ports[1], bitmasks[1] ) ;
                 }
             }
@@ -302,18 +307,4 @@ void Mega2560_16Bit_ILI9486::fillImpl(BufferScreen* buf)
 
     sbi( ports[2], bitmasks[2] ) ;
 }
-
-void Mega2560_16Bit_ILI9486::VerticalScroll(void)
-{
-    writeCom(0x33); // Vertical scrolling definition cmd
-    writeData(0);    // Top fixed area - line 40
-    writeData(40);
-    writeData(0); //vertical scrolling area = 240 lines
-    writeData(240);
-    writeData(0x01); //bottom fixed area = line 280
-    writeData(0x18);
-
-    writeCom(0x37); //vertical scrolling start address
-    writeData(0);
-    writeData(45);
-}
+#endif
