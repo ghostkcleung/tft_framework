@@ -397,16 +397,18 @@ size_t Screen::write(uint8_t data)
 
         delete bScr ;
 
-        Rectangle r;
-        r.setColor(*this);
-        r.setPoint(*f);
-        r.move(90,_w*fontScale);
-        r.setSize (fontScale*fontPadding, _h*fontScale);
-        fillRect(&r);
-        r.setPoint(*f);
-        r.move(180,_h*fontScale);
-        r.setSize(fontScale*(_w+fontPadding), fontScale*fontPadding);
-        fillRect(&r);
+	if ( fontPadding > 0 ) {
+          Rectangle r;
+          r.setColor(*this);
+          r.setPoint(*f);
+          r.move(90,_w*fontScale);
+          r.setSize (fontScale*fontPadding, _h*fontScale);
+          fillRect(&r);
+          r.setPoint(*f);
+          r.move(180,_h*fontScale);
+          r.setSize(fontScale*(_w+fontPadding), fontScale*fontPadding);
+          fillRect(&r);
+	}
     }
     else
     {
