@@ -1,6 +1,6 @@
 # Implement your screen
 
-You may implement your screen by inherit the "Screen" class. 
+You may implement your own screen by inherit the "Screen" class. 
 
 Just let the screen know how to "drawRect()".
 
