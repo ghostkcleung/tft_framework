@@ -224,3 +224,6 @@ buf -> fill ( scr );           // Fill the buffer to real screen
 
 delete buf;                                     // Deallocate
 ```
+
+# Implement your own screen
+https://github.com/ghostkcleung/tft_framework/blob/master/tft_implement/README.md
