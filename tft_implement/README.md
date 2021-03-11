@@ -1,8 +1,10 @@
 # Implement your screen
 
 You may implement your own screen by inherit the "Screen" class. 
+
 Just tell it the resolution and let it know how to "drawRect()".
-See the example of tft_framework.
+
+There is an example
 https://github.com/ghostkcleung/tft_framework/blob/master/tft_framework/examples/DebugScreenDemo/DebugScreenDemo.ino
 
 ```cpp
