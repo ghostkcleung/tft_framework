@@ -226,10 +226,7 @@ delete buf;                                     // Deallocate
 ```
 
 # Implement you custom shape
-You may create your custom shape by inherit Shape class.
-Just implement drawGeneric() method.
-You may also inherit the Fillable interface and implement the fillGeneric() method If you want your shape can be filled.
-
+https://github.com/ghostkcleung/tft_framework/blob/master/CustomShape.md
 
 # Implement your own screen
 https://github.com/ghostkcleung/tft_framework/blob/master/tft_implement/README.md
