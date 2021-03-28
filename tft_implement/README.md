@@ -2,7 +2,7 @@
 
 You may implement your own screen by inherit the "Screen" class. 
 
-Just tell it the resolution and let it know how to "drawRect()".
+Just tell it the resolution and let it know how to "fillRect()".
 
 There is an example
 https://github.com/ghostkcleung/tft_framework/blob/master/tft_framework/examples/DebugScreenDemo/DebugScreenDemo.ino
