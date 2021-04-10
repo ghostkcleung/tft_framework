@@ -9,14 +9,14 @@ https://youtu.be/qud3bSVzDqk
 
 # Hello World
 ```cpp
-#include <ILI9486_16Bit.h>
+#include <ILI9486_Parallel.h>
 
 using namespace tft_framework;
 
 Screen* scr;
 
 void setup () {
-    scr = new ILI9486_16Bit ( ) ;
+    scr = new ILI9486_Parallel ( ) ;
     scr -> init ();
     scr -> clear ();
     scr -> println ( "Hello world" );   // Print text to the screen
