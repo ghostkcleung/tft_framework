@@ -1,16 +1,16 @@
 # Implementation of custom shape
 
-You may create your custom shape by inherit the Shape class. And Implement the drawGeneric() method. You may also inherit the Fillable class and implement the fillGeneric() method if you want to fill color into it.
+You may create your custom shape by inherit the Shape class. And Implement the draw() method. You may also inherit the Fillable class and implement the fill() method if you want to fill color into it.
 
 For example:
 ```cpp
 class MyShape: public Shape, public Fillable {
   public:
-  void drawGeneric ( Screen *scr ) {
+  void draw ( Screen *scr ) {
      // ...
   }
   
-  void fillGeneric ( Screen *scr ) {
+  void fill ( Screen *scr ) {
      // ...
   }
 };
