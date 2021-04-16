@@ -16,4 +16,4 @@ class MyShape: public Shape, public Fillable {
 };
 ```
 
-Demo: https://github.com/ghostkcleung/tft_framework/blob/master/tft_implement/examples/CustomShape/CustomShape.ino
+[Demo](./tft_implement/examples/CustomShape/CustomShape.ino)
