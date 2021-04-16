@@ -4,6 +4,6 @@
 - [Font and print](./font_and_print.md)
 - [BufferedScreen](./buffered_screen.md)
 - [Implement you custom shape](./CustomShape.md)
-- [Implement your own screen](./README.md)
+- [Implement your own screen](./tft_implement/README.md)
 
 
