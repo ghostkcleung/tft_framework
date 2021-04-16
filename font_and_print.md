@@ -46,11 +46,11 @@ scr -> println(1.23456, 4); // 1.2346
 There are some methods of Screen we are usually use:
 
 
-- Call before start to draw everything
--- init()
+- ## Call before start to draw everything
+init()
 
-- Orientation of the screen
--- setRotate(uint8_t rotate)
--- uint8_t setRotate()
+- ## Orientation of the screen
+setRotate(uint8_t rotate)
+uint8_t setRotate()
 
  
