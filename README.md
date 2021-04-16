@@ -1,5 +1,5 @@
-# [Getting Start](./getting_start.md)
-# [Tutorial](./tutorial.md)
+- [Getting Start](./getting_start.md)
+- [Tutorial](./tutorial.md)
 # tft_framework
 TFT Framework is the graphic interface for TFT Screen with Arduino.
 I've tested it with Arduino Mega 2560, Arduino Due and ILI9486 16bit parallel 3.5inch TFT Screen.
