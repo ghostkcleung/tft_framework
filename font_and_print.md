@@ -60,7 +60,7 @@ scr -> println(1.23456, 4); // 1.2346
   - void setBufferd(boolean b)
   - boolean isBuffered()
 
-- Font color and font size to print
+- The color and size of font to be printed
   - void setFontColor(Color c)
   - Color getFontColor()
   - void setFontScale(uint8_t scale)
