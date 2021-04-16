@@ -1,4 +1,7 @@
 # Font
+
+Font is are shape that is drawable (but not fillable). The 5x7 font is built-in at the framework as default font.
+
 ```cpp
 Font *f = new Font5X7();     // Usually the font is assigned to pointer.
 f -> setChar ( 'A' );        // Set character
