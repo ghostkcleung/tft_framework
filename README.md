@@ -9,24 +9,6 @@ https://youtu.be/qud3bSVzDqk
 ![image](https://github.com/ghostkcleung/tft_framework/blob/master/01.jpg)
 ![image](https://github.com/ghostkcleung/tft_framework/blob/master/02.jpg)
 
-# Hello World
-```cpp
-#include <ILI9486_Parallel.h>
-
-using namespace tft_framework;
-
-Screen* scr;
-
-void setup () {
-    scr = new ILI9486_Parallel ( ) ;
-    scr -> init ();
-    scr -> clear ();
-    scr -> println ( "Hello world" );   // Print text to the screen
-}
-
-void loop () { delay ( 100000 ) ; }
-```
-
 # Usage of Point
 ```cpp
 Point p1 ( 10, 20 );    // x: 10, y: 20
