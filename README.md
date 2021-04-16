@@ -1,5 +1,4 @@
-# Getting Start
-[./getting_start.md](./getting_start.md)
+[Getting Start](./getting_start.md)
 
 # tft_framework
 TFT Framework is the graphic interface for TFT Screen with Arduino.
