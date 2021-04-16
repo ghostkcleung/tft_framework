@@ -41,3 +41,14 @@ scr -> println(1.23456, 0); // 1
 scr -> println(1.23456, 2); // 1.23
 scr -> println(1.23456, 4); // 1.2346
 ```
+
+# Usage of screen
+There are some methods of Screen we are usually use:
+
+ - init()
+
+ Call before start to draw everything
+
+ - setRotate(uint8_t rotate)
+
+ Orientation of the screen
