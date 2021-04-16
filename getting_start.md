@@ -4,8 +4,8 @@ I've tested it with Arduino Mega 2560, Arduino Due and ILI9486 16bit parallel 3.
 There is a sample:
 https://youtu.be/qud3bSVzDqk
 
-![image](https://github.com/ghostkcleung/tft_framework/blob/master/01.jpg)
-![image](https://github.com/ghostkcleung/tft_framework/blob/master/02.jpg)
+![image](./01.jpg)
+![image](./02.jpg)
 
 # Hello World
 ```cpp
