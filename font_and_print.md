@@ -42,15 +42,26 @@ scr -> println(1.23456, 2); // 1.23
 scr -> println(1.23456, 4); // 1.2346
 ```
 
-# Usage of screen
-There are some methods of Screen we are usually use:
+# Methods of Screen
 
-
-- Call before start to draw everything
-  - init()
+- Usually we should call before start to draw everything
+  - void init()
 
 - Orientation of the screen
-  - setRotate(uint8_t rotate)
+  - void setRotate(uint8_t rotate)
   - uint8_t setRotate()
 
+- The background color
+  - void setColor (Color c)
+  - Color getColor()
+
+- Is the font drawn to the buffer before print
+  - void setBufferd(boolean b)
+  - boolean isBuffered()
+
+- Font color and font size to print
+  - void setFontColor(Color c)
+  - Color getFontColor()
+  - void setFontScale(uint8_t scale)
+  - uint8_t getFontScale()
  
