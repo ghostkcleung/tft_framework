@@ -54,6 +54,7 @@ scr -> println(1.23456, 4); // 1.2346
 - The background color
   - void setColor (Color c)
   - Color getColor()
+  - clear()
 
 - Is the font drawn to the buffer before print
   - void setBufferd(boolean b)
@@ -65,3 +66,7 @@ scr -> println(1.23456, 4); // 1.2346
   - void setFontScale(uint8_t scale)
   - uint8_t getFontScale()
  
+- The position to print
+  - void setCursor(Point p)
+  - Point getCursor()
+  - void resetCursor()
