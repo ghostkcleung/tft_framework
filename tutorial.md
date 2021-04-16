@@ -19,6 +19,13 @@ p2.setPoint ( p1 ) ;    // Set the X, Y of p2 same as p1
 
 Point p3 ( p1 ) ;       // Create the Point and init as p1
 ```
+ ## Methods:
+
+Point()
+
+Point(uint16_t x, uint16_t y)
+
+Point(Point p)
 
 # Usage of Color
 ```cpp
