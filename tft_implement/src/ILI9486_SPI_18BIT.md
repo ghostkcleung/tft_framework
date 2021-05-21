@@ -15,12 +15,12 @@ I've set some pins for default wiring.
 - SDO = MISO = 19
 
 ```cpp
-		// To create the new instance:
+// To create the new instance:
 
-		uint8_t bl = 32;
-		pinMode ( bl, OUTPUT ) ;
-		digitalWrite ( bl, HIGH ) ;
+uint8_t bl = 32;
+pinMode ( bl, OUTPUT ) ;
+digitalWrite ( bl, HIGH ) ;
 
-		uint8_t dc = 27;
-    Screen *scr = new ILI9486_SPI_18BIT ( dc ) ;
+uint8_t dc = 27;
+Screen *scr = new ILI9486_SPI_18BIT ( dc ) ;
 ```
