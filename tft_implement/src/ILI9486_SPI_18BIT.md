@@ -1,6 +1,6 @@
 21-May-2021
 
-# ESP32 and ILI9486 18-Bit
+# Add support ESP32 with ILI9486 18-Bit
 
 This class is designed for ESP32.
 I've set some pins for default wiring.
