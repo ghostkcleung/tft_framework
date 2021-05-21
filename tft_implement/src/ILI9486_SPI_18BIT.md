@@ -2,7 +2,7 @@
 
 # Add support ESP32 with ILI9486 18-Bit
 
-This class is designed for ESP32.
+This class is designed for ESP32 only.
 I've set some pins for default wiring.
 
 - VDO = VCC
