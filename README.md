@@ -8,4 +8,4 @@
 
 # News
 
-- 21-May-2021 [Getting Start](./getting_start.md)
+- 21-May-2021 [Add support ESP32 with ILI9486 18-Bit](./tft_implement/src/ILI9486_SPI_18BIT.md)
