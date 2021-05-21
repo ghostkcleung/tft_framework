@@ -10,7 +10,7 @@ ILI9486_SPI_18BIT::ILI9486_SPI_18BIT(uint8_t dc):ILI9486(480,320){
 	spi = new SPIClass(VSPI);
 	spi->begin(SCK, MISO, MOSI, SS);
 
-	spi -> beginTransaction(SPISettings(27000000, MSBFIRST, SPI_MODE0));
+	spi -> beginTransaction(SPISettings(40000000, MSBFIRST, SPI_MODE0));
 }
 
 void ILI9486_SPI_18BIT::writeComs ( uint8_t com, uint8_t *datas, unsigned int count ){
