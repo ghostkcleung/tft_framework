@@ -3,6 +3,9 @@
 # Add support ESP32 with ILI9486 18-Bit
 
 This class is designed for ESP32 only.
+And the color interface of the screen module is 18-bit only but not 16-bit.
+So that you cannot set it by write command(0x3A, 0x55).
+
 I've set some pins for default wiring.
 
 - VDO = VCC
