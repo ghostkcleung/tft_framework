@@ -18,7 +18,7 @@ I've set some pins for default wiring.
 - SDO = MISO = 19
 
 ```cpp
-// To create the new instance:
+// Easy way to create the new instance:
 
 uint8_t bl = 32;
 pinMode ( bl, OUTPUT ) ;
