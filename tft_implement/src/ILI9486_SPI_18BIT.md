@@ -40,7 +40,7 @@ uint8_t cs = 5,
   miso = 19,
   mosi = 23;
 
-uint32_t clock = 27000000 ;
+uint32_t clock = 40000000 ;
 
 SPIClass* spi = new SPIClass(VSPI);
 spi->begin(sck, miso, mosi, cs);
