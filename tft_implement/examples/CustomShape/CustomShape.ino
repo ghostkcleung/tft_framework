@@ -52,7 +52,6 @@ void setup() {
 		uint32_t clock = 27000000 ;
 
 		SPIClass* spi = new SPIClass(VSPI);
-		spi = new SPIClass(VSPI);
 		spi->begin(SCK, MISO, MOSI, cs);
 
 		spi -> beginTransaction(SPISettings(clock, MSBFIRST, SPI_MODE0));
