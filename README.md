@@ -6,4 +6,6 @@
 - [Implement you custom shape](./CustomShape.md)
 - [Implement your own screen](./tft_implement/README.md)
 
+# News
 
+- 21-May-2021 [Getting Start](./getting_start.md)
