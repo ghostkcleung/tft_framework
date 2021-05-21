@@ -24,3 +24,24 @@ digitalWrite ( bl, HIGH ) ;
 uint8_t dc = 27;
 Screen *scr = new ILI9486_SPI_18BIT ( dc ) ;
 ```
+
+You may also create the object by your customize pin:
+```cpp
+uint8_t bl = 32;
+pinMode ( bl, OUTPUT ) ;
+digitalWrite ( bl, HIGH ) ;
+
+uint8_t cs = 5,
+  dc = 27,
+  sck = 18,
+  miso = 19,
+  mosi = 23;
+
+uint32_t clock = 27000000 ;
+
+SPIClass* spi = new SPIClass(VSPI);
+spi->begin(sck, miso, mosi, cs);
+spi -> beginTransaction(SPISettings(clock, MSBFIRST, SPI_MODE0));
+
+scr = new ILI9486_SPI_18BIT ( spi, cs, dc ) ;
+```
