@@ -46,4 +46,4 @@ spi -> beginTransaction(SPISettings(clock, MSBFIRST, SPI_MODE0));
 scr = new ILI9486_SPI_18BIT ( spi, cs, dc ) ;
 ```
 
-![image](./src/ILI9486_SPI_18BIT.jpg)
+![image](./ILI9486_SPI_18BIT.jpg)
