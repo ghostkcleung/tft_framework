@@ -51,4 +51,6 @@ spi -> beginTransaction(SPISettings(clock, MSBFIRST, SPI_MODE0));
 scr = new ILI9486_SPI_18BIT ( w, h, spi, cs, dc ) ;
 ```
 
+Demo: https://youtu.be/k89JIES1duM
+
 ![image](./ILI9486_SPI_18BIT.jpg)
