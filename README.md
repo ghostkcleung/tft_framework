@@ -1,6 +1,6 @@
 # Why tft_ftamework ?
 
-It provides the method to drawing. Just tell me the size of your screen and how to "fillRect".
+It provides the method to drawing. Just tell me the size of your screen and how to "Fill Rect".
 
 - [Getting Start](./getting_start.md)
 - [Tutorial](./tutorial.md)
