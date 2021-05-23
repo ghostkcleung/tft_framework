@@ -8,7 +8,7 @@ So that you cannot set it by write command(0x3A, 0x55).
 
 I've set some pins for default wiring.
 
-- VDO = VCC
+- VDD = VCC
 - GND = GND
 - CS = 5 ( Or any output pin, but 5 is recommanded )
 - D/C = 27 ( Or any output pin )
