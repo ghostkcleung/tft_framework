@@ -191,9 +191,9 @@ void ILI9488_SPI_18BIT::fillShape(BufferScreen* buf) {
                 sx = scale ;
                 while ( sx-- > 0 )
                 {
-					spi -> transfer ( c.getR() ) ;
-					spi -> transfer ( c.getG() ) ;
 					spi -> transfer ( c.getB() ) ;
+					spi -> transfer ( c.getG() ) ;
+					spi -> transfer ( c.getR() ) ;
                 }
             }
         }
