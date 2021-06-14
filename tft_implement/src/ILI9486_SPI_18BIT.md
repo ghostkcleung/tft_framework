@@ -11,6 +11,7 @@ I've set some pins for default wiring.
 - VDD = VCC
 - GND = GND
 - CS = 5 ( Or any output pin, but 5 is recommanded )
+- RST = EN
 - D/C = 27 ( Or any output pin )
 - SDI = MOSI = 23
 - SCK = SCK = 18
