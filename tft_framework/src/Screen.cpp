@@ -7,7 +7,6 @@ Screen::Screen(uint16_t w, uint16_t h)
     this->h = h;
     rotate = 0 ;
     printBuffer = false;
-    fontPadding = 0 ;
     fontScale = 1;
     fontColor.setColor(0xFFFF);
     f = new Font5X7();
@@ -83,16 +82,6 @@ void Screen::setFontScale(uint8_t scale)
     fontScale = scale;
 }
 
-uint8_t Screen::getFontPadding()
-{
-    return fontPadding;
-}
-
-void Screen::setFontPadding(uint8_t padding)
-{
-    fontPadding = padding;
-}
-
 Point Screen::getCursor()
 {
     Point p;
@@ -133,8 +122,8 @@ void Screen::setPrintBuffer ( bool buf )
 
 size_t Screen::write(uint8_t data)
 {
-    uint8_t _w = f->getWidth(),
-            _h = f->getHeight();
+    uint8_t _w = f->getTotalWidth(),
+            _h = f->getTotalHeight();
 
     if ( data == '\r' )
     {
@@ -143,18 +132,43 @@ size_t Screen::write(uint8_t data)
 
     if ( data == '\n' )
     {
-        f->move(180,_h*fontScale+fontScale*fontPadding);
+        f->move(180,_h*fontScale);
 
 		if (f->getY()+_h*fontScale > h)
 		{
-			f->move(0,_h*fontScale+fontScale*fontPadding);
+			f->move(0,_h*fontScale);
 		}
 
         f->setX(cursor.getX());
         return 1;
     }
 
-    f->setChar ( data ) ;
+	if ( data & 0b10000000 ) {
+		if ( data & 0b01000000 ) {
+			uint8_t mask = 0b11000000;
+			charLength = 0;
+
+			while ( ( data & mask ) == mask ) {
+				charLength ++ ;
+				mask >>= 1;
+				mask |= 0b10000000;
+			}
+			
+			ch = data << ( charLength * 8 ) ;
+			return 0;
+		} else {
+			charLength -- ;
+			ch += data << ( charLength * 8 ) ;
+
+			if ( charLength ) {
+				return 0 ;
+			}
+			f -> setChar ( ch ) ;
+		}
+	} else {
+		f->setChar ( data ) ;
+	}
+
     f->setColor ( fontColor ) ;
 
     if (f->getX()+_w*fontScale > w)
@@ -178,19 +192,6 @@ size_t Screen::write(uint8_t data)
         f->setPoint(*bScr);
 
         delete bScr ;
-
-	if ( fontPadding > 0 ) {
-          Rectangle r;
-          r.setColor(*this);
-          r.setPoint(*f);
-          r.move(90,_w*fontScale);
-          r.setSize (fontScale*fontPadding, _h*fontScale);
-          fillRect(&r);
-          r.setPoint(*f);
-          r.move(180,_h*fontScale);
-          r.setSize(fontScale*(_w+fontPadding), fontScale*fontPadding);
-          fillRect(&r);
-	}
     }
     else
     {
@@ -198,7 +199,7 @@ size_t Screen::write(uint8_t data)
         f->draw(this);
     }
 
-    f->move(90,_w*fontScale+fontPadding*fontScale);
+    f->move(90,_w*fontScale);
 
     return 1;
 }

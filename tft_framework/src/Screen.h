@@ -9,9 +9,11 @@ private:
     uint8_t rotate;
     Font* f;
     Point cursor;
-    uint8_t fontPadding, fontScale;
+    uint8_t fontScale;
     bool printBuffer;
     Color fontColor;
+	uint8_t charLength ;
+	uint32_t ch;
 
 protected:
     Screen(uint16_t w, uint16_t h);
@@ -29,9 +31,6 @@ public:
 
     uint8_t getFontScale();
     void setFontScale(uint8_t scale);
-
-    uint8_t getFontPadding();
-    void setFontPadding(uint8_t scale);
 
 	Color getFontColor ( );
 	void setFontColor ( Color c );

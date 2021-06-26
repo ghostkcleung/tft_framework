@@ -5,22 +5,40 @@ class Font:public Shape{
 
 public:
 Font(uint8_t w,uint8_t h)
-  :w(w),h(h),scale(1),c('\0'){};
+  :w(w),h(h),scale(1),c('\0')
+  ,paddingTop(0),paddingLeft(0)
+  ,paddingBottom(0),paddingRight(0){};
 
 virtual ~Font();
 
 uint8_t getWidth(), getHeight();
 
-char getChar();
-void setChar(char c);
+uint32_t getChar();
+void setChar(uint32_t c);
 
 uint8_t getScale();
 void setScale(uint8_t s);
 
-private:
-uint8_t w, h, scale;
-char c;
+void setPaddingTop(uint8_t paddingTop);
+void setPaddingLeft(uint8_t paddingLeft);
+void setPaddingBottom(uint8_t paddingBottom);
+void setPaddingRight(uint8_t paddingRight);
 
+uint8_t getPaddingTop();
+uint8_t getPaddingLeft();
+uint8_t getPaddingBottom();
+uint8_t getPaddingRight();
+
+uint8_t getTotalWidth ( );
+uint8_t getTotalHeight ( );
+
+protected:
+uint8_t w, h;
+
+private:
+uint8_t scale;
+uint32_t c;
+uint8_t paddingTop, paddingLeft, paddingBottom, paddingRight;
 };
 
 #endif

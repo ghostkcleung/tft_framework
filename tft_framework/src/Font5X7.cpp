@@ -1,11 +1,16 @@
 #include "tft_framework.h"
 using namespace tft_framework;
 
+Font5X7::Font5X7():Font(5,7){
+	setPaddingTop(1);
+	setPaddingLeft(1);
+}
+
 void Font5X7::draw(Screen* scr){
 	uint8_t scale = getScale();
 	if ( scale==0 ) { return; }
 
-	char ch = getChar();
+	uint32_t ch = getChar();
 
 	if ( ch < 33 || ch >126){
 		return;
@@ -24,8 +29,8 @@ void Font5X7::draw(Screen* scr){
 
 		for(int y=0;y<7;y++){
 			if(ch & (1<<y)){
-				rect.setX(_x+x*scale);
-				rect.setY(_y+y*scale);
+				rect.setX(_x+x*scale + getPaddingLeft()*scale);
+				rect.setY(_y+y*scale + getPaddingTop()*scale);
 				rect.setWidth(scale);
 				rect.setHeight(scale);
 				rect.fill(scr);

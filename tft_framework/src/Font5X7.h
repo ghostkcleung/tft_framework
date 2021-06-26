@@ -4,7 +4,7 @@
 class Font5X7:public Font {
 
 public:
-	Font5X7():Font(5,7){};
+	Font5X7();
 	void draw ( Screen* scr ) ;
 	
 private:
