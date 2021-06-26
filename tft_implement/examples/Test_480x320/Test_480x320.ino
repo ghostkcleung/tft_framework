@@ -37,7 +37,7 @@ void setup() {
 
 		// scr = new ILI9488_SPI_18BIT ( 27 ) ;
 
-		uint32_t clock = 40000000 ;
+		uint32_t clock = 27000000 ;
 
 		SPIClass* spi = new SPIClass(VSPI);
 		spi->begin(SCK, MISO, MOSI, cs);
@@ -53,7 +53,6 @@ void setup() {
     
     scr -> init();
     scr -> setFontScale ( 2 ) ;
-    scr -> setFontPadding ( 1 ) ;
     scr -> setPrintBuffer ( true ) ;
     scr -> clear ( ) ;
 }
