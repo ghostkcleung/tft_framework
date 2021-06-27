@@ -11,6 +11,8 @@ f -> draw ( scr ) ;
 
 f -> setScale ( 3 );         // Scale the font to 3x.
 f -> setPoint ( 50, 20 );
+f -> setPaddingTop ( 1 ) ;
+f -> setPaddingLeft ( 1 ) ;
 f -> draw ( scr ) ;
 
 delete f;                   // Deallocate
@@ -23,9 +25,10 @@ The usage of print just like Serial.print()
 ```cpp
 
 scr -> setFont ( new Font5X7() );               // It's not necessary when using default font.
-scr -> setFontColor ( Color ( 0x0000FF ) ) ;    // Set the print color to blue.
-scr -> setFontScale ( 3 );                      // Set the font size to 3x.
-scr -> setFontPadding ( 1 ) ;                   // The distance of each char.
+scr -> getFont ( ) -> setColor ( Color ( 0x0000FF ) ) ;    // Set the print color to blue.
+scr -> getFont ( ) -> setScale ( 3 );           // Set the font size to 3x.
+scr -> getFont ( ) -> setPaddingTop ( 1 ) ;     // Padding Top.
+scr -> getFont ( ) -> setPaddingLeft ( 1 ) ;    // Padding Left.
 scr -> setCursor ( 18, 24 );                    // Set the print cursor
 
 scr -> println ( 78 );              // 78
