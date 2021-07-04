@@ -62,6 +62,8 @@ void Bitmap::fillGeneric(Screen *scr) {
 		buf -> setY ( y ) ;
 		buf -> fill ( scr ) ;
 	}
+
+	delete buf;
 }
 
 uint32_t Bitmap::getDataOffset ( ) {
