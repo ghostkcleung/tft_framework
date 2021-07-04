@@ -7,12 +7,12 @@ YouTube Demo: https://youtu.be/k89JIES1duM
 ![image](./ILI9486_SPI_18BIT.jpg)
 
 ## Default Wiring
-VDD => 3V3
-GND => GND
-CS  => 5
-RST => EN
-D/C => 27
-SDI => 23
-SCK => 18
-BL  => 32
+VDD => 3V3\
+GND => GND\
+CS  => 5\
+RST => EN\
+D/C => 27\
+SDI => 23\
+SCK => 18\
+BL  => 32\
 SDO => 19
