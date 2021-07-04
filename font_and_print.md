@@ -60,14 +60,8 @@ scr -> println(1.23456, 4); // 1.2346
   - clear()
 
 - Is the font drawn to the buffer before print
-  - void setBufferd(boolean b)
+  - void setPrintBufferd(boolean b)
   - boolean isBuffered()
-
-- The color and size of font to be printed
-  - void setFontColor(Color c)
-  - Color getFontColor()
-  - void setFontScale(uint8_t scale)
-  - uint8_t getFontScale()
  
 - The position to print
   - void setCursor(Point p)
