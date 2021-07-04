@@ -27,21 +27,20 @@ using namespace tft_framework;
 Screen* scr;
 
 void setup() {
+#ifdef ESP32
+  uint8_t bl = 32;
+  pinMode ( bl, OUTPUT ) ;
+  digitalWrite ( bl, HIGH ) ;
 
-    #ifdef ESP32
-		uint8_t bl = 32;
-		pinMode ( bl, OUTPUT ) ;
-		digitalWrite ( bl, HIGH ) ;
+  uint8_t cs = SS,
+  dc = 27;
 
-		uint8_t cs = SS,
-			dc = 27;
-    
-    scr = new ILI9488_SPI_18BIT ( dc ) ;
-    #endif
-    
-    scr -> init();
-    scr -> setPrintBuffer ( true ) ;
-    scr -> clear ( ) ;
+  scr = new ILI9488_SPI_18BIT ( dc ) ;
+#endif
+
+  scr -> init();
+  scr -> setPrintBuffer ( true ) ;
+  scr -> clear ( ) ;
 }
 ```
 ## Custumize pins
