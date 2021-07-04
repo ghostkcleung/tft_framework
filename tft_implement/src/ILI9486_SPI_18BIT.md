@@ -4,4 +4,4 @@ The ILI9488 SPI 18-Bit(6-6-6 Color) has implemented. It support for ESP32 only t
 
 YouTube Demo: https://youtu.be/k89JIES1duM
 
-## Recommanded Wiring
+## Default Wiring
