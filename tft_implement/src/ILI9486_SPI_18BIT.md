@@ -19,6 +19,8 @@ SDO => 19 (MISO)
 
 The recommended PWM output pin is:\
 4, 16, 17, 27, 32, 33
+For more details of pinout, you may see this page:\
+https://randomnerdtutorials.com/esp32-pinout-reference-gpios/
 ## Coding
 This is the easier way to create the Screen Object.
 ```cpp
