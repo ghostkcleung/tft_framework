@@ -9,15 +9,15 @@ YouTube Demo: https://youtu.be/k89JIES1duM
 ## Default Wiring
 VDD => 3V3\
 GND => GND\
-CS  => 5\
+CS  => 5 (CD)\
 RST => EN\
-D/C => 27 (Or any output)\
-SDI => 23\
-SCK => 18\
-BL  => 32\
-SDO => 19
+D/C => 27 (Or any output pin)\
+SDI => 23 (MOSI)\
+SCK => 18 (CLK)\
+BL  => 32 (Or any output pin)\
+SDO => 19 (MISO)
 
-The recommended PWM output pin is:
+The recommended PWM output pin is:\
 4, 16, 17, 27, 32, 33
 ## Coding
 This is the easier way to create the Screen Object.
