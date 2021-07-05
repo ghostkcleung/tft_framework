@@ -9,7 +9,7 @@ YouTube Demo: https://youtu.be/k89JIES1duM
 ## Default Wiring
 VDD => 3V3\
 GND => GND\
-CS  => 5 (CD)\
+CS  => 5 (CS)\
 RST => EN\
 D/C => 27 (Or any output pin)\
 SDI => 23 (MOSI)\
