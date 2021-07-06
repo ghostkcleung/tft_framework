@@ -56,6 +56,13 @@ scr -> println(1.23456, 4); // 1.2346
 
   - Accept value (0-7)
     - 0: CW0
+    - 1: CW0 (Mirror)
+    - 2: CW90
+    - 3: CW90 (Mirror)
+    - 4: CW180
+    - 5: CW180 (Mirror)
+    - 6: CW270
+    - 7: CW270 (Mirror)
 
 - The background color
   - void setColor (Color c)
