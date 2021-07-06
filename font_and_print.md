@@ -54,6 +54,9 @@ scr -> println(1.23456, 4); // 1.2346
   - void setRotate(uint8_t rotate)
   - uint8_t setRotate()
 
+  - Accept value (0-7)
+    - 0: CW0
+
 - The background color
   - void setColor (Color c)
   - Color getColor()
