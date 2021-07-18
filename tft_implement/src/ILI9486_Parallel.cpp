@@ -184,30 +184,39 @@ void ILI9486_Parallel::fillRect ( Rectangle* r )
     sbi ( ports[2], bitmasks[2] );
 }
 
-void ILI9486_Parallel::setRotate(uint8_t rotate)
-{
-    rotate %= 4;
-    if (getRotate()==rotate)
-    {
+void ILI9486_Parallel::setRotate(uint8_t rotate) {
+    rotate %= 8;
+    if (getRotate()==rotate) {
         return;
     }
 
     Screen::setRotate(rotate);
 
     cbi( ports[2], bitmasks[2] );
-    switch ( rotate )
-    {
+    switch ( rotate ) {
     case 0:
         writeCom ( 0x36, 0b10101000 ) ;
         break;
     case 1:
-        writeCom ( 0x36, 0b00001000 ) ;
+        writeCom ( 0x36, 0b00101000 ) ;
         break;
     case 2:
-        writeCom ( 0x36, 0b01101000 ) ;
+        writeCom ( 0x36, 0b00001000 ) ;
         break;
     case 3:
+        writeCom ( 0x36, 0b01001000 ) ;
+        break;
+    case 4:
+        writeCom ( 0x36, 0b01101000 ) ;
+        break;
+    case 5:
+        writeCom ( 0x36, 0b11101000 ) ;
+        break;
+    case 6:
         writeCom ( 0x36, 0b11001000 ) ;
+        break;
+    case 7:
+        writeCom ( 0x36, 0b10001000 ) ;
         break;
     }
 
@@ -215,18 +224,24 @@ void ILI9486_Parallel::setRotate(uint8_t rotate)
 }
 
 
-void ILI9486_Parallel::fillShape(BufferScreen* buf)
-{
-    uint8_t scale = buf->getScale();
-    if ( ! scale )
-    {
-        return ;
-    }
+void ILI9486_Parallel::fillShape(BufferScreen* buf) {
+
+	uint8_t scale = buf->getScale();
+
+	if ( ! scale ) {
+		return ;
+	}
 
     Rectangle r ;
     r.setPoint ( *buf ) ;
-    int16_t w = buf->getWidth ( ),
+    uint16_t w = buf->getWidth ( ),
             h = buf->getHeight ( ) ;
+
+	if ( ( buf -> getRotate ( ) / 2 ) % 2 ) {
+		uint16_t tmp = w;
+		w = h; h = tmp;
+	}
+
     r.setSize ( w*scale, h*scale ) ;
 
     setWindow ( &r ) ;
@@ -277,5 +292,36 @@ void ILI9486_Parallel::drawShape ( Dot *d ) {
 	feedValue ( color >> 8, color ) ;
 	pulseLow ( ports[1], bitmasks[1] ) ;
     sbi ( ports[2], bitmasks[2] );
+}
+
+void ILI9486_Parallel::fillShape ( Bitmap *bmp ) {
+	if ( bmp -> getColorDepth ( ) == 16 ) {
+		uint8_t rotate = getRotate ( ) ;
+		setRotate ( ( rotate + 5 ) % 8 ) ;
+
+		uint16_t w = bmp -> getWidth ( ),
+			h = bmp -> getHeight ( ),
+			bufSize = w * 2;
+
+		Rectangle rect ;
+		rect.setSize ( w , h ) ;
+		setWindow(&rect);
+
+		File f = bmp -> getFile ( ) ;
+		byte bytes [ bufSize ] ;
+		
+		for ( int y = 0; y < h; y ++ ) {
+			f.read ( bytes, bufSize ) ;
+			for ( int x = 0; x < w; x ++ ) {
+				feedValue ( bytes [ x * 2+1 ], bytes [ x * 2 ] ) ;
+				pulseLow ( ports[1], bitmasks[1] ) ;
+			}
+		}
+
+		sbi ( ports[2], bitmasks[2] );
+		setRotate ( rotate ) ;
+	} else {
+		bmp -> fillGeneric ( this ) ;
+	}
 }
 #endif

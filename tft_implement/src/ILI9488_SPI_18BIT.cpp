@@ -91,41 +91,31 @@ void ILI9488_SPI_18BIT::setWindow ( Rectangle* r ) {
 void ILI9488_SPI_18BIT::fillRect ( Rectangle* r ) {
 	setWindow(r);
 
-	uint32_t area =
-		(uint32_t)r->getWidth()
-		* r->getHeight();
+	uint16_t w = r -> getWidth ( ),
+		h = r -> getHeight ( ) ;
 
 	GPIO.out_w1tc = (1 << cs) ;
 	GPIO.out_w1ts = (1 << dc) ;
 
 	uint16_t color = r -> getColor ( ) ;
 
-	int bufSize=128;
-	uint8_t buf[bufSize*3];
+	uint16_t bufSize = w * 3 ;
+	uint8_t buf[bufSize];
 
 	uint8_t blue = r -> getB();
 	uint8_t green = r -> getG();
 	uint8_t red = r -> getR();
 
-	while(area >= bufSize) {
-		for(int i=0; i< bufSize*3; i+=3){
-			buf[2+i] = red ;
-			buf[1+i] = green ;
-			buf[0+i] = blue ;
+	for ( uint16_t y = 0; y < h; y ++ ) {
+		for ( uint16_t x = 0; x < w; x ++ ) {
+			buf [ x * 3 + 2 ] = red ;
+			buf [ x * 3 + 1 ] = green ;
+			buf [ x * 3 ] = blue ;	
 		}
-
-		spi -> transfer(buf ,bufSize*3);
-		area -= bufSize ;
+		spi -> transfer(buf ,bufSize);		
 	}
 
-
-	buf[2] = red ;
-	buf[1] = green ;
-	buf[0] = blue ;
-	spi -> writePattern ( buf, 3, area ) ;
-
 	GPIO.out_w1ts = (1 << cs) ;
-
 };
 
 void ILI9488_SPI_18BIT::setRotate(uint8_t rotate) {
@@ -253,29 +243,30 @@ void ILI9488_SPI_18BIT::drawShape ( Dot *d ) {
 
 void ILI9488_SPI_18BIT::fillShape ( Bitmap *bmp ) {
 	if ( bmp -> getColorDepth ( ) == 24 ) {
-		File f = bmp -> getFile ( ) ;
-		f.seek ( bmp -> getDataOffset ( ) ) ;
+		uint8_t rotate = getRotate ( ) ;
+		setRotate ( ( rotate + 5 ) % 8 ) ;
 
 		uint16_t w = bmp -> getWidth ( ),
-			h = bmp -> getHeight ( ) ;
+			h = bmp -> getHeight ( ),
+			bufSize = w * 3;
 
-		Rectangle r ;
-		r.setPoint ( *bmp ) ;
-		r.setSize ( w, h ) ;
-
-		setWindow ( &r ) ;
-
+		Rectangle rect ;
+		rect.setSize ( w , h ) ;
+		setWindow(&rect);
 		GPIO.out_w1tc = (1 << cs) ;
 		GPIO.out_w1ts = (1 << dc) ;
 
-		byte bytes[ w * 3 ] ;
-
-		for ( uint16_t y = 0; y < h; y ++ ) {
-			f.read ( bytes, w * 3 ) ;
-			spi -> transfer ( bytes, w * 3 ) ;
-		}
+		File f = bmp -> getFile ( ) ;
+		byte bytes [ bufSize ] ;
 		
+		for ( int y = 0; y < h; y ++ ) {
+			f.read ( bytes, bufSize ) ;
+			spi -> transfer(bytes ,bufSize);
+		}
+
 		GPIO.out_w1ts = (1 << cs) ;
+
+		setRotate ( rotate ) ;
 	} else {
 		bmp -> fillGeneric ( this ) ;
 	}

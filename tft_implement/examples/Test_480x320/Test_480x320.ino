@@ -25,7 +25,6 @@ Screen* scr;
 #include "testPrint.h"
 
 void setup() {
-	Serial.begin ( 115200 ) ;
     randomSeed(analogRead(A0));
 
     #ifdef ESP32
@@ -33,10 +32,11 @@ void setup() {
 		pinMode ( bl, OUTPUT ) ;
 		digitalWrite ( bl, HIGH ) ;
 
-		uint8_t cs = SS,
-			dc = 27;
+		uint8_t dc = 27;
 
     /*
+		uint8_t cs = SS,
+			
 		uint32_t clock = 27000000 ;
 
 		SPIClass* spi = new SPIClass(VSPI);
@@ -51,7 +51,7 @@ void setup() {
     
     scr = new ILI9488_SPI_18BIT ( dc ) ;
     #else
-		scr = new ILI9488_Parallel ( ) ;
+		scr = new ILI9486_Parallel ( ) ;
     #endif
     
     scr -> init();

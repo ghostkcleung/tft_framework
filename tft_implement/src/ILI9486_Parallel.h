@@ -45,6 +45,7 @@ public:
 
     void fillShape(BufferScreen* buf);
 	void drawShape(Dot *d);
+	void fillShape (Bitmap *bmp);
 };
 
 }

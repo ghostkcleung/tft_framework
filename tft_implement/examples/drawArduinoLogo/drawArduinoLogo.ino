@@ -11,29 +11,30 @@ Screen* scr;
 
 void setup() {
     #ifdef ESP32
-    uint8_t bl = 32;
-    pinMode ( bl, OUTPUT ) ;
-    digitalWrite ( bl, HIGH ) ;
+		uint8_t bl = 32;
+		pinMode ( bl, OUTPUT ) ;
+		digitalWrite ( bl, HIGH ) ;
 
-    uint8_t cs = SS,
-      dc = 27;
+		uint8_t dc = 27;
 
     /*
-    uint32_t clock = 27000000 ;
+		uint8_t cs = SS,
+			
+		uint32_t clock = 27000000 ;
 
-    SPIClass* spi = new SPIClass(VSPI);
-    spi->begin(SCK, MISO, MOSI, cs);
+		SPIClass* spi = new SPIClass(VSPI);
+		spi->begin(SCK, MISO, MOSI, cs);
 
-    spi -> beginTransaction(SPISettings(clock, MSBFIRST, SPI_MODE0));
+		spi -> beginTransaction(SPISettings(clock, MSBFIRST, SPI_MODE0));
 
-    uint16_t w = 480, h = 320 ;
+		uint16_t w = 480, h = 320 ;
 
-    scr = new ILI9488_SPI_18BIT ( w, h, spi, cs, dc ) ;
+		scr = new ILI9488_SPI_18BIT ( w, h, spi, cs, dc ) ;
     */
     
     scr = new ILI9488_SPI_18BIT ( dc ) ;
     #else
-    scr = new ILI9488_Parallel ( ) ;
+		scr = new ILI9486_Parallel ( ) ;
     #endif
 
     scr -> init ( ) ;
