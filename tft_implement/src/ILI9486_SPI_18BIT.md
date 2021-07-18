@@ -38,8 +38,7 @@ void setup() {
   pinMode ( bl, OUTPUT ) ;
   digitalWrite ( bl, HIGH ) ;
 
-  uint8_t cs = SS,
-  dc = 27;
+  uint8_t dc = 27;
 
   scr = new ILI9488_SPI_18BIT ( dc ) ;
 #endif
