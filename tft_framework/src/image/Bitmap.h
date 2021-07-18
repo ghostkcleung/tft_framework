@@ -16,6 +16,7 @@ Bitmap(File &f);
 uint32_t getDataOffset ( ) ;
 void fill ( Screen *scr ) ;
 void fillGeneric ( Screen *scr ) ;
+
 };
 
 #endif

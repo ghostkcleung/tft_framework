@@ -16,3 +16,15 @@ uint16_t Image::getColorDepth(){
 File Image::getFile(){
 	return f ;
 }
+
+Image::~Image ( ) {
+	f.close ( ) ;
+}
+
+Rectangle Image::getViewport ( ) {
+	return viewport ;
+}
+
+void Image::setViewport ( Rectangle viewport ) {
+	this -> viewport = viewport ;
+}

@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <Print.h>
-#include <FS.h>
+#include <SD.h>
 
 namespace tft_framework
 {
@@ -35,7 +35,9 @@ class Bitmap;
 #include "image/Bitmap.h"
 
 void swap_16(int16_t &x, int16_t &y);
-void sortRect ( Rectangle *r, Screen *scr ) ;
+bool sortRect ( Rectangle *r, Rectangle rect ) ;
+bool sortRect ( Rectangle *r, Image *img ) ;
+bool sortRect ( Rectangle *r, Screen *scr ) ;
 }
 
 #endif

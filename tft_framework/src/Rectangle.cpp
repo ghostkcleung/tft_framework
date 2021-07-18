@@ -93,7 +93,9 @@ void Rectangle::draw(Screen* scr)
 void Rectangle::fill(Screen* scr)
 {
 	Rectangle tmp = *this ;
-	sortRect(&tmp,scr);
+	if ( ! sortRect(&tmp,scr) ) {
+		return ;
+	}
 
 	int x0 = tmp.getX ( )
 		, y0 = tmp.getY ( )
@@ -101,16 +103,6 @@ void Rectangle::fill(Screen* scr)
 		, y1 = tmp.getEndY ( )
 		, maxX = scr -> getWidth ( ) - 1
 		, maxY = scr -> getHeight ( ) - 1 ;
-
-	if ( x0 > maxX || y0 > maxY 
-		|| x1 < 0 || y1 < 0 ) { return ; }
-
-	x0 = x0 < 0 ? 0 : x0;
-	y0 = y0 < 0 ? 0 : y0;
-	x1 = x1 > maxX ? maxX : x1;
-	y1 = y1 > maxY ? maxY : y1;
-	tmp.setPoint(x0,y0);
-	tmp.setEndPoint(x1,y1);
 
     scr -> fillRect( &tmp );
 }

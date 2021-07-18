@@ -3,8 +3,10 @@ using namespace tft_framework;
 
 uint32_t Bitmap::_rev ( byte *ptr, uint8_t len ) {
 	uint32_t hex = 0 ;
+
 	for ( int i = 0 ; i < len; i ++ ) {
-		hex += ptr [i] << i*8;
+		
+		hex += (uint32_t)ptr [i] << i*8;
 	}
 	return hex;
 }
@@ -32,38 +34,62 @@ Bitmap::Bitmap(File &f):Image(f){
 	height = _rev ( meta + 8, 4 );
 	colorDepth = meta [14];
 
+	viewport.setSize ( width, height);
 	bm = true ;
 }
 
 void Bitmap::fill(Screen *scr) {
-	uint8_t rotate = scr -> getRotate ( ) ;
-	scr -> setRotate ( ( rotate + 5 ) % 8 ) ;
+	if ( ! bm ) { return ; }
+
 	scr -> fillShape ( this ) ;
-	scr -> setRotate ( rotate ) ;
 }
 
 void Bitmap::fillGeneric(Screen *scr) {
+	Rectangle viewport = getViewport ( ) ;
+
+	if ( ! sortRect ( &viewport, this ) ) { return ; }
+	viewport.move ( 90 , getX ( ) ) ;
+	viewport.move ( 180 , getY ( ) ) ;
+	if ( ! sortRect ( &viewport, scr ) ) { return ; }
+
+	uint16_t viewW = viewport.getWidth ( );
+
+	int16_t viewX = viewport.getX ( ),
+		viewY = viewport.getY ( ),
+		viewEndY = viewport.getEndY ( ),
+		imgX = getX ( ),
+		imgW = getWidth ( ) ;
+
+	Dot d ;
+
+	BufferScreen *buf = new BufferScreen ( viewW, 1 ) ;
+	buf -> setX ( viewX ) ;
+
+	uint16_t bufLength = viewW * 3 ;
+	byte bytes[ bufLength ] ;
+
 	File f = getFile ( ) ;
-	f.seek ( dataOffset ) ;
-	Dot d;
+	f.seek ( dataOffset + ( getY ( ) + getHeight ( ) - viewEndY - 1 ) * imgW * 3 )   ;
 
-	byte bytes[ width * 3 ] ;
-	BufferScreen *buf = new BufferScreen ( width, 1 ) ;
+	for ( int16_t y = viewEndY; y >= viewY; y -- ) {
+		f.seek ( f.position ( ) + ( viewX - imgX ) * 3 ) ;
+		f.read ( bytes , bufLength ) ;
 
-	for ( uint16_t y = 0; y < height; y ++ ) {
-		f.read ( bytes, width * 3 ) ;
-		for ( uint16_t x = 0; x < width; x ++ ) {
+		for ( int16_t x = 0; x < viewW ; x ++ ) {
 			d.setX ( x ) ;
-			d.setB ( bytes [x*3] );
-			d.setG ( bytes [x*3+1] );
-			d.setR ( bytes [x*3+2] );
+			d.setB ( bytes [ x*3 ] ) ;
+			d.setG ( bytes [ x*3 + 1 ] ) ;
+			d.setR ( bytes [ x*3 + 2 ] ) ;
 			d.draw ( buf ) ;
 		}
+
 		buf -> setY ( y ) ;
 		buf -> fill ( scr ) ;
+		
+		f.seek ( f.position ( ) + ( imgX + imgW - viewX - viewW ) * 3 ) ;
 	}
 
-	delete buf;
+	delete buf ;
 }
 
 uint32_t Bitmap::getDataOffset ( ) {

@@ -153,20 +153,20 @@ size_t Screen::write(uint8_t data)
 
     if (printBuffer)
     {
-        BufferScreen *bScr = new BufferScreen(f->getWidth()+f->getPaddingLeft()
-			,f->getHeight()+f->getPaddingTop());
+		uint8_t scale = f->getScale ( );
+		f->setScale(1);
+
+        BufferScreen *bScr = new BufferScreen( f->getTotalWidth(), f->getTotalHeight() );
         bScr -> setColor ( *this ) ;
         bScr -> setPoint(*f);
         bScr -> clear ( ) ;
         f->setPoint(0,0);
-
-		bScr->setScale ( f->getScale ( ) ) ;
-        f->setScale(1);
+		bScr->setScale ( scale ) ;
         f->draw(bScr);
         bScr -> fill (this);
 
         f->setPoint(*bScr);
-		f->setScale ( bScr -> getScale ( ));
+		f->setScale (scale);
 
         delete bScr ;
     } else {
