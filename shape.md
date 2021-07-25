@@ -54,6 +54,11 @@ r.setWidth ( 60 );           // End point of X: 159
 r.setHeight ( 120 );         // End point of X: 169
 // You may also write it as: r.setSize ( 60, 120 ) ;
 r.fill ( scr );              // Fill to screen
+
+Rectangle r2;
+r.setPoint ( 120, 120 );
+r.setSize ( r );             // The size of r2 is same as r
+r2.fill ( scr );
 ```
 
 # Usage of Triangle
