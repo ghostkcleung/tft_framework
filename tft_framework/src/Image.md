@@ -7,3 +7,10 @@ Screen scr = /* YOUR SCREEN */
 File f = SD.open ( /* YOUR_PATH */ ) ;
 Image *img = new Image ( f ) ;
 img -> fill ( scr ) ;
+```
+
+# Usage of Image
+As the other Shape. You can set the position of the image with setPoint (x, y)
+```cpp
+img.setPoint ( 50, 100 ) ;
+```
