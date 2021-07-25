@@ -36,8 +36,7 @@ void Line::setEndPoint(int16_t x, int16_t y)
     endPoint.setPoint(x, y);
 }
 
-void Line::move(double direction, double distance)
-{
+void Line::move(double direction, double distance) {
     Point::move(direction, distance);
     Point endPoint=getEndPoint();
     endPoint.move(direction, distance);
@@ -113,4 +112,24 @@ void Line::draw(Screen* scr){
             error += deltaX;
         }
     }
+}
+
+void Line::moveTo(Point p){
+	int16_t _x = p.getX ( ) - getX ( ) + getEndX ( ) ;
+	int16_t _y = p.getY ( ) - getY ( ) + getEndY ( )  ;
+
+	setPoint ( p ) ;
+	setEndPoint ( _x, _y ) ;
+}
+
+void Line::moveTo ( int16_t x , int16_t y ) {
+	moveTo ( Point ( x, y )) ;
+}
+
+void Line::moveToX(int16_t x){
+	moveTo ( x, getY ( ) ) ;
+}
+
+void Line::moveToY(int16_t y){
+	moveTo ( getX ( ) , y ) ;
 }

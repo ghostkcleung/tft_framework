@@ -45,48 +45,62 @@ void Bitmap::fill(Screen *scr) {
 }
 
 void Bitmap::fillGeneric(Screen *scr) {
-	Rectangle viewport = getViewport ( ) ;
+	Rectangle window = viewport = getViewport ( );
 
-	if ( ! sortRect ( &viewport, this ) ) { return ; }
-	viewport.move ( 90 , getX ( ) ) ;
-	viewport.move ( 180 , getY ( ) ) ;
-	if ( ! sortRect ( &viewport, scr ) ) { return ; }
+	if ( ! sortRect ( &window, this ) ) { return ; }
 
-	uint16_t viewW = viewport.getWidth ( );
+	window.moveTo ( *this ) ;
+	if ( ! sortRect ( &window, scr ) ) { return ; }
 
-	int16_t viewX = viewport.getX ( ),
-		viewY = viewport.getY ( ),
-		viewEndY = viewport.getEndY ( ),
-		imgX = getX ( ),
-		imgW = getWidth ( ) ;
+	viewport.setSize ( window );
 
-	Dot d ;
+	uint8_t bytePerPixel = getColorDepth ( ) / 8 ;
 
-	BufferScreen *buf = new BufferScreen ( viewW, 1 ) ;
-	buf -> setX ( viewX ) ;
+	uint16_t winW = window.getWidth ( )
+		, imgW = getWidth ( )
+		, bufSize = winW * bytePerPixel ;
 
-	uint16_t bufLength = viewW * 3 ;
-	byte bytes[ bufLength ] ;
+	int16_t winX = window.getX ( )
+		, winY = window.getY ( )
+		, winEndY = window.getEndY ( )
+		, viewX = viewport.getX ( ) ;
+
+	Dot d;
+
+	BufferScreen *buf = new BufferScreen ( winW, 1 ) ;
+	buf -> setX ( winX ) ;
+
+	byte bytes[ bufSize ] ;
 
 	File f = getFile ( ) ;
-	f.seek ( dataOffset + ( getY ( ) + getHeight ( ) - viewEndY - 1 ) * imgW * 3 )   ;
+	f.seek ( dataOffset + ( getHeight ( ) - window.getHeight ( )
+		- viewport.getY ( ) ) * imgW * bytePerPixel ) ;
 
-	for ( int16_t y = viewEndY; y >= viewY; y -- ) {
-		f.seek ( f.position ( ) + ( viewX - imgX ) * 3 ) ;
-		f.read ( bytes , bufLength ) ;
+	for ( int16_t y = winEndY; y >= winY; y -- ) {
+		f.seek ( f.position ( ) + viewX * bytePerPixel ) ;
+		f.read ( bytes, bufSize ) ;
 
-		for ( int16_t x = 0; x < viewW ; x ++ ) {
+		for ( int x = 0; x <= winW; x ++ ) {
 			d.setX ( x ) ;
-			d.setB ( bytes [ x*3 ] ) ;
-			d.setG ( bytes [ x*3 + 1 ] ) ;
-			d.setR ( bytes [ x*3 + 2 ] ) ;
+
+			switch ( bytePerPixel ) {
+				case 2:
+				d.setColor ( bytes [x*2+1] << 8 | bytes [x*2] ) ;
+				break;
+
+				case 3:
+				d.setB ( bytes[x*3] ) ;
+				d.setG ( bytes[x*3+1] ) ;
+				d.setR ( bytes[x*3+2] ) ;
+				break;
+			}
+			
 			d.draw ( buf ) ;
 		}
 
 		buf -> setY ( y ) ;
 		buf -> fill ( scr ) ;
-		
-		f.seek ( f.position ( ) + ( imgX + imgW - viewX - viewW ) * 3 ) ;
+		f.seek ( f.position ( ) + ( imgW - viewX - winW ) * bytePerPixel ) ;
 	}
 
 	delete buf ;

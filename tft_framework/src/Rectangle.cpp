@@ -15,62 +15,53 @@ int16_t Rectangle::getHeight()
     return h ;
 }
 
-int16_t Rectangle::getWidth()
-{
+int16_t Rectangle::getWidth() {
     int16_t w = getEndX() - getX() ;
-    if ( w < 0 )
-    {
+    if ( w < 0 ) {
         w -- ;
-    }
-    else
-    {
+    } else {
         w ++ ;
     }
     return w ;
 }
 
-void Rectangle::setHeight(int16_t h)
-{
-    if ( ! h )
-    {
+void Rectangle::setHeight(int16_t h) {
+    if ( ! h ) {
         return ;
     }
-    if ( h < 0 )
-    {
+
+    if ( h < 0 ) {
         h ++ ;
-    }
-    else
-    {
+    } else {
         h -- ;
     }
     setEndY ( getY()+h );
 }
 
-void Rectangle::setWidth(int16_t w)
-{
-    if ( ! w )
-    {
+void Rectangle::setWidth(int16_t w) {
+    if ( ! w ) {
         return ;
     }
-    if ( w < 0 )
-    {
+
+    if ( w < 0 ) {
         w ++ ;
-    }
-    else
-    {
+    } else {
         w -- ;
     }
     setEndX ( getX()+w );
 }
 
-void Rectangle::setSize(int16_t w, int16_t h)
-{
+void Rectangle::setSize(int16_t w, int16_t h) {
     setWidth(w);
     setHeight(h);
 }
 
-void Rectangle::draw(Screen* scr)
-{
+void Rectangle::setSize(Rectangle rect){
+	setWidth(rect.getWidth());
+	setHeight(rect.getHeight());
+}
+
+void Rectangle::draw(Screen* scr) {
 	Rectangle viewPortRect = *this ;
 	sortRect(&viewPortRect, scr);
 
@@ -90,8 +81,7 @@ void Rectangle::draw(Screen* scr)
     tmp.fill ( scr ) ;
 }
 
-void Rectangle::fill(Screen* scr)
-{
+void Rectangle::fill(Screen* scr) {
 	Rectangle tmp = *this ;
 	if ( ! sortRect(&tmp,scr) ) {
 		return ;

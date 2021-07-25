@@ -20,6 +20,10 @@ public:
     void setEndPoint(int16_t x, int16_t y);
 
     void move(double direction, double distance);
+	void moveTo ( Point p );
+	void moveTo ( int16_t x, int16_t y);
+	void moveToX ( int16_t x ) ;
+	void moveToY ( int16_t y ) ;
 
     void lineTo(double direction, double distance);
 

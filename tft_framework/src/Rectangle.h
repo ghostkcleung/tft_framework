@@ -12,6 +12,7 @@ public:
     void setHeight(int16_t h);
 
     void setSize(int16_t w, int16_t h);
+	void setSize(Rectangle rect);
     void fill(Screen* scr);
     void draw(Screen* scr);
 };
