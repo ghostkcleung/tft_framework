@@ -24,3 +24,4 @@ There is following that I want to do later.
 - Add Unicode font support
 - Add JPG, PNG, GIF support
 - Add more type of MCU and tft module support
+- Add more shape algorithm support
