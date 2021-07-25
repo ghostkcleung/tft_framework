@@ -36,7 +36,7 @@ l.setEndPoint ( 50, 60 );   // End point
 l.draw ( scr );
 
 l.moveTo ( 100, 100 );  // Move the line to 100, 100
-l.draw ( scr );
+l.draw ( scr );         // The endPoint should be 140, 140
 
 l.lineTo ( 135, 50 );   // Set the end to 135 degree of start point, distance 50
 l.draw ( scr );
