@@ -1,6 +1,6 @@
 # Add Image Support
 
-You can load and draw the Image file from the SD card as following.
+You can load and draw the Image file from the SD card as following. tft_framework is support BMP 24bit and 16bit format temporary. I will implement more type of image such as JPG, PNG ... in the future.
 
 ```cpp
 Screen scr = /* YOUR SCREEN */
