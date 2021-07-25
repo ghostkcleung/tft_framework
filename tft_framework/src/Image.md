@@ -7,6 +7,8 @@ Screen scr = /* YOUR SCREEN */
 File f = SD.open ( /* YOUR_PATH */ ) ;
 Image *img = new Image ( f ) ;
 img -> fill ( scr ) ;
+
+delete img;   // The file also is closed when allocate the image object
 ```
 
 # Usage of Image
