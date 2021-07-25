@@ -242,34 +242,54 @@ void ILI9488_SPI_18BIT::drawShape ( Dot *d ) {
 }
 
 void ILI9488_SPI_18BIT::fillShape ( Bitmap *bmp ) {
-	if ( bmp -> getColorDepth ( ) == 24 ) {
-		uint8_t rotate = getRotate ( ) ;
-		setRotate ( ( rotate + 5 ) % 8 ) ;
+if ( bmp -> getColorDepth ( ) == 24 ) {
+	Rectangle viewport = bmp -> getViewport ( ) ;
+	if ( ! sortRect ( &viewport, bmp ) ) { return ; }
 
-		uint16_t w = bmp -> getWidth ( ),
-			h = bmp -> getHeight ( ),
-			bufSize = w * 3;
+	viewport.moveTo ( *bmp ) ;
+	if ( ! sortRect ( &viewport, this ) ) { return ; }
 
-		Rectangle rect ;
-		rect.setSize ( w , h ) ;
-		setWindow(&rect);
-		GPIO.out_w1tc = (1 << cs) ;
-		GPIO.out_w1ts = (1 << dc) ;
+	uint16_t viewH = viewport.getHeight ( )
+		, viewW = viewport.getWidth ( )
+		, imgW = bmp -> getWidth ( )
+		, bufSize = viewW * 3 ;
 
-		File f = bmp -> getFile ( ) ;
-		byte bytes [ bufSize ] ;
+	int16_t viewY = viewport.getY ( );
+
+	byte bytes [ bufSize ] ;
+
+	viewport.moveToY ( getHeight ( ) - viewH - viewY ) ;
+
+	uint8_t rotate = getRotate ( ) ;
+	setRotate ( ( rotate + 5 ) % 8 ) ;
+
+	setWindow(&viewport);
+
+	viewport.moveTo ( bmp -> getViewport ( ) ) ;
+
+	int16_t viewX = viewport.getX ( ) ;
+	viewY = viewport.getY ( ) ;
+
+	GPIO.out_w1tc = (1 << cs) ;
+	GPIO.out_w1ts = (1 << dc) ;
+
+	File f = bmp -> getFile ( ) ;
+	f.seek ( bmp -> getDataOffset ( ) + ( bmp -> getHeight ( ) - viewH - viewY ) * imgW * 3 ) ;
+
+	for ( int y = 0; y < viewH; y ++ ) {
+		f.seek ( f.position ( ) + viewX * 3 ) ;
+		f.read ( bytes, bufSize ) ;
 		
-		for ( int y = 0; y < h; y ++ ) {
-			f.read ( bytes, bufSize ) ;
-			spi -> transfer(bytes ,bufSize);
-		}
-
-		GPIO.out_w1ts = (1 << cs) ;
-
-		setRotate ( rotate ) ;
-	} else {
-		bmp -> fillGeneric ( this ) ;
+		spi -> transfer(bytes ,bufSize);
+		f.seek ( f.position ( ) + ( imgW - viewX - viewW ) * 3 ) ;
 	}
+
+
+	GPIO.out_w1ts = (1 << cs) ;
+	setRotate ( rotate ) ;
+} else {
+	bmp -> fillGeneric ( this ) ;
+}
 }
 
 ILI9488_SPI_18BIT::~ILI9488_SPI_18BIT() {
