@@ -1,4 +1,4 @@
-# Add support ESP32 with ILI9486 18-Bit
+# Add support ESP32 with ILI9488 18-Bit
 
 The ILI9488 SPI 18-Bit(6-6-6 Color) has implemented. It support for ESP32 only temporary. (Basically it should be support all of MCU which have SPI. I will do it for other in the future.) The ILI9488 is support the 18bit color mode only. It need to transfer 3 bytes per pixel.
 
