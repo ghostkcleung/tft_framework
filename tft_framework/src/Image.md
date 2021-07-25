@@ -26,7 +26,7 @@ uint16_t h = img -> getHeight ( );
 # Viewport
 When the image is loaded. You may draw the part of the image by setting of the viewport. For example I want to draw the part as following.
 
-![image](../320x240.jpg)
+![image](/320x240.jpg)
 ```cpp
 Rectangle viewport;
 viewport.setPoint ( 40, 135 );
@@ -37,4 +37,4 @@ img -> fill ( scr ) ;
 
 The result will be
 
-![image](../viewport.jpg)
+![image](/viewport.jpg)
