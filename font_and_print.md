@@ -53,7 +53,7 @@ scr -> println(1.23456, 4); // 1.2346
 - Orientation of the screen
   - void setRotate(uint8_t rotate)
   - uint8_t setRotate()
-Accept value (0-7)
+  - Accept value (0-7)
     - 0: CW0
     - 1: CW0 (Mirror)
     - 2: CW90
