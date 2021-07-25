@@ -295,33 +295,52 @@ void ILI9486_Parallel::drawShape ( Dot *d ) {
 }
 
 void ILI9486_Parallel::fillShape ( Bitmap *bmp ) {
-	if ( bmp -> getColorDepth ( ) == 16 ) {
-		uint8_t rotate = getRotate ( ) ;
-		setRotate ( ( rotate + 5 ) % 8 ) ;
+if ( bmp -> getColorDepth ( ) == 16 ) {
+	Rectangle viewport = bmp -> getViewport ( ) ;
+	if ( ! sortRect ( &viewport, bmp ) ) { return ; }
 
-		uint16_t w = bmp -> getWidth ( ),
-			h = bmp -> getHeight ( ),
-			bufSize = w * 2;
+	viewport.moveTo ( *bmp ) ;
+	if ( ! sortRect ( &viewport, this ) ) { return ; }
 
-		Rectangle rect ;
-		rect.setSize ( w , h ) ;
-		setWindow(&rect);
+	uint16_t viewH = viewport.getHeight ( )
+		, viewW = viewport.getWidth ( )
+		, imgW = bmp -> getWidth ( )
+		, bufSize = viewW * 2 ;
 
-		File f = bmp -> getFile ( ) ;
-		byte bytes [ bufSize ] ;
-		
-		for ( int y = 0; y < h; y ++ ) {
-			f.read ( bytes, bufSize ) ;
-			for ( int x = 0; x < w; x ++ ) {
-				feedValue ( bytes [ x * 2+1 ], bytes [ x * 2 ] ) ;
-				pulseLow ( ports[1], bitmasks[1] ) ;
-			}
+	int16_t viewY = viewport.getY ( );
+
+	byte bytes [ bufSize ] ;
+
+	viewport.moveToY ( getHeight ( ) - viewH - viewY ) ;
+
+	uint8_t rotate = getRotate ( ) ;
+	setRotate ( ( rotate + 5 ) % 8 ) ;
+
+	setWindow(&viewport);
+
+	viewport.moveTo ( bmp -> getViewport ( ) ) ;
+
+	int16_t viewX = viewport.getX ( ) ;
+	viewY = viewport.getY ( ) ;
+
+	File f = bmp -> getFile ( ) ;
+	f.seek ( bmp -> getDataOffset ( ) + ( bmp -> getHeight ( ) - viewH - viewY ) * imgW * 2 ) ;
+
+	for ( int y = 0; y < viewH; y ++ ) {
+		f.seek ( f.position ( ) + viewX * 2 ) ;
+		f.read ( bytes, bufSize ) ;
+		for ( int x = 0; x < viewW; x ++ ) {
+			feedValue ( bytes [ x * 2+1 ], bytes [ x * 2 ] ) ;
+			pulseLow ( ports[1], bitmasks[1] ) ;
 		}
-
-		sbi ( ports[2], bitmasks[2] );
-		setRotate ( rotate ) ;
-	} else {
-		bmp -> fillGeneric ( this ) ;
+		f.seek ( f.position ( ) + ( imgW - viewX - viewW ) * 2 ) ;
 	}
+
+	sbi ( ports[2], bitmasks[2] );
+	setRotate ( rotate ) ;
+} else {
+	bmp -> fillGeneric ( this ) ;
+}
+
 }
 #endif
