@@ -16,3 +16,10 @@ As the other Shape. You can set the position of the image with setPoint (x, y)
 ```cpp
 img.setPoint ( 50, 100 ) ;
 ```
+
+You can get the size of image
+```cpp
+uint16_t w = img -> getWidth ( );
+uint16_t h = img -> getHeight ( );
+```
+
