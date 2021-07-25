@@ -14,7 +14,7 @@ delete img;   // The file also is closed when allocate the image object
 # Usage of Image
 As the other Shape. You can set the position of the image with setPoint (x, y)
 ```cpp
-img.setPoint ( 50, 100 ) ;
+img -> setPoint ( 50, 100 ) ;
 ```
 
 You can get the size of image
