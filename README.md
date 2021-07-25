@@ -12,7 +12,7 @@ It provides the basic methods to draw. Just tell it the size of your screen and 
 
 # News
 
-- 21-May-2021 [Add support ESP32 with ILI9486 18-Bit](./tft_implement/src/ILI9486_SPI_18BIT.md)
+- 21-May-2021 [Add support ESP32 with ILI9486 18-Bit](./tft_implement/src/ILI9488_SPI_18BIT.md)
 - 25-Jul-2021 [Add Image Support](./tft_framework/src/Image.md)
 
 # What will I do next
