@@ -19,7 +19,7 @@ It provides the basic methods to draw. Just tell it the size of your screen and 
 
 There is following that I want to do later.
 
-- Read the pixel from the screen. So that the screen can be capture.
+- Read the pixels from the screen. So that the screen can be capture.
 - Scroll the screen
 - Add Unicode font support
 - Add JPG, PNG, GIF support
