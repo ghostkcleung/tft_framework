@@ -38,6 +38,7 @@ void swap_16(int16_t &x, int16_t &y);
 bool sortRect ( Rectangle *r, Rectangle rect ) ;
 bool sortRect ( Rectangle *r, Image *img ) ;
 bool sortRect ( Rectangle *r, Screen *scr ) ;
+
 }
 
 #endif
