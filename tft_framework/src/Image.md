@@ -5,7 +5,7 @@ You can load and draw the Image file from the SD card as following. tft_framewor
 ```cpp
 Screen scr = /* YOUR SCREEN */
 File f = SD.open ( /* YOUR_PATH */ ) ;
-Image *img = new Image ( f ) ;
+Image *img = new Bitmap ( f ) ;
 img -> fill ( scr ) ;
 
 delete img;   // The file also is closed when allocate the image object
