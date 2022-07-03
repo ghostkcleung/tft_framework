@@ -7,7 +7,7 @@ It provides the basic methods to draw. Just tell it the size of your screen and 
 - [Shape](./shape.md)
 - [Font and print](./font_and_print.md)
 - [BufferedScreen](./buffered_screen.md)
-- [Implement you custom shape](./CustomShape.md)
+- [Implement your custom shape](./CustomShape.md)
 - [Implement your own screen](./tft_implement/README.md)
 
 # News
