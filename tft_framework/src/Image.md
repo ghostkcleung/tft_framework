@@ -8,7 +8,8 @@ File f = SD.open ( /* YOUR_PATH */ ) ;
 Image *img = new Bitmap ( f ) ;
 img -> fill ( scr ) ;
 
-delete img;   // The file also is closed when allocate the image object
+delete img;   // Delete the object if will not use again.
+f.close ();   // You should handle the file object properly also.
 ```
 
 # Usage of Image
