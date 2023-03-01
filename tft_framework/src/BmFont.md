@@ -47,5 +47,7 @@ scr->println("Hello! 你好! こんにちは!");
 scr->println("Hello! 你好! こんにちは!");
 ```
 
-If you run it successfully, You can find that the lagacy at first line of strings. And there is smoother at the 2nd and 3rd line.
+If you run it successfully, You can find that the lagacy at first line of strings. And there is smoother at the 2nd and 3rd line. It is because the pixel of chars is cached into the memory when reading at the 1st line.
+
+
 ![image](/BmFont.jpg)
