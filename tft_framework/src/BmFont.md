@@ -1,12 +1,24 @@
-# Add Image Support
+# Add BmFont Support
 
-You can load and draw the Image file from the SD card as following. tft_framework is support BMP 24bit and 16bit color format temporary. I will implement more type of image such as JPG, PNG ... in the future.
+
 
 ```cpp
 Screen scr = /* YOUR SCREEN */
-File f = SD.open ( /* YOUR_PATH */ ) ;
-Image *img = new Bitmap ( f ) ;
-img -> fill ( scr ) ;
+File path = /* YOUR_PATH */
 
-delete img;   // The file also is closed when allocate the image object
+BmFont *bmFont = new BmFont(path, "/*** Your fnt file ***/");
+
+if (!bmFont->isValid()) {
+  scr->println("File not found or parse error.");
+  delay(1 << 31);
+}
+
+/*** Replace Font ***/
+Font *oldFont = scr->getFont();
+scr->setFont(bmFont);
+delete oldFont;
+
+scr->clear();
+scr->println("Hello,world!");
+scr->println("你好,世界!");
 ```
