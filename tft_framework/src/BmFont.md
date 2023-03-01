@@ -41,3 +41,4 @@ scr->clear();
 scr->println("Hello,world!");
 scr->println("你好,世界!");
 ```
+![image](/BmFont.jpg)
