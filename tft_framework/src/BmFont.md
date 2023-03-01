@@ -21,7 +21,7 @@ https://fonts.google.com/noto/specimen/Noto+Sans+TC
 - Textures: Must select "tga - Targa"
 - Compressior: Must select "none"
 
-Then select characters those you need. Usually we select all of the page of "000000 Latin".
+Then select characters those you need. Usually we select all of the page of "000000 Latin". Save the bitmap font. For this example, we name it as "64_Noto_Sans_CJK_TC".
 
 ```cpp
 Screen scr = /* YOUR SCREEN */
