@@ -1,5 +1,8 @@
-# Add BmFont Support
+# Add BMFont Support
 
+BMFont offical site: https://www.angelcode.com/products/bmfont/(https://www.angelcode.com/products/bmfont/)
+
+As the offical site above, it is a software to convert bitmap from truetype font.
 
 
 ```cpp
