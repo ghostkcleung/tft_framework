@@ -11,6 +11,13 @@ Firstly, I use the font is called "Noto Sans Traditional Chinese" that can downl
 
 https://fonts.google.com/noto/specimen/Noto+Sans+TC
 
+In the BMFont, click [Options] -> [Font Settings] -> [Add font...]
+
+Charset: Select [Unicode]
+
+Size: 64 ( I use 64 for this example )
+
+At the export
 
 ```cpp
 Screen scr = /* YOUR SCREEN */
