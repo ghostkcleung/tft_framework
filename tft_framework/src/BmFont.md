@@ -38,7 +38,8 @@ scr->setFont(bmFont);
 delete oldFont;
 
 scr->clear();
-scr->println("Hello,world!");
-scr->println("你好,世界!");
+scr->println("Hello! 你好! こんにちは!");
+scr->println("Hello! 你好! こんにちは!");
+scr->println("Hello! 你好! こんにちは!");
 ```
 ![image](/BmFont.jpg)
