@@ -21,7 +21,7 @@ https://fonts.google.com/noto/specimen/Noto+Sans+TC
 - Textures: Must select "tga - Targa"
 - Compressior: Must select "none"
 
-Then select characters those you need. Usually we select all of the page of "000000 Latin". Save the bitmap font. For this example, we name it as "64_Noto_Sans_TC". You will get the file "64_Noto_Sans_TC.fnt", "64_Noto_Sans_TC_0.tga", "64_Noto_Sans_TC_1.tga" ...
+Then select characters those you need. Usually we select all of the page of "000000 Latin". Save the bitmap font. For this example, we name it as "64_Noto_Sans_TC". You will get the files "64_Noto_Sans_TC.fnt", "64_Noto_Sans_TC_0.tga", "64_Noto_Sans_TC_1.tga" ...
 
 Inside the tga file, there is informations of the chars those you saved. It is plain text file.
 
