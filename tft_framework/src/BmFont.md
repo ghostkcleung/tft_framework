@@ -6,8 +6,8 @@ As the offical site above, it is a software to convert bitmap from TrueType font
 So we can show the unicode text from our screen.
 
 ### Examples
-
-Firstly, I use the font is called "Noto Sans Traditional Chinese" that can downloaded from google.
+![image](/BmFont.jpg)
+Firstly, let's use the font called "Noto Sans Traditional Chinese" that can downloaded from google.
 
 https://fonts.google.com/noto/specimen/Noto+Sans+TC
 
@@ -49,5 +49,6 @@ scr->println("Hello! 你好! こんにちは!");
 
 If you run it successfully, You can find that the lagacy at first line of strings. And there is smoother at the 2nd and 3rd line. It is because the pixel of chars are cached into the memory when reading at the 1st line.
 
+The default cache size is 100. You can adjust the cache size by calling bmFont->setCacheSize(n)
 
-![image](/BmFont.jpg)
+When the cache is full. The program will delete the char that is the least commonly used.
