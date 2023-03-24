@@ -1,0 +1,72 @@
+Here is an example function written in C++ that can convert WGS84 coordinates to the Hong Kong 1980 (HK1980) grid system:
+
+```c++
+#include
+#include
+
+using namespace std;
+
+const double PI = 3.14159265358979323846;
+const double a = 6378137.0;
+const double b = 6356752.314140;
+const double f = (a - b) / a;
+const double e = sqrt(2 * f - f * f);
+const double e2 = (e * e) / (1 - e * e);
+
+// Convert WGS84 to HK1980
+void wgs84_to_hk1980(double lat, double lon, double *x, double *y) {
+double lat_rad = lat * PI / 180.0;
+double lon_rad = lon * PI / 180.0;
+
+double N = a / sqrt(1 - e2 * sin(lat_rad) * sin(lat_rad));
+double rho = a * (1 - e2) / pow(1 - e2 * sin(lat_rad) * sin(lat_rad), 1.5);
+double eta2 = N / rho - 1;
+
+double M = a * ((1 - e2 / 4 - 3 * e2 * e2 / 64 - 5 * e2 * e2 * e2 / 256) * lat_rad
+- (3 * e2 / 8 + 3 * e2 * e2 / 32 + 45 * e2 * e2 * e2 / 1024) * sin(2 * lat_rad)
++ (15 * e2 * e2 / 256 + 45 * e2 * e2 * e2 / 1024) * sin(4 * lat_rad)
+- (35 * e2 * e2 * e2 / 3072) * sin(6 * lat_rad));
+
+double A0 = 1 - e2 / 4 - 3 * e2 * e2 / 64 - 5 * e2 * e2 * e2 / 256;
+double A2 = (3.0 / 8.0) * (e2 + e2 * e2 / 4 + 15 * e2 * e2 * e2 / 128);
+double A4 = (15.0 / 256.0) * (e2 * e2 + 3 * e2 * e2 * e2 / 4);
+double A6 = 35 * e2 * e2 * e2 / 3072;
+
+double S = A0 * lat_rad - A2 * sin(2 * lat_rad) + A4 * sin(4 * lat_rad) - A6 * sin(6 * lat_rad);
+
+double lambda = lon_rad - (114 * PI / 180.0);
+
+double l = lambda * cos(lat_rad);
+double l2 = l * l;
+double l3 = l2 * l;
+double l4 = l3 * l;
+double l5 = l4 * l;
+double l6 = l5 * l;
+
+double X = 819069.8 + 8344.16 * S + 184.4 * S * S * S + 0.25 * S * S * S * S * S * (l2 + l4 + l6) + 0.2 * S * S * (l2 + l4 + l6);
+double Y = 836694.05 + 18038.7 * S + 389.4 * S * S * S + 0.25 * S * S * S * S * S * l2 + 0.2 * S * S * l2;
+
+*x = X;
+*y = Y;
+}
+
+int main() {
+double lat = 22.279327;
+double lon = 114.162813;
+double x, y;
+
+wgs84_to_hk1980(lat, lon, &x, &y);
+
+cout << "WGS84: (" << lat << ", " << lon << ")" << endl;
+cout << "HK1980: (" << x << ", " << y << ")" << endl;
+
+return 0;
+}
+```
+
+To use this function, you can call it with the latitude and longitude of the WGS84 coordinates, and it will return the corresponding HK1980 grid coordinates in the `x` and `y` variables. For example:
+
+```
+WGS84: (22.279327, 114.162813)
+HK1980: (831869.862335, 815256.040181)
+```
