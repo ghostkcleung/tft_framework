@@ -1,34 +1,62 @@
-Here is an example C function that can convert WGS84 coordinates to HK1980 grid system:
+Here's an example C++ code that converts WGS84 coordinates to HK1980 grid system:
 
-```c
+```cpp
+#include
 #include
 
-#define PI 3.14159265358979323846
-#define a 6378137.0
-#define b 6356752.31414
-#define f (a - b) / a
-#define e sqrt(2 * f - f * f)
+using namespace std;
 
-void WGS84toHK1980(double lat, double lon, double *x, double *y) {
-double lat_rad = lat * PI / 180.0;
-double lon_rad = lon * PI / 180.0;
-double N = a / sqrt(1 - e * e * sin(lat_rad) * sin(lat_rad));
-double M = a * (1 - e * e) / pow(1 - e * e * sin(lat_rad) * sin(lat_rad), 1.5);
-double t = tan(lat_rad);
-double eta = e * cos(lat_rad);
-double p = lon_rad - 114.1785555916667 * PI / 180.0;
-double A = a * (1 - e * e) * (1 + 3 * e * e / 4 + 45 * pow(e, 4) / 64 + 175 * pow(e, 6) / 256 + 11025 * pow(e, 8) / 16384) / pow(1 - e * e, 2);
-double B = a * (1 - e * e) * (3 * e * e / 4 + 15 * pow(e, 4) / 16 + 525 * pow(e, 6) / 512 + 2205 * pow(e, 8) / 2048) / pow(1 - e * e, 2);
-double C = a * (1 - e * e) * (15 * pow(e, 4) / 64 + 105 * pow(e, 6) / 256 + 2205 * pow(e, 8) / 4096) / pow(1 - e * e, 2);
-double D = a * (1 - e * e) * (35 * pow(e, 6) / 512 + 315 * pow(e, 8) / 2048) / pow(1 - e * e, 2);
-double E = a * (1 - e * e) * (315 * pow(e, 8) / 131072) / pow(1 - e * e, 2);
-double X = A * lat_rad - B * sin(2 * lat_rad) + C * sin(4 * lat_rad) - D * sin(6 * lat_rad) + E * sin(8 * lat_rad);
-double Y = N * (p + p * p * p / 6 * pow(cos(lat_rad), 2) * (N / M) * (N / M) * (1 - t * t + eta * eta) + p * p * p * p * p / 120 * pow(cos(lat_rad), 4) * (N / M) * (N / M) * (5 - 18 * t * t + pow(t, 4) + 14 * eta * eta - 58 * t * t * eta * eta));
-*x = X + 836694.05;
-*y = Y + 819069.80;
+const double a = 6378137.0; // WGS84 semi-major axis
+const double b = 6356752.3142; // WGS84 semi-minor axis
+const double f = (a - b) / a; // WGS84 flattening
+const double e2 = 2 * f - f * f; // WGS84 eccentricity squared
+const double k0 = 0.9996; // HK1980 scale factor
+const double dx = 819069.80; // HK1980 false easting
+const double dy = 836694.05; // HK1980 false northing
+const double lon0 = 114.1785555556; // HK1980 central meridian in degrees
+const double lat0 = 22.3121333333; // HK1980 origin latitude in degrees
+
+double deg2rad(double deg) {
+return deg * M_PI / 180.0;
+}
+
+double rad2deg(double rad) {
+return rad * 180.0 / M_PI;
+}
+
+void wgs84_to_hk1980(double lat, double lon, double& x, double& y) {
+double phi = deg2rad(lat);
+double lambda = deg2rad(lon);
+double lambda0 = deg2rad(lon0);
+
+double N = a / sqrt(1 - e2 * sin(phi) * sin(phi));
+double T = tan(phi) * tan(phi);
+double C = e2 * cos(phi) * cos(phi) / (1 - e2);
+double A = (lambda - lambda0) * cos(phi);
+double M = a * ((1 - e2 / 4 - 3 * e2 * e2 / 64 - 5 * e2 * e2 * e2 / 256) * phi
+- (3 * e2 / 8 + 3 * e2 * e2 / 32 + 45 * e2 * e2 * e2 / 1024) * sin(2 * phi)
++ (15 * e2 * e2 / 256 + 45 * e2 * e2 * e2 / 1024) * sin(4 * phi)
+- (35 * e2 * e2 * e2 / 3072) * sin(6 * phi));
+
+x = k0 * (A + (1 - T + C) * pow(A, 3) / 6
++ (5 - 18 * T + T * T + 72 * C - 58 * e2) * pow(A, 5) / 120) + dx;
+y = k0 * (M - N * tan(phi) * (pow(A, 2) / 2
+- (5 + 3 * T + 10 * C - 4 * C * C - 9 * e2) * pow(A, 4) / 24
++ (61 + 90 * T + 298 * C + 45 * T * T - 252 * e2 - 3 * C * C) * pow(A, 6) / 720)) + dy;
+}
+
+int main() {
+double lat = 22.279327;
+double lon = 114.162813;
+double x, y;
+
+wgs84_to_hk1980(lat, lon, x, y);
+
+cout << "WGS84: (" << lat << ", " << lon << ")" << endl;
+cout << "HK1980: (" << x << ", " << y << ")" << endl;
+
+return 0;
 }
 ```
 
-This function takes in the latitude and longitude of a point in WGS84 coordinates and returns the corresponding HK1980 grid system coordinates in the `x` and `y` variables. The constants `a`, `b`, `f`, and `e` are the parameters of the WGS84 ellipsoid. The constants `A`, `B`, `C`, `D`, and `E` are the coefficients of the latitude formula for HK1980. The function uses these formulas to calculate the X and Y coordinates of the point in HK1980 coordinates, and then adds the offset values of 836694.05 and 819069.80 to get the final coordinates.
-
-Note that this function assumes that the input latitude and longitude are in decimal degrees, and that the output coordinates are in meters. Also, this function only works for the Hong Kong area, and may not be accurate for other regions.
+Note that this code assumes that the input latitude and longitude are in decimal degrees, and the output x and y coordinates are in meters. Also, the constants used in the conversion formula are specific to the Hong Kong 1980 grid system, and may need to be adjusted for other grid systems.
