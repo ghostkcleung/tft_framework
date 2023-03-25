@@ -1,4 +1,4 @@
-Here's an example C++ code that converts WGS84 coordinates to HK1980 grid system:
+I apologize for the mistake in my previous answer. Here's an updated C++ code that should correctly convert WGS84 coordinates to HK1980 grid system:
 
 ```cpp
 #include
@@ -28,21 +28,35 @@ void wgs84_to_hk1980(double lat, double lon, double& x, double& y) {
 double phi = deg2rad(lat);
 double lambda = deg2rad(lon);
 double lambda0 = deg2rad(lon0);
+double phi0 = deg2rad(lat0);
 
-double N = a / sqrt(1 - e2 * sin(phi) * sin(phi));
-double T = tan(phi) * tan(phi);
-double C = e2 * cos(phi) * cos(phi) / (1 - e2);
-double A = (lambda - lambda0) * cos(phi);
-double M = a * ((1 - e2 / 4 - 3 * e2 * e2 / 64 - 5 * e2 * e2 * e2 / 256) * phi
-- (3 * e2 / 8 + 3 * e2 * e2 / 32 + 45 * e2 * e2 * e2 / 1024) * sin(2 * phi)
-+ (15 * e2 * e2 / 256 + 45 * e2 * e2 * e2 / 1024) * sin(4 * phi)
-- (35 * e2 * e2 * e2 / 3072) * sin(6 * phi));
+double e = sqrt(e2);
+double n = (a - b) / (a + b);
+double nu = a / sqrt(1 - e2 * sin(phi) * sin(phi));
+double rho = a * (1 - e2) / pow(1 - e2 * sin(phi) * sin(phi), 1.5);
+double eta2 = nu / rho - 1;
+double M = a * ((1 - e2 / 4 - 3 * pow(e2, 2) / 64 - 5 * pow(e2, 3) / 256) * phi
+- (3 * e2 / 8 + 3 * pow(e2, 2) / 32 + 45 * pow(e2, 3) / 1024) * sin(2 * phi)
++ (15 * pow(e2, 2) / 256 + 45 * pow(e2, 3) / 1024) * sin(4 * phi)
+- (35 * pow(e2, 3) / 3072) * sin(6 * phi));
+double sinPhi = sin(phi);
+double cosPhi = cos(phi);
+double tanPhi = tan(phi);
+double N = a / sqrt(1 - e2 * sinPhi * sinPhi);
+double T = tanPhi * tanPhi;
+double C = e2 * cosPhi * cosPhi / (1 - e2);
+double A = (lambda - lambda0) * cosPhi;
+double M0 = a * ((1 - e2 / 4 - 3 * pow(e2, 2) / 64 - 5 * pow(e2, 3) / 256) * phi0
+- (3 * e2 / 8 + 3 * pow(e2, 2) / 32 + 45 * pow(e2, 3) / 1024) * sin(2 * phi0)
++ (15 * pow(e2, 2) / 256 + 45 * pow(e2, 3) / 1024) * sin(4 * phi0)
+- (35 * pow(e2, 3) / 3072) * sin(6 * phi0));
+double Mm = M - M0;
 
-x = k0 * (A + (1 - T + C) * pow(A, 3) / 6
-+ (5 - 18 * T + T * T + 72 * C - 58 * e2) * pow(A, 5) / 120) + dx;
-y = k0 * (M - N * tan(phi) * (pow(A, 2) / 2
-- (5 + 3 * T + 10 * C - 4 * C * C - 9 * e2) * pow(A, 4) / 24
-+ (61 + 90 * T + 298 * C + 45 * T * T - 252 * e2 - 3 * C * C) * pow(A, 6) / 720)) + dy;
+x = dx + k0 * N * (A + (1 - T + C) * pow(A, 3) / 6
++ (5 - 18 * T + T * T + 72 * C - 58 * eta2) * pow(A, 5) / 120);
+y = dy + k0 * (Mm + N * tanPhi * (pow(A, 2) / 2
++ (5 - T + 9 * C + 4 * C * C) * pow(A, 4) / 24
++ (61 - 58 * T + T * T + 600 * C - 330 * eta2) * pow(A, 6) / 720));
 }
 
 int main() {
@@ -59,4 +73,4 @@ return 0;
 }
 ```
 
-Note that this code assumes that the input latitude and longitude are in decimal degrees, and the output x and y coordinates are in meters. Also, the constants used in the conversion formula are specific to the Hong Kong 1980 grid system, and may need to be adjusted for other grid systems.
+Note that this code assumes that the input latitude and longitude are in decimal degrees, and the output x and y coordinates are in meters. The constants used in the conversion formula are specific to the Hong Kong 1980 grid system, and may need to be adjusted for other grid systems.
