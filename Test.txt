@@ -1,83 +1,31 @@
-I apologize for the confusion in my previous answer. After reviewing the calculations, I have found an error in the code that caused the incorrect output. Here is the corrected C++ code that should correctly convert WGS84 coordinates to HK1980 grid system:
+WGS84经纬度转换为大地坐标系中的经纬度算法如下：
 
-```cpp
-#include
-#include
+1. 将WGS84经纬度转换为WGS84椭球体坐标系的笛卡尔坐标系。WGS84椭球体的长半轴为a=6378137米，短半轴为b=6356752.3142米，扁率为f=1/298.257223563。
 
-using namespace std;
+x = (N + h) * cos(lat) * cos(lon)
+y = (N + h) * cos(lat) * sin(lon)
+z = (N * (1 - e^2) + h) * sin(lat)
 
-const double a = 6378137.0; // WGS84 semi-major axis
-const double b = 6356752.3142; // WGS84 semi-minor axis
-const double f = (a - b) / a; // WGS84 flattening
-const double e2 = 2 * f - f * f; // WGS84 eccentricity squared
-const double k0 = 0.9996; // HK1980 scale factor
-const double dx = 819069.80; // HK1980 false easting
-const double dy = 836694.05; // HK1980 false northing
-const double lon0 = 114.1785555556; // HK1980 central meridian in degrees
-const double lat0 = 22.3121333333; // HK1980 origin latitude in degrees
+其中，N为卯酉圈曲率半径，e为椭球体第一偏心率，h为海拔高度。
 
-double deg2rad(double deg) {
-return deg * M_PI / 180.0;
-}
+N = a / sqrt(1 - e^2 * sin(lat)^2)
+e^2 = 2f - f^2
 
-double rad2deg(double rad) {
-return rad * 180.0 / M_PI;
-}
+2. 将WGS84椭球体坐标系的笛卡尔坐标系转换为大地坐标系的笛卡尔坐标系。大地坐标系使用的椭球体参数为a=6378137米，b=6356752.3141米，扁率为f=1/298.257223563。
 
-void wgs84_to_hk1980(double lat, double lon, double& x, double& y) {
-double phi = deg2rad(lat);
-double lambda = deg2rad(lon);
-double lambda0 = deg2rad(lon0);
-double phi0 = deg2rad(lat0);
+X = (1 + k) * x
+Y = (1 + k) * y
+Z = (1 + k - e^2) * z
 
-double e = sqrt(e2);
-double n = (a - b) / (a + b);
-double nu = a / sqrt(1 - e2 * sin(phi) * sin(phi));
-double rho = a * (1 - e2) / pow(1 - e2 * sin(phi) * sin(phi), 1.5);
-double eta2 = nu / rho - 1;
-double M = a * ((1 - e2 / 4 - 3 * pow(e2, 2) / 64 - 5 * pow(e2, 3) / 256) * phi
-- (3 * e2 / 8 + 3 * pow(e2, 2) / 32 + 45 * pow(e2, 3) / 1024) * sin(2 * phi)
-+ (15 * pow(e2, 2) / 256 + 45 * pow(e2, 3) / 1024) * sin(4 * phi)
-- (35 * pow(e2, 3) / 3072) * sin(6 * phi));
-double sinPhi = sin(phi);
-double cosPhi = cos(phi);
-double tanPhi = tan(phi);
-double N = a / sqrt(1 - e2 * sinPhi * sinPhi);
-double T = tanPhi * tanPhi;
-double C = e2 * cosPhi * cosPhi / (1 - e2);
-double A = (lambda - lambda0) * cosPhi;
-double M0 = a * ((1 - e2 / 4 - 3 * pow(e2, 2) / 64 - 5 * pow(e2, 3) / 256) * phi0
-- (3 * e2 / 8 + 3 * pow(e2, 2) / 32 + 45 * pow(e2, 3) / 1024) * sin(2 * phi0)
-+ (15 * pow(e2, 2) / 256 + 45 * pow(e2, 3) / 1024) * sin(4 * phi0)
-- (35 * pow(e2, 3) / 3072) * sin(6 * phi0));
-double Mm = M - M0;
+其中，k为大地坐标系的比例因子，可以通过以下公式计算：
 
-x = dx + k0 * N * (A + (1 - T + C) * pow(A, 3) / 6
-+ (5 - 18 * T + T * T + 72 * C - 58 * eta2) * pow(A, 5) / 120);
-y = dy + k0 * (Mm + N * tanPhi * (pow(A, 2) / 2
-+ (5 - T + 9 * C + 4 * C * C) * pow(A, 4) / 24
-+ (61 - 58 * T + T * T + 600 * C - 330 * eta2) * pow(A, 6) / 720));
-}
+k = (a * e^2) / (sqrt(X^2 + Y^2) * sqrt(1 - e^2 * sin(lat)^2))
 
-int main() {
-double lat = 22.279327;
-double lon = 114.162813;
-double x, y;
+3. 将大地坐标系的笛卡尔坐标系转换为大地坐标系的经纬度。
 
-wgs84_to_hk1980(lat, lon, x, y);
+lon = atan(Y / X)
+lat = atan(Z / sqrt(X^2 + Y^2))
 
-cout << "WGS84: (" << lat << ", " << lon << ")" << endl;
-cout << "HK1980: (" << x << ", " << y << ")" << endl;
+其中，atan为反正切函数，返回值为弧度制。需要将结果转换为度数制。
 
-return 0;
-}
-```
-
-With the input parameters of latitude 22.279327 and longitude 114.162813, the output should be:
-
-```
-WGS84: (22.279327, 114.162813)
-HK1980: (815606.597, 834818.855)
-```
-
-I apologize for any confusion caused by my previous answer.
+需要注意的是，以上算法中的经纬度坐标系为弧度制，需要将结果转换为度数制。此外，由于计算过程中涉及到三角函数的计算，可能会存在精度误差。
