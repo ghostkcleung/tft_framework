@@ -1,153 +1,129 @@
-以下是一個簡單的 C 語言函數，可以將 WGS84 經緯度轉換為 HK1980 方格座標：
+WGS84经纬度转换为HK1980方格坐标的计算方法可以分为以下几步：
 
-```c
-#include
+1. 将WGS84经纬度转换为大地坐标系
 
-void wgs84_to_hk1980(double lat, double lon, double &x, double &y) {
-double a = 6378137.0; // WGS84橢球體長半軸
-double b = 6356752.3142; // WGS84橢球體短半軸
-double e = sqrt(1 - pow(b / a, 2)); // WGS84橢球體第一偏心率
-double e2 = pow(e, 2); // WGS84橢球體第二偏心率
-double m0 = 0.9999; // HK1980中央子午線縮尺因子
-double a0 = 6367558.4969; // HK1980橢球體長半軸
-double b0 = 6356256.910; // HK1980橢球體短半軸
-double e0 = sqrt(1 - pow(b0 / a0, 2)); // HK1980橢球體第一偏心率
-double e02 = pow(e0, 2); // HK1980橢球體第二偏心率
-double n = (a - b) / (a + b); // WGS84橢球體地球極半徑差
-double n2 = pow(n, 2); // WGS84橢球體地球極半徑差平方
-double n3 = pow(n, 3); // WGS84橢球體地球極半徑差三次方
-double n4 = pow(n, 4); // WGS84橢球體地球極半徑差四次方
-double n5 = pow(n, 5); // WGS84橢球體地球極半徑差五次方
-double n6 = pow(n, 6); // WGS84橢球體地球極半徑差六次方
-double aStar = a / (1 + n) * (1 + n2 / 4 + n4 / 64 + n6 / 256); // WGS84橢球體地球極半徑
-double deltaLon = lon - 114.178555; // 經度差
-double deltaLat = lat - 22.2670; // 緯度差
-double sinLat = sin(lat * M_PI / 180); // 緯度的正弦值
-double cosLat = cos(lat * M_PI / 180); // 緯度的餘弦值
-double cos2Lat = pow(cosLat, 2); // 緯度的餘弦值平方
-double cos3Lat = pow(cosLat, 3); // 緯度的餘弦值三次方
-double cos4Lat = pow(cosLat, 4); // 緯度的餘弦值四次方
-double cos5Lat = pow(cosLat, 5); // 緯度的餘弦值五次方
-double cos6Lat = pow(cosLat, 6); // 緯度的餘弦值六次方
-double cos7Lat = pow(cosLat, 7); // 緯度的餘弦值七次方
-double cos8Lat = pow(cosLat, 8); // 緯度的餘弦值八次方
-double l = deltaLon * M_PI / 180; // 經度差的弧度值
-double l2 = pow(l, 2); // 經度差的弧度值平方
-double l3 = pow(l, 3); // 經度差的弧度值三次方
-double l4 = pow(l, 4); // 經度差的弧度值四次方
-double l5 = pow(l, 5); // 經度差的弧度值五次方
-double l6 = pow(l, 6); // 經度差的弧度值六次方
-double l7 = pow(l, 7); // 經度差的弧度值七次方
-double l8 = pow(l, 8); // 經度差的弧度值八次方
-double m = aStar * ((1 - pow(e, 2) / 4 - 3 * pow(e, 4) / 64 - 5 * pow(e, 6) / 256) * lat
-- (3 * pow(e, 2) / 8 + 3 * pow(e, 4) / 32 + 45 * pow(e, 6) / 1024) * sin(2 * lat)
-+ (15 * pow(e, 4) / 256 + 45 * pow(e, 6) / 1024) * sin(4 * lat)
-- (35 * pow(e, 6) / 3072) * sin(6 * lat)); // WGS84橢球體子午線弧長
-double n0 = a0 / sqrt(1 - e02 * pow(sinLat, 2)); // HK1980橢球體卯酉圈曲率半徑
-double t = tan(lat * M_PI / 180); // 緯度的正切值
-double t2 = pow(t, 2); // 緯度的正切值平方
-double t4 = pow(t, 4); // 緯度的正切值四次方
-double t6以下是一個用 C 語言寫出的 WGS84 經緯度轉換成 HK1980 方格座標的 function，使用的是公式轉換法：
+WGS84经纬度可以通过以下公式转换为大地坐标系中的经纬度：
 
-```c
-void wgs84_to_hk1980(double lat, double lon, double &x, double &y) {
-// WGS84橢球體參數
-double a = 6378137.0; // 赤道半徑
-double f = 1 / 298.257223563; // 扁率
+φ = arctan((1 - f) * tan(λ))
+L = atan2(tan(φ), cos(λ))
 
-// HK1980坐標系參數
-double a0 = 6378388.0; // 香港1973坐標系長軸半徑
-double b0 = 6356911.946; // 香港1973坐標系短軸半徑
-double e0 = sqrt(1 - (b0 * b0) / (a0 * a0)); // 香港1973坐標系第一偏心率
-double e1 = sqrt((a0 * a0) / (b0 * b0) - 1); // 香港1973坐標系第二偏心率
+其中，φ表示纬度，λ表示经度，f表示椭球体扁率。
 
-// 轉換經度和緯度為弧度
-double lat_r = lat * M_PI / 180.0;
-double lon_r = lon * M_PI / 180.0;
+然后，可以使用大地坐标系中的转换公式将经纬度转换为大地坐标系中的X、Y、Z坐标：
 
-// 計算WGS84橢球體參數
-double W = sqrt(1 - pow(e0 * sin(lat_r), 2));
-double N = a / W;
+X = (N + h) * cos(φ) * cos(λ)
+Y = (N + h) * cos(φ) * sin(λ)
+Z = (N * (1 - e^2) + h) * sin(φ)
 
-// 計算WGS84經緯度到香港1973坐標系的轉換
-double M = a0 * ((1 - pow(e0, 2) / 4 - 3 * pow(e0, 4) / 64 - 5 * pow(e0, 6) / 256) * lat_r
-- (3 * pow(e0, 2) / 8 + 3 * pow(e0, 4) / 32 + 45 * pow(e0, 6) / 1024) * sin(2 * lat_r)
-+ (15 * pow(e0, 4) / 256 + 45 * pow(e0, 6) / 1024) * sin(4 * lat_r)
-- (35 * pow(e0, 6) / 3072) * sin(6 * lat_r));
-double t = tan(lat_r);
-double eta = e1 * cos(lat_r);
-double A = (lon_r - M_PI * 113.0 / 180.0) * cos(lat_r);
-double N1 = a0 / sqrt(1 - pow(e0 * sin(lat_r), 2));
-double M1 = a0 * ((1 - pow(e0, 2) / 4 - 3 * pow(e0, 4) / 64 - 5 * pow(e0, 6) / 256) * lat_r
-- (3 * pow(e0, 2) / 8 + 3 * pow(e0, 4) / 32 + 45 * pow(e0, 6) / 1024) * sin(2 * lat_r)
-+ (15 * pow(e0, 4) / 256 + 45 * pow(e0, 6) / 1024) * sin(4 * lat_r)
-- (35 * pow(e0, 6) / 3072) * sin(6 * lat_r));
+其中，N表示卯酉圈曲率半径，h表示高度，e表示椭球体第一偏心率。
 
-double x0 = 836694.05;
-double y0 = 819069.80;
+2. 将大地坐标系转换为平面坐标系
 
-double x_hk1980 = x0 + N1 * (A + pow(A, 3) * (1 - pow(t, 2) + pow(eta, 2)) / 6
-+ pow(A, 5) * (5 - 18 * pow(t, 2) + pow(t, 4) + 14 * pow(eta, 2) - 58 * pow(t, 2) * pow(eta, 2)) / 120);
-double y_hk1980 = y0 + M1 - N1 * t * (pow(A, 2) / 2 + pow(A, 4) * (5 - pow(t, 2) + 9 * pow(eta, 2) + 4 * pow(eta, 4)) / 24
-+ pow(A, 6) * (61 - 58 * pow(t, 2) + pow(t, 4) + 270 * pow(eta, 2) - 330 * pow(t, 2) * pow(eta, 2)) / 720);
+在HK1980坐标系中，通常使用的是“港澳格网”（Hong Kong Grid）或“港九格网”（Hong Kong 1980 Grid）来表示平面坐标。这些格网通常是基于UTM投影或高斯-克吕格投影的。
 
-x = x_hk1980;
-y = y_hk1980;
-}
+对于UTM投影，可以使用以下公式将大地坐标系中的X、Y、Z坐标转换为UTM投影下的坐标：
+
+a = 6378137
+f = 1 / 298.257223563
+b = a * (1 - f)
+e = sqrt(1 - (b / a)^2)
+n = f / (2 - f)
+v = a / sqrt(1 - e^2 * sin(φ)^2)
+p = a * (1 - e^2) / (1 - e^2 * sin(φ)^2)^(3/2)
+m = a * (1 - e^2) * (1 - e^2 * sin(φ)^2)^(-1.5)
+
+A = (λ - λ0) * cos(φ)
+t = tan(φ)
+η = n / (v * m)
+x = A^2 / 2 * v * m * sin(φ) * cos(φ)
+y = A^4 / 24 * v * m * sin(φ) * cos(φ)^3 * (5 - t^2 + 9 * η^2 + 4 * η^4)
+z = A^6 / 720 * v * m * sin(φ) * cos(φ)^5 * (61 - 58 * t^2 + t^4)
+
+其中，a表示椭球体长半轴，f表示椭球体扁率，b表示椭球体短半轴，e表示椭球体第一偏心率，φ表示纬度，λ表示经度，λ0表示中央经线，n表示椭球体第三偏心率，v表示子午线曲率半径，p表示卯酉圈曲率半径，m表示子午线弧长半径，A表示经差，t表示切线，η表示斜率因子，x、y、z表示UTM投影下的坐标。
+
+对于高斯-克吕格投影，可以使用以下公式将大地坐标系中的X、Y、Z坐标转换为高斯-克吕格投影下的坐标：
+
+a = 6378137
+f = 1 / 298.257223563
+b = a * (1 - f)
+e = sqrt(1 - (b / a)^2)
+n = f / (2 - f)
+v = a / sqrt(1 - e^2 * sin(φ)^2)
+p = a * (1 - e^2) / (1 - e^2 * sin(φ)^2)^(3/2)
+m = a * (1 - e^2) * (1 - e^2 * sin(φ)^2)^(-1.5)
+
+λ0 = (zone - 1) * 6 - 180 + 3
+L0 = (zone - 1) * 6 - 180 + 3
+
+A = (λ - λ0) * cos(φ)
+t = tan(φ)
+η = n / (v * m)
+x = p * cos(φ) * A * (1 + A^2 / 6 * (1 - t^2 + η^2))
+y = p * (m + A^2 / 2 * t * (1 - t^2 + η^2) + A^4 / 24 * t * (5 - t^2 + 9 * η^2 + 4 * η^4))
+z = 1
+
+其中，a表示椭球体长半轴，f表示椭球体扁率，b表示椭球体短半轴，e表示椭球体第一偏心率，φ表示纬度，λ表示经度，zone表示投影带号，n表示椭球体第三偏心率，v表示子午线曲率半径，p表示卯酉圈曲率半径，m表示子午线弧长半径，λ0表示中央经线，L0表示投影中央经度，A表示经差，t表示切线，η表示斜率因子，x、y、z表示高斯-克吕格投影下的坐标。
+
+3. 将平面坐标转换为方格坐标WGS84经纬度转换为HK1980方格坐标的计算方法可以分为以下步骤：
+
+1. 将WGS84经纬度转换为大地坐标系（GCS_HK1980）。
+
+这可以通过以下公式进行计算：
+
+```
+φ = latitude * π / 180
+λ = longitude * π / 180
+a = 6378137.0
+f = 1 / 298.257223563
+b = a * (1 - f)
+e = sqrt((a**2 - b**2) / a**2)
+N = a / sqrt(1 - e**2 * sin(φ)**2)
+X = (N + altitude) * cos(φ) * cos(λ)
+Y = (N + altitude) * cos(φ) * sin(λ)
+Z = (N * (1 - e**2) + altitude) * sin(φ)
 ```
 
-這個 function 接受三個參數：經度 `lon`、緯度 `lat` 和兩個指向 `double` 的變量 `x` 和 `y`，用於存儲轉換後的 HK1980 方格座標。在 function 內部，首先定義了 WGS84 橢球體和 HK1980 坐標系的參數，然後將經度和緯度轉換為弧度。接下來，使用公式計算 WGS84 經緯度到 HK1980 坐標系的轉換，最後將計算結果存儲到 `x` 和 `y` 變量中。
+其中，`latitude`和`longitude`分别表示WGS84坐标系下的纬度和经度，`altitude`表示高程（如果不知道高程，则可以将其设为0）。`a`和`b`分别表示WGS84椭球体的长半轴和短半轴，`f`表示椭球体扁率，`e`表示椭球体第一偏心率，`N`表示卯酉圈曲率半径，`X`、`Y`和`Z`分别表示大地坐标系下的X、Y和Z坐标。
 
-需要注意的是，這個 function 中使用了 `M_PI` 常量，這是 C 語言中的圓周率常量，需要包含 `` 標頭文件才能使用。此外，因為 function 中使用了指向 `double` 的變量，以下是一個用 C 語言實現的 WGS84 經緯度轉換成 HK1980 方格座標的函數：
+2. 将大地坐标系转换为平面坐标系。
 
-```c
-#include
+在HK1980坐标系中，通常使用的是“港澳格网”（Hong Kong Grid）或“港九格网”（Hong Kong 1980 Grid）来表示平面坐标。这些格网通常是基于UTM投影或高斯-克吕格投影的，因此需要使用相应的投影参数进行转换。
 
-void wgs84_to_hk1980(double lat, double lon, double &x, double &y) {
-// WGS84 橢球體參數
-const double a = 6378137.0; // 長半軸
-const double f = 1.0 / 298.257223563; // 扁率
-const double e2 = 2 * f - f * f; // 第一偏心率平方
-const double e2p = e2 / (1 - e2); // 第二偏心率平方
+以高斯-克吕格投影为例，可以使用以下公式进行计算：
 
-// HK1980 平面直角座標系統參數
-const double a0 = 6367558.4969;
-const double b0 = 16002.8900;
-const double c0 = 16.8326;
-const double a1 = 32005.7800;
-const double b1 = 0.0091;
-const double c1 = 0.00004;
-const double a2 = 0.0003;
-const double b2 = 0.0003;
-const double c2 = 0.0000;
-
-// 計算中間變量
-const double phi = lat * M_PI / 180; // 緯度轉弧度
-const double lambda = lon * M_PI / 180; // 經度轉弧度
-const double n = (a - b0) / (a + b0);
-const double nu = a / sqrt(1 - e2 * sin(phi) * sin(phi));
-const double rho = a * (1 - e2) / pow(1 - e2 * sin(phi) * sin(phi), 1.5);
-const double eta2 = nu / rho - 1;
-const double M = a * ((1 - e2 / 4 - 3 * pow(e2, 2) / 64 - 5 * pow(e2, 3) / 256) * phi
-- (3 * e2 / 8 + 3 * pow(e2, 2) / 32 + 45 * pow(e2, 3) / 1024) * sin(2 * phi)
-+ (15 * pow(e2, 2) / 256 + 45 * pow(e2, 3) / 1024) * sin(4 * phi)
-- (35 * pow(e2, 3) / 3072) * sin(6 * phi));
-const double A = (lambda - M_PI * 114 / 180) * cos(phi);
-const double A2 = A * A;
-const double A3 = A2 * A;
-const double A4 = A3 * A;
-const double A5 = A4 * A;
-const double A6 = A5 * A;
-const double A7 = A6 * A;
-const double A8 = A7 * A;
-const double A9 = A8 * A;
-const double A10 = A9 * A;
-
-// 計算 HK1980 平面直角座標系統的 x 和 y
-x = a0 * phi + a1 * sin(2 * phi) + a2 * sin(4 * phi) + A2 * b1 + A4 * b2 + A6 * c1 + A8 * c2;
-y = M + nu * tan(phi) * (A2 / 2 + (5 - eta2 + 9 * eta2 * eta2 + 4 * eta2 * eta2 * eta2) * A4 / 24
-+ (61 - 58 * eta2 + eta2 * eta2 + 600 * eta2 * eta2 * eta2 - 330 * eta2 * eta2 * eta2 * eta2) * A6 / 720);
-}
+```
+a = 6378388.0
+f = 1 / 297.0
+b = a * (1 - f)
+e = sqrt((a**2 - b**2) / a**2)
+φ0 = 22.3121333333333 * π / 180
+λ0 = 114.178555555556 * π / 180
+k0 = 1
+N0 = 819069.8
+E0 = 836694.05
+λ = atan(Y / X)
+ρ = sqrt(X**2 + Y**2)
+η2 = e**2 * cos(φ)**2
+M = a * (1 - e**2) / (1 - e**2 * sin(φ)**2)**1.5
+N = a / sqrt(1 - e**2 * sin(φ)**2)
+t = tan(φ)
+t2 = t**2
+t4 = t**4
+t6 = t**6
+C = e**2 / (1 - e**2) * cos(φ)**2
+A = (λ - λ0) * cos(φ)
+A2 = A**2
+A3 = A**3
+A5 = A**5
+A7 = A**7
+E = E0 + k0 * N * (A + A3 / 6 * (1 - t2 + C) + A5 / 120 * (5 - 18 * t2 + t4 + 72 * C - 58 * η2) + A7 / 5040 * (61 - 479 * t2 + 179 * t4 - t6))
+N = N0 + k0 * (M + t2 * N / 2 * (A2 + (5 - t2 + 9 * C + 4 * C**2) * A4 / 24 + (61 - 58 * t2 + t4 + 600 * C - 330 * η2) * A6 / 720))
 ```
 
-這個函數接受三個參數：經度 `lon`、緯度 `lat` 和兩個指向 `double` 型變量的指針 `x` 和 `y`。函數會計算出對應的 HK1980 平面直角座標系統的 x 和 y，並將結果存儲在 `x` 和 `y` 指向的變量中。注意，這個函數使用了數學庫中的 `sqrt()`、`sin()`、`cos()`、`tan()` 和 `pow()` 函數，因此需要包含 `` 標頭文件。
+其中，`a`和`b`分别表示HK1980椭球体的长半轴和短半轴，`f`表示椭球体扁率，`e`表示椭球体第一偏心率，`φ0`和`λ0`分别表示投影中央经线和纬线，`k0`表示比例因子，`N0`和`E0`分别表示投影坐标系下的原点纬度和经度，`λ`表示投影后的经度，`ρ`表示投影后的半径，`η2`表示投影后的第二偏心率，`M`表示子午线弧长，`N`表示卯酉圈曲率半径，`t`表示投影后的纬度切线，`C`表示投影后的子午线曲率半径，`A`表示投影后的横向坐标，`E`和`N`分别表示投影后的东西向和南北向坐标。
+
+3. 将平面坐标转换为方格坐标。
+
+在HK1980坐标系中，方格坐标通常是以“X-Y”形式表示的，其中X和Y分别表示格网中的列和行。因此，需要将平面坐标转换为相应的列和行坐标，即可得到HK1980方格坐标。
+
+需要注意的是，由于WGS84和HK1980使用的基准面和坐标系不同，因此在进行坐标转换时可能存在一定的误差。因此，在进行精确的坐标转换时，建议使用专业的GIS软件或咨询相关专业人士。
