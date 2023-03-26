@@ -1,0 +1,160 @@
+首先，我們需要了解 WGS84 和 HK1980 的定義和轉換公式。WGS84 是一個全球定位系統，它使用經度和緯度來確定地球上的位置。HK1980 是香港的地理坐標系統，它使用東經和北緯來確定香港的位置。因此，我們需要一個轉換公式來將 WGS84 經緯度轉換為 HK1980 方格座標。
+
+以下是一個使用 C 語言寫出的 WGS84 經緯度轉換為 HK1980 方格座標的 function：
+
+```c
+#include
+
+void wgs84_to_hk1980(double lat, double lon, double *x, double *y) {
+double a = 6378137.0; // WGS84 橢球體長半軸
+double b = 6356752.3142; // WGS84 橢球體短半軸
+double e = sqrt(1 - (b / a) * (b / a)); // WGS84 橢球體第一偏心率
+double e2 = e * e; // WGS84 橢球體第二偏心率
+double n = (a - b) / (a + b); // WGS84 橢球體卯酉圈曲率半徑
+double n2 = n * n; // WGS84 橢球體卯酉圈曲率半徑平方
+double n3 = n * n * n; // WGS84 橢球體卯酉圈曲率半徑立方
+double n4 = n * n * n * n; // WGS84 橢球體卯酉圈曲率半徑四次方
+double a0 = 6367558.4969; // HK1980 橢球體長半軸
+double b0 = 6356571.6896; // HK1980 橢球體短半軸
+double e0 = sqrt(1 - (b0 / a0) * (b0 / a0)); // HK1980 橢球體第一偏心率
+double e02 = e0 * e0; // HK1980 橢球體第二偏心率
+double n0 = (a0 - b0) / (a0 + b0); // HK1980 橢球體卯酉圈曲率半徑
+double n02 = n0 * n0; // HK1980 橢球體卯酉圈曲率半徑平方
+double n03 = n0 * n0 * n0; // HK1980 橢球體卯酉圈曲率半徑立方
+double n04 = n0 * n0 * n0 * n0; // HK1980 橢球體卯酉圈曲率半徑四次方
+double lon0 = 114.178555556; // 中央子午線經度
+double k0 = 1.0; // 縮尺因子
+
+double phi = lat * M_PI / 180.0; // 緯度轉換為弧度
+double lambda = lon * M_PI / 180.0; // 經度轉換為弧度
+double lambda0 = lon0 * M_PI / 180.0; // 中央子午線經度轉換為弧度
+
+double sin_phi = sin(phi);
+double cos_phi = cos(phi);
+double tan_phi = tan(phi);
+double sin_lambda = sin(lambda);
+double cos_lambda = cos(lambda);
+double sin_lambda0 = sin(lambda0);
+double cos_lambda0 = cos(lambda0);
+
+// WGS84 經緯度轉換為空間直角坐標系
+double N = a / sqrt(1 - e2 * sin_phi * sin_phi);
+double X = (N + lon) * cos_phi * cos_lambda;
+double Y = (N + lon) * cos_phi * sin_lambda;
+double Z = (N * (1 - e2) + lon) * sin_phi;
+
+// 空間直角坐標系轉換為 HK1980 方格座標系
+double m = cos_phi * (lambda - lambda0);
+double m2 = m * m;
+double m3 = m * m * m;
+double m4 = m * m * m * m;
+double m5 = m * m * m * m * m;
+double m6 = m * m * m * m * m * m;
+double m7 = m * m * m * m * m * m * m;
+double m8 = m * m * m * m * m * m * m * m;
+double a_star = a0 * (1 - n0 + (5 / 4) * (n02 - n03) + (81 / 64) * (n04 - n03));
+double b_star = (3 * a0 * n0 / 2) * (1 - n0 + (7 / 8) * (n02 - n03) + (55 / 64) * (n04 - n03));
+double c_star = (15 * a0 * n02在進行 WGS84 經緯度轉換成 HK1980 方格座標的 function 時，需要先了解 WGS84 和 HK1980 的座標系統之間的轉換關係。WGS84 是一種全球性的地理坐標系統，而 HK1980 則是香港特別行政區所採用的地理坐標系統。因此，我們需要使用轉換公式來將 WGS84 經緯度轉換成 HK1980 方格座標。
+
+以下是使用 C 語言實現 WGS84 經緯度轉換成 HK1980 方格座標的 function：
+
+```c
+#include
+
+#define PI 3.14159265358979323846
+#define a 6378137.0
+#define b 6356752.3142
+#define lon0 114.1785555555556
+#define k0 1.0
+#define dx -819069.80
+#define dy -834732.10
+#define e 0.0818191910428
+#define e2 0.00669438002290
+#define m0 0.9999
+
+void wgs84_to_hk1980(double lat, double lon, double *x, double *y) {
+double lat_rad = lat * PI / 180.0;
+double lon_rad = lon * PI / 180.0;
+double lon0_rad = lon0 * PI / 180.0;
+double n = (a - b) / (a + b);
+double nu = a / sqrt(1 - e2 * pow(sin(lat_rad), 2));
+double rho = a * (1 - e2) / pow(1 - e2 * pow(sin(lat_rad), 2), 1.5);
+double eta2 = nu / rho - 1;
+double M = a * ((1 - e2 / 4 - 3 * pow(e2, 2) / 64 - 5 * pow(e2, 3) / 256) * lat_rad - (3 * e2 / 8 + 3 * pow(e2, 2) / 32 + 45 * pow(e2, 3) / 1024) * sin(2 * lat_rad) + (15 * pow(e2, 2) / 256 + 45 * pow(e2, 3) / 1024) * sin(4 * lat_rad) - (35 * pow(e2, 3) / 3072) * sin(6 * lat_rad));
+double sin_lat = sin(lat_rad);
+double cos_lat = cos(lat_rad);
+double cos_lon_diff = cos(lon_rad - lon0_rad);
+double sin_lon_diff = sin(lon_rad - lon0_rad);
+double N = a / sqrt(1 - e2 * pow(sin_lat, 2));
+double T = pow(tan(lat_rad), 2);
+double C = e2 * pow(cos_lat, 2) / (1 - e2);
+double A = (lon_rad - lon0_rad) * cos_lat;
+double M0 = a * ((1 - e2 / 4 - 3 * pow(e2, 2) / 64 - 5 * pow(e2, 3) / 256) * lon0_rad - (3 * e2 / 8 + 3 * pow(e2, 2) / 32 + 45 * pow(e2, 3) / 1024) * sin(2 * lon0_rad) + (15 * pow(e2, 2) / 256 + 45 * pow(e2, 3) / 1024) * sin(4 * lon0_rad) - (35 * pow(e2, 3) / 3072) * sin(6 * lon0_rad));
+double x_val = dx + k0 * N * (A + (1 - T + C) * pow(A, 3) / 6 + (5 - 18 * T + pow(T, 2) + 72 * C - 58 * eta2) * pow(A, 5) / 120);
+double y_val = dy + k0 * (M - M0 + N * tan(lat_rad) * (pow(A, 2) / 2 + (5 - T + 9 * C + 4 * pow(C, 2)) * pow(A, 4) / 24 + (61 - 58 * T + pow(T, 2) + 600 * C - 330 * eta2) * pow(A, 6) / 720));
+*x = x_val;
+*y = y_val;
+}
+```
+
+在這個 function 中，我們使用了一些常數和公式來進行轉換。其中，常數 a 和 b 分別代表 WGS84 橢球體的長半軸和短半軸，常數 lon0 代表 HK1980 的中央子午線經度，常數 k0 代表縮尺比例因子，常數 dx 和 dy 分別代表 HK1980 方格座標系統的偏移量，常數 e 和 e2 分別代表 WGS84 橢球體的第一偏心率和第二偏心率，常數 m0 代表 HK1980 方格座標系統的中央縮尺因子。
+
+在 function 中，我們首先將經度和緯度轉換成弧度單位，然後計算出一些必要的參數，例如卯酉圈曲率半徑 nu、子午線曲率半徑 rho、等積緯度差 eta2、子午線弧長 M、座標轉換用到的一些三角函數值等等。最後，我們在進行 WGS84 經緯度轉換成 HK1980 方格座標之前，需要先了解 WGS84 和 HK1980 的定義和差異。
+
+WGS84 是一個全球定位系統，它是由美國國防部開發的，也是目前全球使用最廣泛的地理坐標系統之一。WGS84 使用的是橢球體模型，其參數為長半軸 a = 6378137 米，短半軸 b = 6356752.3142 米，扁率 f = (a - b) / a = 1 / 298.257223563。
+
+HK1980 是香港的地理坐標系統，它使用的是平面直角坐標系統，其基準面為香港1973年的大地水準面。HK1980 的坐標系統是以香港中央經線和赤道為基準，並以港鐵尖沙咀站的坐標為原點。HK1980 的坐標系統使用的是高斯-克吕格投影法，其投影參數需要進行計算。
+
+下面是 WGS84 經緯度轉換成 HK1980 方格座標的 C 語言 function：
+
+```c
+#include
+
+void wgs84_to_hk1980(double lat, double lon, double *x, double *y) {
+// WGS84 橢球體參數
+const double a = 6378137.0;
+const double b = 6356752.3142;
+const double f = 1 / 298.257223563;
+
+// HK1980 投影參數
+const double k0 = 0.9996;
+const double a0 = 6367558.4969;
+const double b0 = 16002.8900;
+const double c0 = 16.8326;
+const double d0 = 0.0219;
+const double e0 = 0.0003;
+
+// 計算經度差
+const double lon0 = 114.1785555555556;
+const double dl = lon - lon0;
+
+// 計算經度平均值
+const double lonm = (lon + lon0) / 2;
+
+// 計算曲率半徑
+const double e2 = f * (2 - f);
+const double m = a * (1 - e2) / pow(1 - e2 * pow(sin(lat), 2), 1.5);
+const double n = a / sqrt(1 - e2 * pow(sin(lat), 2));
+
+// 計算投影座標
+const double A = (lonm - lon0) * cos(lat);
+const double A2 = pow(A, 2);
+const double A4 = pow(A, 4);
+const double A6 = pow(A, 6);
+const double N = k0 * m;
+const double T = pow(tan(lat), 2);
+const double C = pow(e2 * pow(cos(lat), 2), 2);
+const double M = a * ((1 - e2 / 4 - 3 * pow(e2, 2) / 64 - 5 * pow(e2, 3) / 256) * lat
+- (3 * e2 / 8 + 3 * pow(e2, 2) / 32 + 45 * pow(e2, 3) / 1024) * sin(2 * lat)
++ (15 * pow(e2, 2) / 256 + 45 * pow(e2, 3) / 1024) * sin(4 * lat)
+- (35 * pow(e2, 3) / 3072) * sin(6 * lat));
+const double X = a0 * lat - b0 * sin(2 * lat) + c0 * sin(4 * lat) - d0 * sin(6 * lat) + e0 * sin(8 * lat);
+const double Y = N * (A + (1 - T + C) * A2 / 6 + (5 - 18 * T + T * T + 72 * C - 58 * e2) * A4 / 120 + (61 - 479 * T + 179 * T * T - T * T * T) * A6 / 5040) + 500000;
+
+// 設定輸出參數
+*x = X;
+*y = Y;
+}
+```
+
+這個 function 接受四個參數，分別是 WGS84 經度、緯度和 HK1980 方格座標系統中的 x 和 y 座標。在 function 內部，首先定義了 WGS84 橢球體參數和 HK1980 投影參數，然後計算經度差、經度平均值和曲率半徑等參數，最後使用高斯-克吕格投影法計算投影座標。最後，將計算得到的 x 和 y 座標設定為輸出參數。
