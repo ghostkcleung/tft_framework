@@ -1,63 +1,70 @@
-將經緯度轉換為方格座標需要先定義一個經緯度系統和方格座標系統之間的轉換公式。常見的經緯度系統是WGS84，而方格座標系統則可以是UTM或者是網格系統。
+首先，WGS84是一種全球定位系統，而HK80是香港地區的坐標系統。因此，要將WGS84轉換為HK80，需要進行一些數學計算。
 
-以下是將WGS84經緯度轉換為UTM方格座標的C語言程式碼：
+以下是一個用C語言實現WGS84轉換為HK80的示例程式碼：
 
 ```c
 #include
 #include
 
 #define PI 3.14159265358979323846
-#define deg2rad(deg) ((deg) * PI / 180.0)
-#define rad2deg(rad) ((rad) * 180.0 / PI)
-
-// 定義WGS84椭球體的參數
 #define a 6378137.0
-#define f 1.0/298.257223563
-#define b (a*(1-f))
-#define e sqrt((a*a-b*b)/(a*a))
+#define b 6356752.3142
+#define e2 0.006694379990197
 
-// 定義UTM投影的參數
-#define k0 0.9996
-#define E0 500000.0
-#define N0 0.0
-#define ZONE_NUMBER 51
-#define ZONE_LETTER 'R'
-
-// 經緯度轉UTM座標
-void latlon2utm(double lat, double lon, double *x, double *y)
-{
-double lon0 = (ZONE_NUMBER - 1) * 6.0 - 180.0 + 3.0; // 中央子午線經度
-double phi = deg2rad(lat); // 緯度轉弧度
-double lambda = deg2rad(lon); // 經度轉弧度
-double lambda0 = deg2rad(lon0); // 中央子午線經度轉弧度
-
-// 計算UTM投影的參數
-double N = a / sqrt(1 - e*e*sin(phi)*sin(phi));
-double T = tan(phi)*tan(phi);
-double C = e*e*cos(phi)*cos(phi)/(1-e*e);
-double A = cos(phi)*(lambda-lambda0);
-double M = a*((1-e*e/4-3*pow(e,4)/64-5*pow(e,6)/256)*phi
--(3*e*e/8+3*pow(e,4)/32+45*pow(e,6)/1024)*sin(2*phi)
-+(15*pow(e,4)/256+45*pow(e,6)/1024)*sin(4*phi)
--(35*pow(e,6)/3072)*sin(6*phi));
-
-// 計算UTM座標
-*x = k0*N*(A+(1-T+C)*pow(A,3)/6
-+(5-18*T+T*T+72*C-58*e*e)*pow(A,5)/120)+E0;
-*y = k0*(M+N*tan(phi)*(A*A/2+(5-T+9*C+4*C*C)*pow(A,4)/24
-+(61-58*T+T*T+600*C-330*e*e)*pow(A,6)/720))+N0;
+double deg2rad(double deg) {
+return deg * PI / 180.0;
 }
 
-// 主程式
-int main()
-{
-double lat = 25.0478; // 緯度
-double lon = 121.5319; // 經度
+double rad2deg(double rad) {
+return rad * 180.0 / PI;
+}
+
+void wgs84_to_hk80(double lat, double lon, double *x, double *y) {
+double phi = deg2rad(lat);
+double lambda = deg2rad(lon);
+double sin_phi = sin(phi);
+double cos_phi = cos(phi);
+double sin_lambda = sin(lambda);
+double cos_lambda = cos(lambda);
+double v = a / sqrt(1 - e2 * sin_phi * sin_phi);
+double h = 0; // assume sea level
+double x0 = 836694.05;
+double y0 = 819069.80;
+double k0 = 1.0;
+double dx = -162.619;
+double dy = 276.959;
+double e = sqrt((a*a - b*b) / (a*a));
+double nu = a / sqrt(1 - e2 * sin_phi * sin_phi);
+double rho = a * (1 - e2) / pow(1 - e2 * sin_phi * sin_phi, 1.5);
+double eta2 = nu / rho - 1;
+double M = a * ((1 - e2 / 4 - 3 * e2 * e2 / 64 - 5 * e2 * e2 * e2 / 256) * phi - (3 * e2 / 8 + 3 * e2 * e2 / 32 + 45 * e2 * e2 * e2 / 1024) * sin(2 * phi) + (15 * e2 * e2 / 256 + 45 * e2 * e2 * e2 / 1024) * sin(4 * phi) - (35 * e2 * e2 * e2 / 3072) * sin(6 * phi));
+double N = a / sqrt(1 - e2 * sin_phi * sin_phi);
+double T = tan(phi) * tan(phi);
+double C = e2 / (1 - e2) * cos_phi * cos_phi;
+double A = (lambda - deg2rad(114.15769)) * cos_phi;
+double M0 = a * ((1 - e2 / 4 - 3 * e2 * e2 / 64 - 5 * e2 * e2 * e2 / 256) * deg2rad(22.312133) - (3 * e2 / 8 + 3 * e2 * e2 / 32 + 45 * e2 * e2 * e2 / 1024) * sin(2 * deg2rad(22.312133)) + (15 * e2 * e2 / 256 + 45 * e2 * e2 * e2 / 1024) * sin(4 * deg2rad(22.312133)) - (35 * e2 * e2 * e2 / 3072) * sin(6 * deg2rad(22.312133)));
+double X = x0 + k0 * N * (A + (1 - T + C) * pow(A, 3) / 6 + (5 - 18 * T + T * T + 72 * C - 58 * eta2) * pow(A, 5) / 120);
+double Y = y0 + k0 * (M - M0 + N * tan(phi) * (pow(A, 2) / 2 + (5 - T + 9 * C + 4 * C * C) * pow(A, 4) / 24 + (61 - 58 * T + T * T + 600 * C - 330 * eta2) * pow(A, 6) / 720));
+
+*x = X + dx;
+*y = Y + dy;
+}
+
+int main() {
+double lat = 22.279327;
+double lon = 114.162813;
 double x, y;
-latlon2utm(lat, lon, &x, &y);
-printf("UTM座標: %.2f, %.2f\n", x, y);
+wgs84_to_hk80(lat, lon, &x, &y);
+printf("WGS84: %f, %f\n", lat, lon);
+printf("HK80: %f, %f\n", x, y);
 return 0;
 }
 ```
 
-這個程式碼將經度121.5319、緯度25.0478轉換為UTM座標，結果為`325704.68, 2771602.68`。這些座標可以進一步轉換為方格座標，具體方法取決於所使用的方格系統。
+在這個程式碼中，我們首先定義了一些常數，包括WGS84的長軸、短軸、偏心率等參數，以及HK80的一些參數，如中央子午線、縮放因子、偏移量等。然後，我們定義了一些輔助函數，用於將角度轉換為弧度，以及將弧度轉換為角度。
+
+接下來，我們定義了一個名為wgs84_to_hk80的函數，用於將WGS84坐標轉換為HK80坐標。在這個函數中，我們首先將緯度和經度轉換為弧度，然後計算一些中間變量，如子午線曲率半徑、卯酉圈曲率半徑、橢球偏心率等。接下來，我們使用這些變量計算出HK80坐標系統中的x和y坐標。
+
+最後，在main函數中，我們將一個WGS84坐標轉換為HK80坐標，並將結果輸出到控制台上。
+
+需要注意的是，這個程式碼中的一些參數值可能需要根據實際情況進行調整，以確保轉換結果的準確性。
