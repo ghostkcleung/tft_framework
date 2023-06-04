@@ -3,12 +3,12 @@
 It provides the basic methods to draw. Just tell it the size of your screen and how to "Fill Rect".
 
 - [Getting Start](./md/getting_start.md)
-- [Tutorial](./tutorial.md)
-- [Shape](./shape.md)
-- [Font and print](./font_and_print.md)
-- [BufferedScreen](./buffered_screen.md)
-- [Implement your custom shape](./CustomShape.md)
-- [Implement your own screen](./tft_implement/README.md)
+- [Tutorial](./md/tutorial.md)
+- [Shape](./md/shape.md)
+- [Font and print](./md/font_and_print.md)
+- [BufferedScreen](./md/buffered_screen.md)
+- [Implement your custom shape](./md/CustomShape.md)
+- [Implement your own screen](./md/tft_implement.md)
 
 # News
 
