@@ -2,7 +2,7 @@
 
 It provides the basic methods to draw. Just tell it the size of your screen and how to "Fill Rect".
 
-- [Getting Start](./getting_start.md)
+- [Getting Start](./md/getting_start.md)
 - [Tutorial](./tutorial.md)
 - [Shape](./shape.md)
 - [Font and print](./font_and_print.md)
