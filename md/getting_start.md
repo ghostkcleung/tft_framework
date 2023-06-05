@@ -5,7 +5,7 @@ It provide the generic method to drawing, filling and print.
 There is a sample:
 https://youtu.be/qud3bSVzDqk
 
-<img src="./01.jpg" width="40%" />
+<img src="./01.jpg" width="40%" /><img src="./02.jpg" width="40%" />
 ![image](./01.jpg)
 ![image](./02.jpg)
 
