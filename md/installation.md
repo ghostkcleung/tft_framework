@@ -8,4 +8,4 @@ https://platformio.org/install/ide?install=vscode
 
 Then create your own project in the PlatformIO. Add the <SD.h> library.
 
-Copy the "tft_framework" and "tft_implement" to lib of the project path.
+Copy the "tft_framework" and "tft_implement" to /lib of the project path.
