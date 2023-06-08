@@ -21,13 +21,27 @@ Point p1(20,30);
 Point p2(p1);       // x:20, y:30
 ```
 ## The setter and getter
-The following methods can change the property of the Point object.
+The following methods can get or change the property of the Point object.
 ```cpp
-void setX ( int16_t x );
+int16_t getX();
+int16_t getY();
 
-void setY ( int16_t y );
+void setX (int16_t x);
+void setY (int16_t y);
 
-void setPoint ( int16_t x, int16_t y );
+void setPoint (int16_t x, int16_t y);
+void setPoint (Point p);
+```
+## Move the Point
+We can move the point by the move method.
+```cpp
+void move (double direction, double distance);
 
-void setPoint ( Point p );
+// Direction: 0 to 360 degree.
+// 0 is North ( or upper side of the screen )
+
+// Example:
+Point p(100,100);   // x:100, y:100
+p.move(120,50);     // direction: 120 degree, distance.
+                    // Finally, x: 143, y:125
 ```
