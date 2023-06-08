@@ -4,7 +4,7 @@ Point is a simple X, Y coordinate concept. (0, 0) is the first point of top left
 
 The Point class have 2 private properties: x, y (int16_t)
 
-Inside the tft_framework, most of properties are declared as private so that we can access them by getter or setter only.
+Inside the tft_framework, most of properties of classes are declared as private so that we can access them by getter or setter only.
 
 ## Create Point Object
 The easiest way to create a Point.
