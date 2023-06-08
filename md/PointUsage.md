@@ -21,7 +21,7 @@ Point p1(20,30);
 Point p2(p1);       // x:20, y:30
 ```
 ## The setter and getter
-The following methods can get or change the property of the Point object.
+The following methods can get or change the properties of the Point object.
 ```cpp
 int16_t getX();
 int16_t getY();
