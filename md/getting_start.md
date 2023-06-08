@@ -32,4 +32,5 @@ void setup () {
 
 void loop () { delay ( 100000 ) ; }
 ```
-<img src="./03.jpg" width="100%" />
+Result:
+<img src="./03.jpg" width="40%" />
