@@ -11,11 +11,11 @@ The easiest way to create a Point.
 ```cpp
 Point p;          // p will initial x:0, y:0
 ```
-We can provide the initial value at creation time
+We can provide initial values at creation time
 ```cpp
 Point p(10, 15);  // x:10, y:15
 ```
-We can create a Point with the same as another Point.
+We can create a Point with same as another Point.
 ```cpp
 Point p1(20,30);
 Point p2(p1);       // x:20, y:30
