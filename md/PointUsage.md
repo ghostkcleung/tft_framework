@@ -39,7 +39,7 @@ void move (double direction, double distance);
 
 // Direction: 0 to 360 degree.
 // 0 is North ( or upper side of the screen )
-// 90 is 
+// 90 is the right side of the screen
 
 // Example:
 Point p(100,100);   // x:100, y:100
