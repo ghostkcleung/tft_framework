@@ -18,5 +18,5 @@ Point p(10, 15);  // x:10, y:15
 We can create a Point with the same as another Point.
 ```cpp
 Point p1(20,30);
-Point p2(p1);
+Point p2(p1);       // x:20, y:30
 ```
