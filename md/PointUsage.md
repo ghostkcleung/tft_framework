@@ -2,7 +2,7 @@
 
 Point is a simple X, Y coordinate concept. (0, 0) is the first point of top left side of a screen.
 
-The Point class have 2 private property: int16_t x, y
+The Point class have 2 private properties: x, y (int16_t)
 
 Inside the tft_framework, most of property is declared as private so that we can access them by getter or setter only.
 
