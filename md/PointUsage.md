@@ -9,7 +9,7 @@ Inside the tft_framework, most of properties of classes are declared as private 
 ## Create Point Object
 The easiest way to create a Point.
 ```cpp
-Point p;          // p will initial x:0, y:0
+Point p;          // p will be initialled as x:0, y:0
 ```
 We can provide initial values at creation time
 ```cpp
