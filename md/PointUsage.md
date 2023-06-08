@@ -21,9 +21,13 @@ Point p1(20,30);
 Point p2(p1);       // x:20, y:30
 ```
 ## The setter and getter
+The following methods can change the property of the Point object.
+```cpp
 void setX ( int16_t x )
-void setY ( int16_t y )
-void setPoint ( int16_t x, int16_t y )
-void setPoint ( Point p )
 
-The 
+void setY ( int16_t y )
+
+void setPoint ( int16_t x, int16_t y )
+
+void setPoint ( Point p )
+```
