@@ -16,11 +16,7 @@ We can provide initial values at creation time
 Color c(0xFFFF);  // c will be init as white color (0xFFFF).
                   // The data type is uint16_t
 ```
-We can create a Point with same as another Point.
-```cpp
-Point p1(20,30);
-Point p2(p1);       // x:20, y:30
-```
+
 ## Setter and getter
 The following methods can get or change the properties of the Point object.
 ```cpp
