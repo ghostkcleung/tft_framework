@@ -20,8 +20,8 @@ void setup () {
     scr = new ILI9486_Parallel_16Bit ( ) ;
     scr -> init ();
 
-    Font *f = scr -> getFont();
-    f -> setScale ( 2 );
+    Font *fnt = scr -> getFont();
+    fnt -> setScale ( 2 );
 
     Point p ( 10, 14 );
     scr -> setCursor ( p );
