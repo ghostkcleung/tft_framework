@@ -20,11 +20,14 @@ void setup () {
     scr = new ILI9486_Parallel_16Bit ( ) ;
     scr -> init ();
 
-    Font *fnt = scr -> getFont();
-    fnt -> setScale ( 2 );
+    Font *fnt = scr -> getFont();   // Default font is 5x7 matrix font.
+    fnt -> setScale ( 2 );          // Enlarge the font to 2X.
 
-    Point p ( 10, 14 );
-    scr -> setCursor ( p );
+    uint8_t w = fnt -> getTotalWidth ( );   // Font width: 10
+    uint8_t h = fnt -> getTotalHeight ( );  // Font height: 14
+    
+    Point p ( w, h );
+    scr -> setCursor ( p );                 // The position to print.
 
     scr -> clear ();
     scr -> println ( "Hello, world!" );   // Print text to the screen
