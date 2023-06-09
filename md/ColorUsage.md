@@ -17,7 +17,7 @@ Color c(0xFFFF);  // c will be init as white color (0xFFFF).
                   // The data type is uint16_t
 ```
 ## Setter and getter
-The following methods can get or change the properties of the Color object.
+The following methods can get or set the properties of the Color object.
 ```cpp
 uint16_t getColor();
 
