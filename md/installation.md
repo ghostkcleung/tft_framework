@@ -12,4 +12,4 @@ Download and unzip the source code here. Copy the "tft_framework" and "tft_imple
 
 Add the <SD.h> library. https://github.com/arduino-libraries/SD
 
-(If you are using ESP32. The SD library is built-in)
+(If you are using ESP32. The SD library has built-in already)
