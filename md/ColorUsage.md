@@ -28,7 +28,7 @@ void setColor(Color c);
 There is some distortion when exchange with RGB each other.
 ```cpp
 uint32_t getRGB();
-void setRGB(uint32_t rgb)
+void setRGB(uint32_t rgb);
 
 uint8_t getR();
 uint8_t getG();
