@@ -2,45 +2,39 @@
 
 The tft_framework is using 5-6-5 color format. The following picture show how does the 16bit color work.
 
-<img src="565color.jpg" />
+<img src="565color.jpg" width="903" />
 
-## Create a Point Object
-The easiest way to create a Point.
+The Color object have a uint16_t property. We can access it by some public method also.
+
+## Create a Color object
+The easiest way to create a Color object.
 ```cpp
-Point p;          // p will be initialled as x:0, y:0
+Color c;          // c will be initialled as black color (0).
 ```
 We can provide initial values at creation time
 ```cpp
-Point p(10, 15);  // x:10, y:15
-```
-We can create a Point with same as another Point.
-```cpp
-Point p1(20,30);
-Point p2(p1);       // x:20, y:30
+Color c(0xFFFF);  // c will be init as white color (0xFFFF).
+                  // The data type is uint16_t
 ```
 ## Setter and getter
-The following methods can get or change the properties of the Point object.
+The following methods can get or change the properties of the Color object.
 ```cpp
-int16_t getX();
-int16_t getY();
+uint16_t getColor();
 
-void setX (int16_t x);
-void setY (int16_t y);
-
-void setPoint (int16_t x, int16_t y);
-void setPoint (Point p);
+void setColor(uint16_t c);
+void setColor(Color c);
 ```
-## Move the Point
-We can move the point by the move method.
+## Exchange with 24bit RGB
+There is some distortion when exchange with RGB each other.
 ```cpp
-void move (double direction, double distance);
+uint32_t getRGB();
+void setRGB(uint32_t rgb)
 
-// Direction: 0 to 360 degree.
-// 0 is North ( or upper side of the screen )
-// 90 is the right side of the screen
+uint8_t getR();
+uint8_t getG();
+uint8_t getB();
 
-// Example:
-Point p(100,100);   // x:100, y:100
-p.move(120,50);     // direction: 120 degree, distance.
-                    // Finally, x: 143, y:125
+void setR(uint8_t r);
+void setG(uint8_t g);
+void setB(uint8_t b);
 ```
