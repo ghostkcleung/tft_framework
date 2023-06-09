@@ -23,8 +23,8 @@ void setup () {
     Font *fnt = scr -> getFont();   // Default font is 5x7 matrix font.
     fnt -> setScale ( 2 );          // Enlarge the font to 2X.
 
-    uint8_t w = fnt -> getTotalWidth ( );   // Font width: 10
-    uint8_t h = fnt -> getTotalHeight ( );  // Font height: 14
+    uint8_t w = fnt -> getTotalWidth ( );   // Font width: 12
+    uint8_t h = fnt -> getTotalHeight ( );  // Font height: 16
     
     Point p ( w, h );
     scr -> setCursor ( p );                 // The position to print.
