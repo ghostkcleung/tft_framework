@@ -4,14 +4,17 @@ The tft_framework is using 5-6-5 color format. The following picture show how do
 
 <img src="565color.jpg" width="903" />
 
-## Create a Point Object
-The easiest way to create a Point.
+The Color object have a uint16_t property. We can access it by some public method also.
+
+## Create a Color object
+The easiest way to create a Color object.
 ```cpp
-Point p;          // p will be initialled as x:0, y:0
+Color c;          // c will be initialled as black color (0).
 ```
 We can provide initial values at creation time
 ```cpp
-Point p(10, 15);  // x:10, y:15
+Color c(0xFFFF);  // c will be init as white color (0xFFFF).
+                  // The data type is uint16_t
 ```
 We can create a Point with same as another Point.
 ```cpp
