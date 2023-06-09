@@ -6,7 +6,7 @@ The Point class have 2 private properties: x, y (int16_t)
 
 Inside the tft_framework, most of properties of classes are declared as private so that we can access them by getter or setter only.
 
-## Create Point Object
+## Create a Point Object
 The easiest way to create a Point.
 ```cpp
 Point p;          // p will be initialled as x:0, y:0
@@ -20,7 +20,7 @@ We can create a Point with same as another Point.
 Point p1(20,30);
 Point p2(p1);       // x:20, y:30
 ```
-## The setter and getter
+## Setter and getter
 The following methods can get or change the properties of the Point object.
 ```cpp
 int16_t getX();
