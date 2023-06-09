@@ -16,30 +16,25 @@ We can provide initial values at creation time
 Color c(0xFFFF);  // c will be init as white color (0xFFFF).
                   // The data type is uint16_t
 ```
-
 ## Setter and getter
-The following methods can get or change the properties of the Point object.
+The following methods can get or change the properties of the Color object.
 ```cpp
-int16_t getX();
-int16_t getY();
+uint16_t getColor();
 
-void setX (int16_t x);
-void setY (int16_t y);
-
-void setPoint (int16_t x, int16_t y);
-void setPoint (Point p);
+void setColor(uint16_t c);
+void setColor(Color c);
 ```
-## Move the Point
-We can move the point by the move method.
+## Exchange with 24bit RGB
+There is some distortion when exchange with RGB each other.
 ```cpp
-void move (double direction, double distance);
+uint32_t getRGB();
+void setRGB(uint32_t rgb)
 
-// Direction: 0 to 360 degree.
-// 0 is North ( or upper side of the screen )
-// 90 is the right side of the screen
+uint8_t getR();
+uint8_t getG();
+uint8_t getB();
 
-// Example:
-Point p(100,100);   // x:100, y:100
-p.move(120,50);     // direction: 120 degree, distance.
-                    // Finally, x: 143, y:125
+void setR(uint8_t r);
+void setG(uint8_t g);
+void setB(uint8_t b);
 ```
