@@ -34,7 +34,7 @@ uint8_t getR();
 uint8_t getG();
 uint8_t getB();
 
-void setR(uint8_t r);
+void setR(uint8_t r);   // Range: 0 to 255
 void setG(uint8_t g);
 void setB(uint8_t b);
 ```
