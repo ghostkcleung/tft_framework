@@ -2,7 +2,7 @@
 
 The tft_framework is using 5-6-5 color format. The following picture show how does the 16bit color work.
 
-<img src="565color.jpg" width="90%" />
+<img src="565color.jpg" />
 
 ## Create a Point Object
 The easiest way to create a Point.
