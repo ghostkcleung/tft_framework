@@ -1,4 +1,7 @@
 # Shape
+
+Share is a class inherit Point and Color. We can draw a Shape to the screen by calling "draw()" method.
+
 The following type is inherit Shape:
 - Dot
 - Line
@@ -8,8 +11,8 @@ The following type is inherit Shape:
 - Ellipse
 - Font
 
-All of them have the properties of Point and Color.
-They are Drawable. And most of them are Fillable except:
+## Fillable
+
 
 - Dot
 - Line
