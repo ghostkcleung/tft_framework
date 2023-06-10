@@ -1,3 +1,7 @@
+class: Shape
+
+Inherit class: Point, Color
+
 # Shape
 
 Shape is a class inherit Point and Color. We can draw a Shape to the screen by calling "draw()" method.
