@@ -1,8 +1,8 @@
 # Usage of Dot
 
-<ol>
+<ol style="list-style-type: none;">
   <li style="list-style-type: none;">Shape</li>
-    <ol>
+    <ol style="list-style-type: none;">
       <li style="list-style-type: none;">Dot<li>
     </ol>
 </ol>
