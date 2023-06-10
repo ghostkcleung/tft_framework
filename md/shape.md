@@ -1,4 +1,4 @@
-class: Shape
+Class: Shape
 
 Inherit class: Point, Color
 
