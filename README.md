@@ -3,6 +3,7 @@
 It provides the basic methods to draw. Just tell it the size of your screen and how to "Fill Rect".
 
 - [Getting Start](./md/getting_start.md)
+- [Supported hardware] (./md/Hardware.md)
 - [Installation](./md/installation.md)
 - [Usage of Point](./md/PointUsage.md)
 - [Usage of Color](./md/ColorUsage.md)
