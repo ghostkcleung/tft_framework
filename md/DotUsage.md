@@ -1,4 +1,4 @@
 # Usage of Dot
 
-Shape
-  Dot
+- Shape
+  - Dot
