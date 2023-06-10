@@ -1,6 +1,6 @@
 # Shape
 
-Share is a class inherit Point and Color. We can draw a Shape to the screen by calling "draw()" method.
+Shape is a class inherit Point and Color. We can draw a Shape to the screen by calling "draw()" method.
 
 The following type is inherit Shape:
 - Dot
