@@ -37,4 +37,4 @@ void loop () { delay ( 100000 ) ; }
 ```
 Result:
 
-<img src="./03.jpg" width="40%" />
+<img src="./03.jpg" width="80%" />
