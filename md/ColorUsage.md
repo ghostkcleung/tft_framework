@@ -20,6 +20,7 @@ Color c(0xFFFF);  // c will be init as white color (0xFFFF).
 And we can feed a RGB value also
 ```cpp
 Color c( 127, 127, 127);  // Grey color
+```
 
 ## Setter and getter
 The following methods can get or set the property of the Color object.
