@@ -17,6 +17,6 @@ LCD Modules
 - [3.5 inch ILI9488 SPI](http://www.lcdwiki.com/zh/3.5inch_SPI_Module_ILI9488_SKU:MSP3520)
 - [4.0 inch ST7796s](http://www.lcdwiki.com/zh/3.5inch_SPI_Module_ILI9488_SKU:MSP3520)
 
-For the project, ESP32 is recommended. It has higher performance, more memories, multi task supported and Wifi/BT, internal storage(SPIFFS) built-in. ESP32 is almost fully support Arduino. In terms of transmission, the speed of 16 pins parallel bus is faster than SPI. It is suitable for Arduino Mega or Due. But it is not easy to implement with ESP32.
+For the project, ESP32 is recommended. It has higher performance, more memories, multi task supported and Wifi/BT, internal storage(SPIFFS) built-in. ESP32 is almost fully support Arduino. In terms of transmission, the speed of 16 pins parallel bus is faster than SPI. It is suitable for Arduino Mega or Due. But it is not easy to implement and wiring with ESP32.
 
 ESP32 with ST7796s is recommended.
