@@ -11,11 +11,16 @@ The easiest way to create a Color object.
 ```cpp
 Color c;          // c will be initialled as black color (0).
 ```
-We can provide initial values at creation time
+We can feed an initial values at creation time
 ```cpp
 Color c(0xFFFF);  // c will be init as white color (0xFFFF).
                   // The data type is uint16_t
 ```
+
+And we can feed a RGB value also
+```cpp
+Color c( 127, 127, 127);  // Grey color
+
 ## Setter and getter
 The following methods can get or set the property of the Color object.
 ```cpp
@@ -63,6 +68,4 @@ scr -> println ( c1.getRGB ( ), HEX ) ;    // Output: 946531
 
 Color c2;
 c2.setColor ( c1 );     // Set the color content same as c1
-
-Color c3 ( c1 );        // Create the Color and init as c1
 ```
