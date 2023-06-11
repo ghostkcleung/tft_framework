@@ -38,3 +38,31 @@ void setR(uint8_t r);   // Range: 0 to 255
 void setG(uint8_t g);
 void setB(uint8_t b);
 ```
+
+# Example
+```cpp
+// The data of Color is stored as 16 bit(565)
+Color c1 ( 0 ) ;                        // Init the color to black
+c1.setColor ( 0xFFFF );                 // Set to white
+scr -> println ( c1.getColor ( ) ) ;    // Output: 65535
+
+c1.setRGB ( 0xFF0000 ); // Set to Red
+c1.setRGB ( 0x00FF00 ); // Set to Green
+c1.setRGB ( 0x0000FF ); // Set to Blue
+
+c1.setColor ( 0 );
+c1.setR ( 0x99 );   // 0x990000
+c1.setG ( 0x66 );   // 0x996600
+c1.setB ( 0x33 );   // 0x996633
+
+// There is some lost when covert from RGB to 565
+scr -> println ( c1.getR ( ), HEX ) ;    // Output: 94
+scr -> println ( c1.getG ( ), HEX ) ;    // Output: 65
+scr -> println ( c1.getB ( ), HEX ) ;    // Output: 31
+scr -> println ( c1.getRGB ( ), HEX ) ;    // Output: 946531
+
+Color c2;
+c2.setColor ( c1 );     // Set the color content same as c1
+
+Color c3 ( c1 );        // Create the Color and init as c1
+```
