@@ -62,10 +62,10 @@ c1.setG ( 0x66 );   // 0x996600
 c1.setB ( 0x33 );   // 0x996633
 
 // There is little distortion when covert from RGB to 565
-scr -> println ( c1.getR ( ), HEX ) ;    // Output: 94
-scr -> println ( c1.getG ( ), HEX ) ;    // Output: 65
-scr -> println ( c1.getB ( ), HEX ) ;    // Output: 31
-scr -> println ( c1.getRGB ( ), HEX ) ;    // Output: 946531
+scr -> println ( c1.getR ( ), HEX ) ;    // Output: 98
+scr -> println ( c1.getG ( ), HEX ) ;    // Output: 64
+scr -> println ( c1.getB ( ), HEX ) ;    // Output: 30
+scr -> println ( c1.getRGB ( ), HEX ) ;    // Output: 986430
 
 Color c2;
 c2.setColor ( c1 );     // Set the color content same as c1
