@@ -13,5 +13,8 @@ Here are some detailed information.
 - [ESP32-DevKitC V4](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/hw-reference/esp32/get-started-devkitc.html)
 
 LCD Modules
--
--
+- [3.5 inch ILI9486 16 bit  parallel](http://www.lcdwiki.com/zh/3.5inch_16BIT_Module_ILI9486_SKU:MRB3503)
+- [3.5 inch ILI9488 SPI](http://www.lcdwiki.com/zh/3.5inch_SPI_Module_ILI9488_SKU:MSP3520)
+- [4.0 inch ST7796s](http://www.lcdwiki.com/zh/3.5inch_SPI_Module_ILI9488_SKU:MSP3520)
+
+ESP32 with ST7796 is recommanded.
