@@ -19,7 +19,7 @@ Color c(0xFFFF);  // c will be init as white color (0xFFFF).
 
 And we can feed a RGB value also
 ```cpp
-Color c(127, 127, 127);  // Grey color
+Color c(127, 127, 127);  // Grey color, uint8_t
 ```
 
 ## Setter and getter
