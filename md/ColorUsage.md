@@ -31,7 +31,7 @@ void setColor(uint16_t c);
 void setColor(Color c);
 ```
 ## Exchange with 24bit RGB
-There is some distortion when exchange with RGB each other.
+There is little distortion when exchange with RGB each other.
 ```cpp
 uint32_t getRGB();
 void setRGB(uint32_t rgb);
@@ -61,7 +61,7 @@ c1.setR ( 0x99 );   // 0x990000
 c1.setG ( 0x66 );   // 0x996600
 c1.setB ( 0x33 );   // 0x996633
 
-// There is some lost when covert from RGB to 565
+// There is little distortion when covert from RGB to 565
 scr -> println ( c1.getR ( ), HEX ) ;    // Output: 94
 scr -> println ( c1.getG ( ), HEX ) ;    // Output: 65
 scr -> println ( c1.getB ( ), HEX ) ;    // Output: 31
