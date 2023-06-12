@@ -40,3 +40,6 @@ void setup () {
 
 void loop () { delay ( 100000 ) ; }
 ```
+
+## Initialize with ESP32
+
