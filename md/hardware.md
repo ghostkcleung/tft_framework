@@ -43,3 +43,6 @@ void loop () { delay ( 100000 ) ; }
 
 ## Initialize with ESP32
 
+For the ESP32, I've made the ILI9488 and ST7796s implements. They are both connecting with SPI. I set the frequency to 40Mhz by default.
+
+ILI9488 demo: https://youtu.be/k89JIES1duM
