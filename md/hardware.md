@@ -46,3 +46,71 @@ void loop () { delay ( 100000 ) ; }
 For the ESP32, I've made the ILI9488 and ST7796s implements. They are both connecting with SPI. I set the frequency to 40Mhz by default.
 
 ILI9488 demo: https://youtu.be/k89JIES1duM
+
+## Default Wiring
+VDD => 3V3\
+GND => GND\
+CS  => 5 (CS)\
+RST => EN\
+D/C => 27 (Or any output pin)\
+SDI => 23 (MOSI)\
+SCK => 18 (CLK)\
+BL  => 32 (Or any output pin)\
+SDO => 19 (MISO)
+
+The recommended PWM output pin is:\
+4, 16, 17, 27, 32, 33
+
+For more details of pinout, you may see this page:\
+https://randomnerdtutorials.com/esp32-pinout-reference-gpios/
+## Coding
+This is the easier way to create the Screen Object.
+```cpp
+#ifdef ESP32
+  #include <ILI9488_SPI_18BIT.h>
+#endif
+
+using namespace tft_framework;
+Screen* scr;
+
+void setup() {
+#ifdef ESP32
+  uint8_t bl = 32;
+  pinMode ( bl, OUTPUT ) ;
+  digitalWrite ( bl, HIGH ) ;
+
+  uint8_t dc = 27;
+
+  scr = new ILI9488_SPI_18BIT ( dc ) ;
+#endif
+
+  scr -> init();
+  scr -> setPrintBuffer ( true ) ;
+  scr -> clear ( ) ;
+}
+```
+## Custumize pins
+If you wiring with your customize pins. The code will be similar to following.
+```cpp
+#ifdef ESP32
+	uint8_t bl = 32;
+	pinMode ( bl, OUTPUT ) ;
+	digitalWrite ( bl, HIGH ) ;
+
+	uint8_t cs = SS,
+		dc = 27;
+
+	uint32_t clock = 27000000 ;
+
+	SPIClass* spi = new SPIClass(VSPI);
+	spi->begin(SCK, MISO, MOSI, cs);
+
+	spi -> beginTransaction(SPISettings(clock, MSBFIRST, SPI_MODE0));
+
+	uint16_t w = 480, h = 320 ;
+
+	scr = new ILI9488_SPI_18BIT ( w, h, spi, cs, dc ) ;
+#endif
+```
+
+
