@@ -8,7 +8,7 @@ https://platformio.org/install/ide?install=vscode
 
 Then create your own project in the PlatformIO.
 
-Download and unzip the source code here. Copy the "tft_framework" and "tft_implement" to /lib of the project path.
+Download the source code here. Copy  and unzip the "tft_framework" and "tft_implement" to /lib path of the project.
 
 Add the <SD.h> library. https://github.com/arduino-libraries/SD
 
