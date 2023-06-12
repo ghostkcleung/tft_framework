@@ -22,3 +22,21 @@ In terms of transmission, the speed of 16 pins parallel bus is faster than SPI. 
 For the project, ESP32 is recommended. It has higher performance, more memories, multi task supported and Wifi/BT, internal storage(SPIFFS) built-in. ESP32 is almost fully support Arduino. 
 
 ESP32 with ST7796s is recommended.
+
+## Initialize with 3.5 inch ILI9486 16 bit  parallel
+This screen module is designed for Arduino Mega 2560 and Due. The pin is fit already. We just need to combine the screen module and MCU module.
+
+```cpp
+#include <ILI9486_Parallel_16Bit.h>
+
+using namespace tft_framework;
+
+Screen* scr;
+
+void setup () {
+    scr = new ILI9486_Parallel_16Bit ( ) ;
+    scr -> init ();
+}
+
+void loop () { delay ( 100000 ) ; }
+```
