@@ -13,12 +13,6 @@ It provides the basic methods to draw. Just tell it the size of your screen and 
 - [Implement your custom shape](./md/CustomShape.md)
 - [Implement your own screen](./md/tft_implement.md)
 
-# News
-
-- 21-May-2021 [Add support ESP32 with ILI9488 18-Bit](./tft_implement/src/ILI9488_SPI_18BIT.md)
-- 25-Jul-2021 [Add Image Support](./tft_framework/src/Image.md)
-- 02-Mar-2023 [Add BMFont Support](./tft_framework/src/BmFont.md)
-
 # What will I do next
 
 There is following that I want to do later.
