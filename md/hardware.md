@@ -76,15 +76,14 @@ using namespace tft_framework;
 Screen* scr;
 
 void setup() {
-  uint8_t bl = 32;
-  pinMode ( bl, OUTPUT ) ;
-  digitalWrite ( bl, HIGH ) ;
+	uint8_t bl = 32;
+	pinMode ( bl, OUTPUT ) ;
+	digitalWrite ( bl, HIGH ) ;
 
-  uint8_t dc = 27;
+	uint8_t dc = 27;
 
-  scr = new ILI9488_SPI_18BIT ( dc ) ;
-
-  scr -> init();
+	scr = new ILI9488_SPI_18BIT ( dc ) ;
+	scr -> init();
 }
 ```
 
@@ -95,7 +94,6 @@ using namespace tft_framework;
 Screen* scr;
 
 void setup() {
-
 	uint8_t bl = 32;
 	pinMode ( bl, OUTPUT ) ;
 	digitalWrite ( bl, HIGH ) ;
@@ -111,8 +109,8 @@ void setup() {
 	spi -> beginTransaction(SPISettings(clock, MSBFIRST, SPI_MODE0));
 
 	uint16_t w = 480, h = 320 ;
+	
+	scr = new ILI9488_SPI_18BIT ( w, h, spi, cs, dc ) ;
+	scr -> init();
 }
-scr = new ILI9488_SPI_18BIT ( w, h, spi, cs, dc ) ;
-
-scr -> init();
 ```
