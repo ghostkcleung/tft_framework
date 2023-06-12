@@ -91,22 +91,27 @@ void setup() {
 ## Custumize pins
 If you wiring with your customize pins. There is a similar code.
 ```cpp
-uint8_t bl = 32;
-pinMode ( bl, OUTPUT ) ;
-digitalWrite ( bl, HIGH ) ;
+using namespace tft_framework;
+Screen* scr;
 
-uint8_t cs = SS,
-	dc = 27;
+void setup() {
 
-uint32_t clock = 27000000 ;
+	uint8_t bl = 32;
+	pinMode ( bl, OUTPUT ) ;
+	digitalWrite ( bl, HIGH ) ;
 
-SPIClass* spi = new SPIClass(VSPI);
-spi->begin(SCK, MISO, MOSI, cs);
+	uint8_t cs = SS,
+		dc = 27;
 
-spi -> beginTransaction(SPISettings(clock, MSBFIRST, SPI_MODE0));
+	uint32_t clock = 27000000 ;
 
-uint16_t w = 480, h = 320 ;
+	SPIClass* spi = new SPIClass(VSPI);
+	spi->begin(SCK, MISO, MOSI, cs);
 
+	spi -> beginTransaction(SPISettings(clock, MSBFIRST, SPI_MODE0));
+
+	uint16_t w = 480, h = 320 ;
+}
 scr = new ILI9488_SPI_18BIT ( w, h, spi, cs, dc ) ;
 
 scr -> init();
