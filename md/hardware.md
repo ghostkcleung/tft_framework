@@ -64,10 +64,14 @@ The recommended PWM output pin is:\
 For more details of pinout, you may see this page:\
 https://randomnerdtutorials.com/esp32-pinout-reference-gpios/
 ## Coding
-This is the easier way to create the Screen Object.
+This is the easy way to create the Screen Object.
 ```cpp
-#include <ILI9488_SPI_18BIT.h>
+#include <ILI9488_SPI_18Bit.h>
+// or
+#include <ST7796s_SPI_16Bit.h>
+```
 
+```cpp
 using namespace tft_framework;
 Screen* scr;
 
