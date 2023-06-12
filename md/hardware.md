@@ -85,7 +85,7 @@ void setup() {
 ```
 
 ## Custumize pins
-If you wiring with your customize pins. The code will be similar to following.
+If you wiring with your customize pins. There is a similar code.
 ```cpp
 uint8_t bl = 32;
 pinMode ( bl, OUTPUT ) ;
