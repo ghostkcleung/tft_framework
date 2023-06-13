@@ -19,6 +19,8 @@ The following type is inherit Shape:
 
 Fillable is an interface contains "fill()" method. When a derived shape class implement Fillable. That mean the shape can fill color to the screen.
 
+Dot, Line and Font is not Fillable.
+
 # Usage of Dot
 ```cpp
 Dot d;
