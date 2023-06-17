@@ -44,6 +44,7 @@ Screen *scr ;
 void setup ( ) {
   // Init your scr ...
   
+  scr -> clear ( );
   randomSeed(analogRead(0));
 
   Dot d;
