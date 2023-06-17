@@ -2,7 +2,7 @@
 
 It provides the basic methods to draw. Just tell it the size of your screen and how to "Fill Rect".
 
-<ol>
+<ul>
   <li>
     [Getting Start](./md/getting_start.md)
   </li>
@@ -11,14 +11,14 @@ It provides the basic methods to draw. Just tell it the size of your screen and 
   <li>[Usage of Point](./md/PointUsage.md)</li>
   <li>[Usage of Color](./md/ColorUsage.md)</li>
   <li>[Shape and Fillable](./md/shape.md)</li>
-  <ol>
+  <ul>
     <li>[Usage of Dot](./md/DotUsage.md)</li>
-  </ol>
+  </ul>
   <li>[Font and print](./md/font_and_print.md)</li>
   <li>[BufferedScreen](./md/buffered_screen.md)</li>
   <li>[Implement your custom shape](./md/CustomShape.md)(./md/getting_start.md)</li>
   <li>[Implement your own screen](./md/tft_implement.md)</li>
-</ol>
+</ul>
 
 # What will I do next
 
