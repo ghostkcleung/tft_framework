@@ -17,7 +17,7 @@ Color c(0xFFFF);  // c will be init as white color (0xFFFF).
                   // The data type is uint16_t
 ```
 
-And we can feed a RGB value also
+And we can feed an RGB value also
 ```cpp
 Color c(127, 127, 127);  // Grey color, 3 params type: uint8_t
 ```
