@@ -7,7 +7,7 @@ It provides the basic methods to draw. Just tell it the size of your screen and 
 - [Installation](./md/installation.md)
 - [Usage of Point](./md/PointUsage.md)
 - [Usage of Color](./md/ColorUsage.md)
-- [Shape](./md/shape.md)
+- [Shape and Fillable](./md/shape.md)
 - [Usage of Dot](./md/DotUsage.md)
 - [Font and print](./md/font_and_print.md)
 - [BufferedScreen](./md/buffered_screen.md)
