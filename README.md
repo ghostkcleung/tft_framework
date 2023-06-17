@@ -4,18 +4,18 @@ It provides the basic methods to draw. Just tell it the size of your screen and 
 
 <ul>
   <li><a href="./md/getting_start.md">Getting Start</a></li>
-  <li>[Supported Hardware](./md/hardware.md)</li>
-  <li>[Installation](./md/installation.md)</li>
-  <li>[Usage of Point](./md/PointUsage.md)</li>
-  <li>[Usage of Color](./md/ColorUsage.md)</li>
-  <li>[Shape and Fillable](./md/shape.md)</li>
+  <li><a href="./md/hardware.md">Supported Hardware</a></li>
+  <li><a href="./md/installation.md">Installation</a></li>
+  <li><a href="./md/PointUsage.md">Usage of Point</a></li>
+  <li><a href="./md/ColorUsage.md">Usage of Color</a></li>
+  <li><a href="./md/shape.md">Shape and Fillable</a></li>
   <ul>
-    <li>[Usage of Dot](./md/DotUsage.md)</li>
+    <li><a href="./md/DotUsage.md">Usage of Dot</a></li>
   </ul>
-  <li>[Font and print](./md/font_and_print.md)</li>
-  <li>[BufferedScreen](./md/buffered_screen.md)</li>
-  <li>[Implement your custom shape](./md/CustomShape.md)(./md/getting_start.md)</li>
-  <li>[Implement your own screen](./md/tft_implement.md)</li>
+  <li><a href="./md/font_and_print.md">Font and print</a></li>
+  <li><a href="./md/buffered_screen.md">BufferedScreen</a></li>
+  <li><a href="./md/CustomShape.md">Implement your custom shape</a></li>
+  <li><a href="./md/tft_implement.md">Implement your own screen</a></li>
 </ul>
 
 # What will I do next
