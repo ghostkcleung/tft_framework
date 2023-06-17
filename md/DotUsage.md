@@ -59,6 +59,6 @@ void setup ( ) {
     }
   }
 }
-
-
 ```
+Result:
+<img src="dotExample.jpg" width="480" />
