@@ -3,7 +3,9 @@
 It provides the basic methods to draw. Just tell it the size of your screen and how to "Fill Rect".
 
 <ol>
-  <li>[Getting Start](./md/getting_start.md)</li>
+  <li>
+    [Getting Start](./md/getting_start.md)
+  </li>
   <li>[Supported Hardware](./md/hardware.md)</li>
   <li>[Installation](./md/installation.md)</li>
   <li>[Usage of Point](./md/PointUsage.md)</li>
