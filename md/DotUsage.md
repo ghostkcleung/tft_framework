@@ -34,7 +34,7 @@ d.setR ( r );
 d.setG ( g );
 d.setB ( b );
 
-d -> draw ( scr ) ;   // Draw the dot to the screen
+d.draw ( scr ) ;   // Draw the dot to the screen
 ```
 
 ## Examples
@@ -46,7 +46,17 @@ void setup ( ) {
   
   randomSeed(analogRead(0));
 
-  for ( int y = 0 ;
+  Dot d;
+  uint16_t w = scr -> getWidth ( );
+  uint16_t h = scr -> getHeight ( );
+
+  for ( int y = 0; y < h; y ++ ) {
+    for ( int x = 0; x < w; x ++ ) {
+      p.setPoint ( x, y );
+      p.setColor ( random ( 0xFFFF ) ) ;
+      p.draw ( scr ) ;
+    }
+  }
 }
 
 
