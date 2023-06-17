@@ -38,3 +38,16 @@ d -> draw ( scr ) ;   // Draw the dot to the screen
 ```
 
 ## Examples
+```cpp
+Screen *scr ;
+
+void setup ( ) {
+  // Init your scr ...
+  
+  randomSeed(analogRead(0));
+
+  for ( int y = 0 ;
+}
+
+
+```
