@@ -17,6 +17,9 @@ Dot d;
 Dot is inherit Shape. It also contains the methods and properties of [Point](/md/PointUsage.md) and [Color](/md/ColorUsage.md)
 
 ```cpp
+Screen *scr ;
+// Init your scr ...
+
 Dot d;
 
 uint16_t x = 100;
@@ -30,4 +33,8 @@ d.setPoint ( x, y );
 d.setR ( r );
 d.setG ( g );
 d.setB ( b );
+
+d -> draw ( scr ) ;   // Draw the dot to the screen
 ```
+
+## Examples
