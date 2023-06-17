@@ -14,7 +14,7 @@ Dot d;
 ```
 
 ## Methods about Point and Color
-Dot is inherit Shape. It also contains the methods and properties of Point and Color
+Dot is inherit Shape. It also contains the methods and properties of [Point](/md/PointUsage.md) and [Color](/md/ColorUsage.md)
 
 ```cpp
 Dot d;
