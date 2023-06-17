@@ -53,9 +53,9 @@ void setup ( ) {
 
   for ( int y = 0; y < h; y ++ ) {
     for ( int x = 0; x < w; x ++ ) {
-      p.setPoint ( x, y );
-      p.setColor ( random ( 0xFFFF ) ) ;
-      p.draw ( scr ) ;
+      d.setPoint ( x, y );
+      d.setColor ( random ( 0xFFFF ) ) ;
+      d.draw ( scr ) ;
     }
   }
 }
