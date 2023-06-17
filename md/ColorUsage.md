@@ -83,15 +83,15 @@ B:0x99 = 10011001
 ```
 The color will store to 16bit as follow:
 ```
-R: 00110011, to 5-bit: 00110
-G: 01100110, to 6-bit: 011001
-B: 10011001, to 5-bit: 10011
+R: 00110011, to 5-bit: 00110---
+G: 01100110, to 6-bit: 011001--
+B: 10011001, to 5-bit: 10011---
 ```
 When we get back 24-bit value, distortion as follow:
 ```
-R: 00110,  to 8-bit: 00110000, 0x30
-G: 011001, to 8-bit: 01100100, 0x64
-B: 10011,  to 8-bit: 10011000, 0x98
+R: 00110---,  to 8-bit: 00110000, 0x30
+G: 011001--, to 8-bit: 01100100, 0x64
+B: 10011---,  to 8-bit: 10011000, 0x98
 
 Output Color: 0x306498
 ```
