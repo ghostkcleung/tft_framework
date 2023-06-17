@@ -7,21 +7,27 @@ Inherit class: Shape
 Dot is a 1x1 Rectangle to draw to the screen.
 After set the Point(position) and Color, you can draw a dot to the screen.
 
+## Constructor
+
 ```cpp
-Screen *scr;
+Dot d;
+```
 
-void setup(){
-  // ... init your screen
+## Methods about Point and Color
+Dot is inherit Shape. It also contains the methods and properties of Point and Color
 
-  Dot d;
+```cpp
+Dot d;
 
-  d.setRGB ( 0xFF0000 ) ;   // Set the dot to red
-  d.setPoint ( 3, 4 ) ;
+uint16_t x = 100;
+uint16_t y = 50;
 
-  d.draw ( scr ) ;
-}
+uint8_t r = 63;
+uint8_t g = 127;
+uint8_t b = 255;
 
-void loop(){
-  delay ( 10000 ) ;
-}
+d.setPoint ( x, y );
+d.setR ( r );
+d.setG ( g );
+d.setB ( b );
 ```
