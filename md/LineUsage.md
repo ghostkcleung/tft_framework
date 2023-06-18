@@ -28,9 +28,13 @@ void setup ( ) {
 
   Line l;
   l.setColor ( 0xFFFF );  // White color
-
   l.setPoint ( 50, 50 );
-  
+  l.setEndPoint ( 50, 150 );
+
+  for ( int i = 0; i < 5; i ++ ) {
+    l.draw ( scr );
+    l.move ( 90, 50 );    // Move right side, distance 50
+  }
 }
 ```
 
