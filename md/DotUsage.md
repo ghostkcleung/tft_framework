@@ -15,7 +15,7 @@ Dot d;
 ```
 
 ## Methods about Point and Color
-Dot is inherit [Shape](shape.md). It also contains the methods and properties of [Point](PointUsage.md) and [Color](ColorUsage.md)
+Dot is inherit [Shape](shape.md). It contains the methods and properties of [Point](PointUsage.md) and [Color](ColorUsage.md) also.
 
 ```cpp
 Screen *scr ;
