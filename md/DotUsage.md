@@ -61,6 +61,6 @@ void setup ( ) {
   }
 }
 ```
-Result:
+Output:
 
 <img src="dotExample.jpg" width="480" />
