@@ -38,4 +38,5 @@ void setup ( ) {
 }
 ```
 Output:
+
 <img src="LineExample1.jpg" width="480" />
