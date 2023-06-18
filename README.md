@@ -11,6 +11,7 @@ It provides the basic methods to draw. Just tell it the size of your screen and 
   <li><a href="./md/shape.md">Shape and Fillable</a></li>
   <ul>
     <li><a href="./md/DotUsage.md">Usage of Dot</a></li>
+    <li><a href="./md/LineUsage.md">Usage of Line</a></li>
   </ul>
   <li><a href="./md/font_and_print.md">Font and print</a></li>
   <li><a href="./md/buffered_screen.md">BufferedScreen</a></li>
