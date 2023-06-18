@@ -10,19 +10,12 @@ void setup ( ) {
   // Init your scr ...
   
   scr -> clear ( );
-  randomSeed(analogRead(0));
 
-  Dot d;
-  uint16_t w = scr -> getWidth ( );
-  uint16_t h = scr -> getHeight ( );
+  Line l;
+  l.setColor ( 0xFFFF );  // White color
 
-  for ( int y = 0; y < h; y ++ ) {
-    for ( int x = 0; x < w; x ++ ) {
-      d.setPoint ( x, y );
-      d.setColor ( random ( 0xFFFF ) ) ;
-      d.draw ( scr ) ;
-    }
-  }
+  l.setPoint ( 50, 50 );
+  
 }
 ```
 
