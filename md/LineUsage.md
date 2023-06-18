@@ -3,12 +3,19 @@
 When we set the start point and the end point, we can draw a line.
 
 ## Methods
-Basic point and color methods:
+There are methods other than basic Point and Color
 ```cpp
-void setPoint ( Point p );
-void setPoint ( int16_t x, int16_t y );
+void setEndPoint ( Point p );
+void setEndPoint ( int16_t x, int16_t y );
+Point getEndPoint ( );
 
-Point getPoint ( );
+void moveTo ( Point p );
+void moveTo ( int16_t x, int16_t y );
+void moveToX ( int16_t x );
+void moveToY ( int16_t y );
+
+// lineTo: set the end point from the start point
+void lineTo ( double direction, double distance );
 ```
 ## Examples
 ```cpp
