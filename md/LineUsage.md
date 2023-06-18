@@ -29,7 +29,7 @@ void setup ( ) {
   Line l;
   l.setColor ( 0xFFFF );  // White color
   l.setPoint ( 50, 50 );
-  l.setEndPoint ( 50, 150 );
+  l.setEndPoint ( 70, 150 );
 
   for ( int i = 0; i < 5; i ++ ) {
     l.draw ( scr );
