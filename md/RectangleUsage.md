@@ -32,10 +32,18 @@ void setup ( ) {
   r.setSize ( 100, 100 );
 
   for ( int i = 0; i < 3; i ++ ) {
-    r.setRGB ( color ) ;
+    r.setRGB ( color[i] ) ;
     r.move ( 135, 30 );
     r.draw ( scr ) ;
   }
+
+  r.moveTo ( 200, 50 );
+
+  for ( int i = 0; i < 3; i ++ ) {
+    r.setRGB ( color[i] ) ;
+    r.move ( 135, 30 );
+    r.fill ( scr ) ;
+  }  
 }
 ```
 
