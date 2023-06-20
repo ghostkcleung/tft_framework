@@ -36,8 +36,6 @@ void setup ( ) {
     r.move ( 135, 30 );
     r.draw ( scr ) ;
   }
-```
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 }
 ```
+
