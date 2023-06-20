@@ -1,6 +1,6 @@
 # Line
 
-When we set the start point and the end point, we can draw a line.
+“Line” is composed of a series of points connected together. When we set the start point and the end point, we can draw a line.
 
 ## Methods
 There are methods other than basic Point and Color
