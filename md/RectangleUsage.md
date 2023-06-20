@@ -37,7 +37,7 @@ void setup ( ) {
     r.draw ( scr ) ;
   }
 
-  r.moveTo ( 200, 50 );
+  r.moveTo ( 250, 50 );
 
   for ( int i = 0; i < 3; i ++ ) {
     r.setRGB ( color[i] ) ;
