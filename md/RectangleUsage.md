@@ -46,4 +46,5 @@ void setup ( ) {
   }  
 }
 ```
-
+## Output
+<img src="RectangleExample.jpg" width="480" />
