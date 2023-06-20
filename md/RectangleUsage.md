@@ -6,14 +6,15 @@ Similar to line, Rectangle has color, point and endPoint.
 It inherit Shape and Fillable. we can draw and fill a rectangle.
 
 ## Methods
-- void setSize ( uint16_t w, uint16_t h );
-- void setSize ( Rectangle r );
-- void setWidth ( uint16_t w );
-- void setHeight ( uint16_t h );
+```cpp
+void setSize ( uint16_t w, uint16_t h );
+void setSize ( Rectangle r );
+void setWidth ( uint16_t w );
+void setHeight ( uint16_t h );
 
-- uint16_t getWidth ( );
-- uint16_t getHeight ( );
-
+uint16_t getWidth ( );
+uint16_t getHeight ( );
+```
 ##Example:
 ```cpp
 Screen *scr ;
