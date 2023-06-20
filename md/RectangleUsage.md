@@ -25,14 +25,14 @@ void setup ( ) {
   scr -> clear ( );
 
   // red, green and blue
-  uint32_t color[]={0xFF0000, 0x00FF00, 0x0000FF};
+  uint32_t colors[]={0xFF0000, 0x00FF00, 0x0000FF};
 
   Rectangle r;
   r.setPoint ( 50, 50 );
   r.setSize ( 100, 100 );
 
   for ( int i = 0; i < 3; i ++ ) {
-    r.setRGB ( color[i] ) ;
+    r.setRGB ( colors[i] ) ;
     r.move ( 135, 30 );
     r.draw ( scr ) ;
   }
@@ -40,7 +40,7 @@ void setup ( ) {
   r.moveTo ( 250, 50 );
 
   for ( int i = 0; i < 3; i ++ ) {
-    r.setRGB ( color[i] ) ;
+    r.setRGB ( colors[i] ) ;
     r.move ( 135, 30 );
     r.fill ( scr ) ;
   }  
