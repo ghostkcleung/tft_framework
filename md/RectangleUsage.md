@@ -5,6 +5,15 @@ Drawing any graphics will be based on "fillRect()". for example, "Dot" is a 1x1 
 Similar to line, Rectangle has color, point and endPoint.
 It inherit Shape and Fillable. we can draw and fill a rectangle.
 
+## Methods
+void setSize ( uint16_t w, uint16_t h );
+void setSize ( Rectangle r );
+void setWidth ( uint16_t w );
+void setHeight ( uint16_t h );
+
+uint16_t getWidth ( );
+uint16_t getHeight ( );
+
 ##Example:
 ```cpp
 Screen *scr ;
@@ -14,10 +23,19 @@ void setup ( ) {
   
   scr -> clear ( );
 
+  // red, green and blue
+  uint32_t color[]={0xFF0000, 0x00FF00, 0x0000FF};
+
   Rectangle r;
-  r.setRGB ( 0xFF0000 );  // Red color
-  l.setPoint ( 50, 50 );
-  l.setEndPoint ( 75, 75 );
+  r.setPoint ( 50, 50 );
+  r.setSize ( 100, 100 );
+
+  for ( int i = 0; i < 3; i ++ ) {
+    r.setRGB ( color ) ;
+    r.move ( 135, 30 );
+    r.draw ( scr ) ;
+  }
+```
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 }
