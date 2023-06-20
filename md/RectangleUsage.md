@@ -7,4 +7,18 @@ It inherit Shape and Fillable. we can draw and fill a rectangle.
 
 ##Example:
 ```cpp
+Screen *scr ;
+
+void setup ( ) {
+  // Init your scr ...
+  
+  scr -> clear ( );
+
+  Rectangle r;
+  r.setRGB ( 0xFF0000 );  // Red color
+  l.setPoint ( 50, 50 );
+  l.setEndPoint ( 75, 75 );
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+}
 ```
