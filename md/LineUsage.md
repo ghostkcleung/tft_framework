@@ -1,6 +1,6 @@
 # Line
 
-"Line" is composed of a series of points connected together through [Bresenham’s line algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm). When we set the start point and the end point, we can draw a line.
+"Line" is composed of a series of points connected together through [Bresenham’s line algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm). We can draw a line after the setting of color, start point and end point.
 
 ## Methods
 There are methods other than basic Point and Color
