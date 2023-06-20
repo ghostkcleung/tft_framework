@@ -15,7 +15,7 @@ void setHeight ( uint16_t h );
 uint16_t getWidth ( );
 uint16_t getHeight ( );
 ```
-##Example:
+## Example:
 ```cpp
 Screen *scr ;
 
