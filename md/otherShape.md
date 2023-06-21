@@ -53,12 +53,31 @@ void setup ( ) {
 
   Triangle t;
   t.setRGB ( 0xFF00000 ) ;
-  t.setPoint ( 50, 25 );
-  t.setP2 ( 25, 68 );
-  t.setP3 ( 75, 68 );
+  t.setPoint ( 75, 25 );
+  t.setP2 ( 25, 112 );
+  t.setP3 ( 125, 112 );
   t.draw ( scr ) ;
 
-  t.moveTo ( 100, 25 ) // move right, distance 100
+  t.move ( 90, 125 ); // move right, distance 100
   t.fill ( scr ) ;
+
+  Circle c;
+  c.setRadius ( 50 );
+  c.setRGB ( 0x00FF00 );
+  c.setPoint ( 75, 200 ) ;
+  c.draw ( scr );
+
+  c.move ( 90, 125 );
+  c.fill ( scr );
+
+  Ellipse e;
+  e.setRGB( 0x0000FF);
+  e.setPoint ( 370, 70 );
+  e.setRx ( 80 );
+  e.setRy ( 40 );
+  e.draw ( scr );
+
+  e.move ( 180, 125 );
+  e.fill(scr);
 }
 ```
