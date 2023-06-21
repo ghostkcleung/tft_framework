@@ -62,16 +62,16 @@ void setup ( ) {
   t.fill ( scr ) ;
 
   Circle c;
-  c.setRadius ( 50 );
   c.setRGB ( 0x00FF00 );
   c.setPoint ( 75, 200 ) ;
+  c.setRadius ( 50 );
   c.draw ( scr );
 
   c.move ( 90, 125 );
   c.fill ( scr );
 
   Ellipse e;
-  e.setRGB( 0x0000FF);
+  e.setRGB ( 0x0000FF );
   e.setPoint ( 370, 70 );
   e.setRx ( 80 );
   e.setRy ( 40 );
