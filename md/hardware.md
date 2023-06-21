@@ -23,6 +23,8 @@ For the project, ESP32 is recommended. It has higher performance, more memories,
 
 ESP32 with ST7796s is recommended.
 
+The main concept of this library is not about supporting hardware, but rather through this library, as long as the hardware in hand has the implementation of fillRect(), there will be other drawing functions.
+
 ## Initialize with 3.5 inch ILI9486 16 bit  parallel
 This screen module is designed for Arduino Mega 2560 and Due. The pins is fit already. We just need to combine the screen and MCU module together.
 
