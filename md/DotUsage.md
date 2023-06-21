@@ -23,8 +23,8 @@ Screen *scr ;
 
 Dot d;
 
-uint16_t x = 100;
-uint16_t y = 50;
+int16_t x = 100;
+int16_t y = 50;
 
 uint8_t r = 63;
 uint8_t g = 127;
