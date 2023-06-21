@@ -42,3 +42,6 @@ void setRy( uint16_t ry );
 uint16_t getRx();
 uint16_t getRy();
 ```
+## Example
+```cpp
+```
