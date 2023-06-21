@@ -44,4 +44,16 @@ uint16_t getRy();
 ```
 ## Example
 ```cpp
+Screen *scr ;
+
+void setup ( ) {
+  // Init your scr ...
+  
+  scr -> clear ( );
+
+  Triangle t;
+  t.setPoint ( 50, 25 );
+  t.setP2 ( 25, 68 );
+  t.setP3 ( 75, 68 );
+}
 ```
