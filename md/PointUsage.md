@@ -1,6 +1,6 @@
 # Usage of Point
 
-Point is a simple X, Y coordinate concept. (0, 0) is the first point of top left side of a screen.
+Point is a simple X, Y coordinate concept. (0, 0) is the first point of top left side of a screen. It is not a drawable object. You should use the [Dot](DotUsage.md) if you want to draw a pixel with color to a screen.
 
 The Point class have 2 private properties: x, y (int16_t)
 
