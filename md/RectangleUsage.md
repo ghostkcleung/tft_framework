@@ -7,10 +7,10 @@ It inherit Shape and Fillable. we can draw and fill a rectangle.
 
 ## Methods
 ```cpp
-void setSize ( uint16_t w, uint16_t h );
+void setSize ( int16_t w, int16_t h );
 void setSize ( Rectangle r );
-void setWidth ( uint16_t w );
-void setHeight ( uint16_t h );
+void setWidth ( int16_t w );
+void setHeight ( int16_t h );
 
 uint16_t getWidth ( );
 uint16_t getHeight ( );
