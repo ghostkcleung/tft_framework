@@ -58,7 +58,7 @@ void setup ( ) {
   t.setP3 ( 75, 68 );
   t.draw ( scr ) ;
 
-  t.move ( 90, 100 ) // move right, distance 100
+  t.moveTo ( 100, 25 ) // move right, distance 100
   t.fill ( scr ) ;
 }
 ```
