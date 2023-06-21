@@ -4,7 +4,7 @@ Inherit class: Shape
 
 # Usage of Dot
 
-Dot is a 1x1 Rectangle to draw to the screen.
+Dot is a 1x1 [Rectangle](RectangleUsage.md) to draw to the screen.
 
 You can draw a dot to the screen after set the Point(position) and Color.
 
