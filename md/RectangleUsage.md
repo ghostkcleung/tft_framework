@@ -15,6 +15,8 @@ void setHeight ( int16_t h );
 uint16_t getWidth ( );
 uint16_t getHeight ( );
 ```
+
+The endPoint will at upper left side when the value of w or h is negative
 ## Example:
 ```cpp
 Screen *scr ;
