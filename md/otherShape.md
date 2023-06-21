@@ -52,8 +52,13 @@ void setup ( ) {
   scr -> clear ( );
 
   Triangle t;
+  t.setRGB ( 0xFF00000 ) ;
   t.setPoint ( 50, 25 );
   t.setP2 ( 25, 68 );
   t.setP3 ( 75, 68 );
+  t.draw ( scr ) ;
+
+  t.move ( 90, 100 ) // move right, distance 100
+  t.fill ( scr ) ;
 }
 ```
