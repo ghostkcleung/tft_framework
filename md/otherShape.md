@@ -81,3 +81,6 @@ void setup ( ) {
   e.fill(scr);
 }
 ```
+## Output:
+
+<img src="OtherShape.jpg" width="480" />
