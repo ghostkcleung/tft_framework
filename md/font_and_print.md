@@ -6,7 +6,7 @@ Font is a drawable shape (but not fillable). The 5x7 font is built-in at the fra
 
 For example, matrix 'A' is \[0x7E\], \[0x11\], \[0x11\], \[0x11\], \[0x7E\] ( See the source code [Font5X7.cpp](/tft_framework/src/Font5X7.cpp) )
 ```
-Binary is:
+Binary:
 01111110 (0x7E)
 00010001 (0x11)
 00010001 (0x11)
