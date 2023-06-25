@@ -9,14 +9,20 @@ It is stored at the program memories (ROM).
 For example, matrix 'A' is \[0x7E\], \[0x11\], \[0x11\], \[0x11\], \[0x7E\]
 
 It will be rendered as following:
-The background color is `#ffffff` for light mode and `#000000` for dark mode.
-0[Red](111)0
-[Red](1)000[Red](1)
-[Red](1)000[Red](1)
-[Red](1)000[Red](1)
-[Red](11111)
-[Red](1)000[Red](1)
-[Red](1)000[Red](1)
+
+0`111`0
+
+`1`000`1`
+
+`1`000`1`
+
+`1`000`1`
+
+`11111`
+
+`1`000`1`
+
+`1`000`1`
 
 ## Methods
 ```cpp
