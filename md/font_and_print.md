@@ -5,9 +5,14 @@ Font is a drawable shape (but not fillable). The 5x7 font is built-in at the fra
 5x7 pixels font is a matrix array. It is stored at the program memories (ROM).
 
 For example, matrix 'A' is \[0x7E\], \[0x11\], \[0x11\], \[0x11\], \[0x7E\] ( See the source code [Font5X7.cpp](/tft_framework/src/Font5X7.cpp) )
-
-Binary is: 01111110, 00010001, 00010001, 00010001, 01111110
-
+```
+Binary is:
+01111110 (0x7E)
+00010001 (0x11)
+00010001 (0x11)
+00010001 (0x11)
+01111110 (0x7E)
+```
 You can see there are 5x8 bits above because of more easier for handling. It is iterated from the last bit to the first bit. The first bit is always be 0 and to be skipped.
 
 It will be rendered as the fowllowing picture:
