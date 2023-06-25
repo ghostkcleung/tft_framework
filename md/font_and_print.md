@@ -2,22 +2,6 @@
 
 Font is a drawable shape (but not fillable). The 5x7 font is built-in at the framework as default font.
 
-```cpp
-Font *f = new Font5X7();     // Usually the font is assigned to pointer.
-f -> setChar ( 'A' );        // Set character
-f -> setRGB ( 0x0000FF );    // Set to Blue
-f -> setPoint ( 10, 20 );
-f -> draw ( scr ) ;
-
-f -> setScale ( 3 );         // Scale the font to 3x.
-f -> setPoint ( 50, 20 );
-f -> setPaddingTop ( 1 ) ;
-f -> setPaddingLeft ( 1 ) ;
-f -> draw ( scr ) ;
-
-delete f;                   // Deallocate
-```
-
 ## Methods
 ```cpp
 uint32_t getChar();
