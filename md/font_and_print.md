@@ -8,6 +8,18 @@ It is stored at the program memories (ROM).
 
 For example, matrix 'A' is \[0x7E\], \[0x11\], \[0x11\], \[0x11\], \[0x7E\]
 
+It will be rendered as following:
+```
+01110
+10001
+10001
+10001
+11111
+10001
+10001
+00000
+```
+
 ## Methods
 ```cpp
 uint32_t getChar();
