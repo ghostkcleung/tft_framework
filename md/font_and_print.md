@@ -8,7 +8,7 @@ For example, matrix 'A' is \[0x7E\], \[0x11\], \[0x11\], \[0x11\], \[0x7E\]
 
 Binary is: 01111110, 00010001, 00010001, 00010001, 01111110
 
-You can see there are 5x8 bits because of more easier for handling. It is iterate from last bit to first bit. And the first bit is ignored.
+You can see there are 5x8 bits because of more easier for handling. It is iterated from the last bit to the first bit. And the first bit is ignored.
 
 It will be rendered as the fowllowing picture:
 
