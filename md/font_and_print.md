@@ -13,7 +13,7 @@ Binary:
 00010001 (0x11)
 01111110 (0x7E)
 ```
-You can see there are 5x8 bits above because of more easier for handling. It is iterated from the last bit to the first bit. The first bit is always be 0 and to be skipped.
+You can see there are 5x8 bits above because of more easier for handling. The first bit is always be 0 and to be skipped.
 
 It will be rendered as the fowllowing picture:
 
