@@ -9,8 +9,15 @@ It is stored at the program memories (ROM).
 For example, matrix 'A' is \[0x7E\], \[0x11\], \[0x11\], \[0x11\], \[0x7E\]
 
 It will be rendered as following:
-<span style="background:black"> </span>
-
+```
+0[Red](111)0
+[Red](1)000[Red](1)
+[Red](1)000[Red](1)
+[Red](1)000[Red](1)
+[Red](11111)
+[Red](1)000[Red](1)
+[Red](1)000[Red](1)
+```
 ## Methods
 ```cpp
 uint32_t getChar();
