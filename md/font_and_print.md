@@ -14,7 +14,7 @@ It will be rendered as the fowllowing picture:
 
 <img src="5x7_render.jpg" width="300" />
 
-The valid char range of 5x7 font is between ASCII 33 to 126.
+The valid char range of 5x7 font is between [ASCII] 33 to 126.
 
 ## Methods
 ```cpp
