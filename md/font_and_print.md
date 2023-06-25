@@ -12,7 +12,7 @@ Binary is: 01111110, 00010001, 00010001, 00010001, 01111110
 
 It will be rendered as the fowllowing picture:
 
-<img src="5x7_render.jpg" width="150" />
+<img src="5x7_render.jpg" width="300" />
 
 ## Methods
 ```cpp
