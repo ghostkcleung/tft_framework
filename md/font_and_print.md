@@ -8,21 +8,11 @@ It is stored at the program memories (ROM).
 
 For example, matrix 'A' is \[0x7E\], \[0x11\], \[0x11\], \[0x11\], \[0x7E\]
 
-It will be rendered as following:
+Binary is: 01111110, 00010001, 00010001, 00010001, 01111110
 
-0`111`0
+It will be rendered as the picture:
 
-`1`000`1`
 
-`1`000`1`
-
-`1`000`1`
-
-`11111`
-
-`1`000`1`
-
-`1`000`1`
 
 ## Methods
 ```cpp
