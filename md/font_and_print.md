@@ -2,13 +2,13 @@
 
 Font is a drawable shape (but not fillable). The 5x7 font is built-in at the framework as default font.
 
-5x7 font is a matrix array. The dimension is 5 X 7 pixels.
-
-It is stored at the program memories (ROM).
+5x7 pixels font is a matrix array. It is stored at the program memories (ROM).
 
 For example, matrix 'A' is \[0x7E\], \[0x11\], \[0x11\], \[0x11\], \[0x7E\]
 
 Binary is: 01111110, 00010001, 00010001, 00010001, 01111110
+
+You can see there are 5x8 bits because of more easier for handling. It is iterate from last bit to first bit. And the first bit is ignored.
 
 It will be rendered as the fowllowing picture:
 
