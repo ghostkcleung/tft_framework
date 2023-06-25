@@ -6,7 +6,7 @@ Font is a drawable shape (but not fillable). The 5x7 font is built-in at the fra
 
 It is stored at the program memories (ROM).
 
-For example, matrix 'A' is \[ 0x7E, 0x11, 0x11, 0x11, 0x7E \]
+For example, matrix 'A' is \[0x7E\], \[0x11\], \[0x11\], \[0x11\], \[0x7E\]
 
 ## Methods
 ```cpp
