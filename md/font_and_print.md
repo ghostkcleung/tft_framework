@@ -2,6 +2,12 @@
 
 Font is a drawable shape (but not fillable). The 5x7 font is built-in at the framework as default font.
 
+5x7 font is a matrix array. The dimension is 5 X 7 pixels.
+
+It is stored at the program memories (ROM).
+
+For example, matrix 'A' is {0x7E, 0x11, 0x11, 0x11, 0x7E}
+
 ## Methods
 ```cpp
 uint32_t getChar();
