@@ -4,7 +4,7 @@ Font is a drawable shape (but not fillable). The 5x7 font is built-in at the fra
 
 5x7 pixels font is a matrix array. It is stored at the program memories (ROM).
 
-For example, matrix 'A' is \[0x7E\], \[0x11\], \[0x11\], \[0x11\], \[0x7E\] ( See the source code [Font5X7.cpp](/tft_framework/src/Font5X7.cpp) )
+For example, the matrix 'A' is \[0x7E\], \[0x11\], \[0x11\], \[0x11\], \[0x7E\] ( See the source code [Font5X7.cpp](/tft_framework/src/Font5X7.cpp) )
 ```
 Binary:
 01111110 (0x7E)
