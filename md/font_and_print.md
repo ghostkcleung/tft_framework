@@ -12,7 +12,7 @@ You can see there are 5x8 bits above because of more easier for handling. It is 
 
 It will be rendered as the fowllowing picture:
 
-<img src="5x7_render.jpg" width="300" />
+<img src="5x7_render.jpg" width="210" />
 
 The valid char range of 5x7 font is between the [ASCII](https://en.wikipedia.org/wiki/ASCII) code 0x20 to 0x7E.
 
