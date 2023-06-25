@@ -24,7 +24,7 @@ The valid char range of 5x7 font is between the [ASCII](https://en.wikipedia.org
 ## Methods
 ```cpp
 uint32_t getChar();
-virtual void setChar(uint32_t c);
+void setChar(uint32_t c);
 
 uint8_t getScale();
 void setScale(uint8_t s);
@@ -56,6 +56,6 @@ void setSpacingBottom(uint8_t spacingBottom);
 void setSpacingRight(uint8_t spacingRight);
 
 // Total width is padding + spacing + width
-virtual uint8_t getTotalWidth ( );
-virtual uint8_t getTotalHeight ( );
+uint8_t getTotalWidth ( );
+uint8_t getTotalHeight ( );
 ```
