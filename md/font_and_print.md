@@ -69,7 +69,7 @@ void setup ( ) {
   scr -> clear ( );
 
   Font *f = scr -> getFont ( ) ;
-  f -> setScale ( 2 ) ;
+  f -> setScale ( 4 ) ;
   uint16_t w = f -> getTotalWidth ( ) ;
   uint16_t h = f -> getTotalHeight ( ) ;
   f -> setPoint ( w, h ) ;
@@ -78,14 +78,14 @@ void setup ( ) {
   f -> draw ( scr ) ;
   f -> move ( 90, w ) ;
 
-  f -> setScale ( 3 ) ;
+  f -> setScale ( 5 ) ;
   w = f -> getTotalWidth ( ) ;
   f -> setRGB ( 0x00FF00 ) ;
   f -> setChar ( 'B' ) ;
   f -> draw ( scr ) ;
   f -> move ( 90, w ) ;
 
-  f -> setScale ( 4 ) ;
+  f -> setScale ( 6 ) ;
   w = f -> getTotalWidth ( ) ;
   f -> setRGB ( 0x0000FF ) ;
   f -> setChar ( 'C' ) ;
