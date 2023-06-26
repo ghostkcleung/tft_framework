@@ -59,3 +59,15 @@ void setSpacingRight(uint8_t spacingRight);
 uint8_t getTotalWidth ( );
 uint8_t getTotalHeight ( );
 ```
+## Examples
+```cpp
+Screen *scr ;
+
+void setup ( ) {
+  // Init your scr ...
+  
+  scr -> clear ( );
+
+  scr -> getFont ( ) ;
+}
+```
