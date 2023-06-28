@@ -92,3 +92,7 @@ void setup ( ) {
   f -> draw ( scr ) ;
 }
 ```
+## Output
+
+
+<img src="font.jpg" width="480" />
