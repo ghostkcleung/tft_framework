@@ -12,6 +12,9 @@ void setup ( ) {
   
   scr -> clear ( );
 
+  Font *fnt = scr -> getFont ( );
+  fnt -> setScale ( 3 );
+
   scr -> println(78, BIN);      // gives "1001110"
   scr -> println(78, OCT);      // gives "116"
   scr -> println(78, DEC);      // gives "78"
