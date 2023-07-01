@@ -46,7 +46,7 @@ void resetCursor ( );
 
 ## Cursor Example
 
-```
+```cpp
 Screen *scr ;
 
 void setup ( ) {
@@ -84,10 +84,46 @@ void setup ( ) {
 <img src="./cursor.jpg" width="480" />
 
 ## Print Buffer
-
-Usually, we first output the text to the buffer and then fill it into the screen.
+At the example above. There is overlaped at the first line when reset cursor. Print buffer output the text to the buffer firstly. and then fill it into the screen with background color.
 
 ```cpp
 void setBuffer ( boolean b );
 boolean isBuffer ( );
+```
+
+## Print buffer example
+```cpp
+Screen *scr ;
+
+void setup ( ) {
+  // Init your scr ...
+  scr -> clear ( ) ;
+
+  // Same as above example. But add this line.
+  scr -> setPrintBuffer ( true );
+
+  Font *fnt = scr -> getFont ( );
+  fnt -> setScale ( 2 );
+
+  Rectangle r;
+  r.setSize ( 300, 200 );
+  r.setPoint ( 70, 50 );
+  r.setRGB ( 0x0000FF );
+  r.fill ( scr );
+
+  scr -> setCursor ( r );
+  int16_t x = scr -> getCursor ( ) .getX ( ) ;
+  int16_t y = scr -> getCursor ( ) .getY ( ) ;
+  scr -> printf ( "Cursor: %d, %d\n", x, y ) ;
+
+  for ( int i = 0; i < 5; i++ ) {
+    x = scr -> getCursor ( ) .getX ( ) ;
+    y = scr -> getCursor ( ) .getY ( ) ;
+    scr -> printf ( "Cursor: %d, %d\n", x, y ) ;
+  }
+
+  fnt -> setColor ( 0 ) ;
+  scr -> resetCursor ( );
+  scr -> print ( "----------------" );
+}
 ```
