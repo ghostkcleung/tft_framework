@@ -128,3 +128,7 @@ void setup ( ) {
 ```
 ## Output
 <img src="./print_buffer.jpg" width="480" />
+
+## Spacing and padding
+
+
