@@ -165,4 +165,4 @@ void setup ( ) {
 
 ## Output
 
-<img scr="./spacing_padding.jpg" width="480" />
+<img src="./spacing_padding.jpg" width="480" />
