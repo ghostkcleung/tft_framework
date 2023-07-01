@@ -79,6 +79,10 @@ void setup ( ) {
 }
 ```
 
+## Cursor Example Output
+
+<img src="./cursor.jpg" width="480" />
+
 ## Print Buffer
 
 Usually, we first output the text to the buffer and then fill it into the screen.
