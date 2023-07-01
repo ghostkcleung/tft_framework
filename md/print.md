@@ -127,5 +127,5 @@ void setup ( ) {
   scr -> print ( "----------------" );
 }
 ```
-
+## Output
 <img src="./print_buffer.jpg" width="480" />
