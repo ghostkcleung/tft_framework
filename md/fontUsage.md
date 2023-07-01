@@ -33,28 +33,6 @@ void setScale(uint8_t s);
 uint8_t getWidth();
 uint8_t getHeight();
 
-// Padding
-uint8_t getPaddingTop();
-uint8_t getPaddingLeft();
-uint8_t getPaddingBottom();
-uint8_t getPaddingRight();
-
-void setPaddingTop(uint8_t paddingTop);
-void setPaddingLeft(uint8_t paddingLeft);
-void setPaddingBottom(uint8_t paddingBottom);
-void setPaddingRight(uint8_t paddingRight);
-
-// Spacing
-uint8_t getSpacingTop();
-uint8_t getSpacingLeft();
-uint8_t getSpacingBottom();
-uint8_t getSpacingRight();
-
-void setSpacingTop(uint8_t spacingTop);
-void setSpacingLeft(uint8_t spacingLeft);
-void setSpacingBottom(uint8_t spacingBottom);
-void setSpacingRight(uint8_t spacingRight);
-
 // Total width is padding + spacing + width
 uint8_t getTotalWidth ( );
 uint8_t getTotalHeight ( );
