@@ -131,4 +131,38 @@ void setup ( ) {
 
 ## Spacing and padding
 
+## Example
+```cpp
+  // Init your scr ...
+  scr -> clear ( );
+  scr -> setPrintBuffer (true);
 
+  Font *fnt = scr -> getFont ( );
+  fnt -> setScale ( 2 );
+
+  Rectangle r;
+  r.setSize ( scr -> getWidth(), scr -> getHeight() );
+  r.setRGB ( 0x0000FF );
+  r.fill ( scr );
+
+  for ( int i = 1; i <= 4; i++ ){
+    fnt -> setSpacingTop ( i );
+    fnt -> setSpacingLeft ( i );
+    fnt -> setSpacingBottom ( i );
+    fnt -> setSpacingRight ( i );
+    scr -> printf ( "spacing: %d\n", i );
+  }
+
+  for ( int i = 1; i <= 4; i++ ){
+    fnt -> setPaddingTop ( i );
+    fnt -> setPaddingLeft ( i );
+    fnt -> setPaddingBottom ( i );
+    fnt -> setPaddingRight ( i );
+    scr -> printf ( "padding: %d\n", i );
+  }
+}
+```
+
+## Output
+
+<img scr="spacing_padding.jpg" width="480" />
