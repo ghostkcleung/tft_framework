@@ -122,7 +122,6 @@ void setup ( ) {
     scr -> printf ( "Cursor: %d, %d\n", x, y ) ;
   }
 
-  fnt -> setColor ( 0 ) ;
   scr -> resetCursor ( );
   scr -> print ( "----------------" );
 }
