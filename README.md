@@ -17,7 +17,7 @@ It provides the basic methods to draw. Just tell it the size of your screen and 
   </ul>
   <li><a href="./md/fontUsage.md">Usage of Font</a></li>
   <li><a href="./md/print.md">Screen print</a></li>
-  <li><a href="./md/buffered_screen.md">BufferedScreen</a></li>
+  <li><a href="./md/buffered_screen.md">Buffer Screen</a></li>
   <li><a href="./md/CustomShape.md">Implement your custom shape</a></li>
   <li><a href="./md/tft_implement.md">Implement your own screen</a></li>
 </ul>
