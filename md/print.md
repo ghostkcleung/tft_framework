@@ -84,7 +84,7 @@ void setup ( ) {
 <img src="./cursor.jpg" width="480" />
 
 ## Print Buffer
-At the example above. There is overlaped at the first line when reset cursor. Print buffer output the text to the buffer firstly. and then fill it into the screen with background color.
+At the example above. There is overlaped at the first line when reset cursor. Print buffer output the text to the buffer firstly. and then fill it into the screen with background color. ( More about [./buffered_screen.md](Buffer Screen) )
 
 ```cpp
 void setBuffer ( boolean b );
