@@ -130,6 +130,29 @@ void setup ( ) {
 <img src="./print_buffer.jpg" width="480" />
 
 ## Spacing and padding
+Padding refers to the space inside the print area, while spacing refers to the space outside the print area.
+
+```cpp
+void setPaddingTop(uint8_t paddingTop);
+void setPaddingLeft(uint8_t paddingLeft);
+void setPaddingBottom(uint8_t paddingBottom);
+void setPaddingRight(uint8_t paddingRight);
+
+uint8_t getPaddingTop();
+uint8_t getPaddingLeft();
+uint8_t getPaddingBottom();
+uint8_t getPaddingRight();
+
+void setSpacingTop(uint8_t spacingTop);
+void setSpacingLeft(uint8_t spacingLeft);
+void setSpacingBottom(uint8_t spacingBottom);
+void setSpacingRight(uint8_t spacingRight);
+
+uint8_t getSpacingTop();
+uint8_t getSpacingLeft();
+uint8_t getSpacingBottom();
+uint8_t getSpacingRight();
+```
 
 ## Example
 ```cpp
