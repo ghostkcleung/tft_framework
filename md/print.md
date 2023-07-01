@@ -37,3 +37,8 @@ void setup ( ) {
 ## Print Buffer
 
 Usually, we first output the text to the buffer and then fill it into the screen.
+
+```cpp
+void setBuffer ( boolean b );
+boolean isBuffer ( );
+```
