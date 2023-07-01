@@ -34,6 +34,51 @@ void setup ( ) {
 
 <img src="./print.jpg" width="480" />
 
+## Cursor
+
+This is a Point used to set the position of print.
+
+```cpp
+void setCursor ( Point cursor );
+Point getCursor ( );
+void resetCursor ( );
+```
+
+## Cursor Example
+
+```
+Screen *scr ;
+
+void setup ( ) {
+  // Init your scr ...
+  scr -> clear ( ) ;
+
+  Font *fnt = scr -> getFont ( );
+  fnt -> setScale ( 2 );
+
+  Rectangle r;
+  r.setSize ( 300, 200 );
+  r.setPoint ( 70, 50 );
+  r.setRGB ( 0x0000FF );
+  r.fill ( scr );
+
+  scr -> setCursor ( r );
+  int16_t x = scr -> getCursor ( ) .getX ( ) ;
+  int16_t y = scr -> getCursor ( ) .getY ( ) ;
+  scr -> printf ( "Cursor: %d, %d\n", x, y ) ;
+
+  for ( int i = 0; i < 5; i++ ) {
+    x = scr -> getCursor ( ) .getX ( ) ;
+    y = scr -> getCursor ( ) .getY ( ) ;
+    scr -> printf ( "Cursor: %d, %d\n", x, y ) ;
+  }
+
+  fnt -> setColor ( 0 ) ;
+  scr -> resetCursor ( );
+  scr -> print ( "----------------" );
+}
+```
+
 ## Print Buffer
 
 Usually, we first output the text to the buffer and then fill it into the screen.
