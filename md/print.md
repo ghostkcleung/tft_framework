@@ -33,3 +33,7 @@ void setup ( ) {
 ## Example
 
 <img src="./print.jpg" width="480" />
+
+## Print Buffer
+
+Usually, we first output the text to the buffer and then fill it into the screen.
