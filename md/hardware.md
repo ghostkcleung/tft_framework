@@ -85,6 +85,7 @@ void setup() {
 	uint8_t dc = 27;
 
 	scr = new ILI9488_SPI_18BIT ( dc ) ;
+	// Or... scr = new ST7796s_SPI_16Bit ( dc ) ;
 	scr -> init();
 }
 ```
@@ -113,6 +114,7 @@ void setup() {
 	uint16_t w = 480, h = 320 ;
 	
 	scr = new ILI9488_SPI_18BIT ( w, h, spi, cs, dc ) ;
+	// Or... scr = new ST7796s_SPI_16Bit ( w, h, spi, cs, dc ) ;
 	scr -> init();
 }
 ```
