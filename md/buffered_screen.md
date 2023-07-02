@@ -5,23 +5,35 @@ But be attention for the limitation of memory size. It need 2byte per pixel. The
 60x60x2 = 7200bytes
 
 ```cpp
-BufferScreen *buf = new BufferScreen ( 40, 40 );      // Create the buffer with bounds 40x40.
-buf -> setRGB ( 0xFFFF00 );                     // Set the background Color to yellow.
-buf -> clear ( );
+Screen *scr ;
 
-Triangle t;
-t.setPoint ( 0,39 );
-t.setP2 ( 19, 0 );
-t.setP3 ( 39, 39);
+void setup ( ) {
+  // Init your scr ...
+  
+  scr -> clear ( );
 
-t.draw ( buf );
+  BufferScreen *buf = new BufferScreen(40, 40); // Create the buffer with bounds 40x40.
+  buf->setRGB(0xFFFF00);                        // Set the background Color to yellow.
+  buf->clear();
 
-buf -> setPoint ( 20, 20 );
-buf -> fill ( scr );           // Fill the buffer to real screen
+  Triangle t;
+  t.setPoint(4, 34);
+  t.setP2(19, 4);
+  t.setP3(34, 34);
 
-buf -> setScale ( 3 );         // Enlarge to 3x
-buf -> setPoint ( 20, 100 );
-buf -> fill ( scr );           // Fill the buffer to real screen
+  t.draw(buf);
 
-delete buf;                                     // Deallocate
+  buf->setPoint(20, 20);
+  buf->fill(scr); // Fill the buffer to real screen
+
+  buf->setScale(3); // Enlarge to 3x
+  buf->setPoint(20, 100);
+  buf->fill(scr); // Fill the buffer to real screen
+
+  delete buf; // Deallocate
+}
 ```
+
+## Output
+
+<img src="buffer.jpg" width="480" />
