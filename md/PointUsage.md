@@ -32,7 +32,7 @@ We can move the point by the move method.
 ```cpp
 void move (double direction, double distance);
 
-// Direction: 0 to 360 degree.
+// Direction: 0 to 359 degree.
 // 0 is North ( or upper side of the screen )
 // 90 is the right side of the screen
 
