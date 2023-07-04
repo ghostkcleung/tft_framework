@@ -1,6 +1,6 @@
 # Why tft_ftamework ?
 
-It provides the basic methods to draw. Just tell it the size of your screen and how to "Fill Rect".
+It provides the basic methods to draw. Just tell it the size of your screen and "HOW TO Fill Rect".
 
 <ul>
   <li><a href="./md/getting_start.md">Getting Start</a></li>
