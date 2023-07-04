@@ -1,6 +1,6 @@
 # Bitmap Image
 
-You can show a bitmap image to the screen by the reading from File. Ususally it is read from SD card (or SPIFFS when using ESP32). For the usage of File IO, you can see the following tutorial:
+You can show a bitmap image to the screen by the reading from File. Ususally it is read from SD card (or SPIFFS when using ESP32). For the usage of File I/O, you can see the following tutorial:
 
 https://docs.arduino.cc/learn/programming/sd-guide
 
