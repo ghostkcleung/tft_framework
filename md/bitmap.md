@@ -23,3 +23,8 @@ void setup ( ) {
   file.close ( ) ;
 }
 ```
+
+The above example shows the image at the top left of the screen. As the other Shape. You can set the position of the image with setPoint (x, y)
+```cpp
+img -> setPoint ( 50, 100 ) ;
+```
