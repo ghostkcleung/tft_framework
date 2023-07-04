@@ -18,7 +18,7 @@ It provides the basic methods to draw. Just tell it the size of your screen and 
   <li><a href="./md/fontUsage.md">Usage of Font</a></li>
   <li><a href="./md/print.md">Screen print</a></li>
   <li><a href="./md/buffered_screen.md">Buffer Screen</a></li>
-  <li><a href="./md/bitmap.md">BMP Image</a></li>
+  <!--<li><a href="./md/bitmap.md">BMP Image</a></li>-->
 </ul>
 
 # What will I do next
