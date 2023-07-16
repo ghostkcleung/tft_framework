@@ -13,7 +13,7 @@ Binary:
 00010001 (0x11)
 01111110 (0x7E)
 ```
-You can see there are 5x8 bits above. There are 5 bits waste. However it is more easier for handling. The first bit is always be 0 and to be skipped.
+You can see there are 5x8 bits above. There are 5 bits wasted. However it is more easier for handling. The first bit is always be 0 and to be skipped.
 
 It will be rendered as the fowllowing picture:
 
