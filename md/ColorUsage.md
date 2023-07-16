@@ -57,15 +57,15 @@ c1.setRGB ( 0x00FF00 ); // Set to Green
 c1.setRGB ( 0x0000FF ); // Set to Blue
 
 c1.setColor ( 0 );
-c1.setR ( 0x99 );   // 0x990000
-c1.setG ( 0x66 );   // 0x996600
-c1.setB ( 0x33 );   // 0x996633
+c1.setR ( 0x33 );   // 0x330000
+c1.setG ( 0x66 );   // 0x336600
+c1.setB ( 0x99 );   // 0x336699
 
 // There is little distortion when covert from RGB to 565
-scr -> println ( c1.getR ( ), HEX ) ;    // Output: 98
+scr -> println ( c1.getR ( ), HEX ) ;    // Output: 30
 scr -> println ( c1.getG ( ), HEX ) ;    // Output: 64
-scr -> println ( c1.getB ( ), HEX ) ;    // Output: 30
-scr -> println ( c1.getRGB ( ), HEX ) ;    // Output: 986430
+scr -> println ( c1.getB ( ), HEX ) ;    // Output: 98
+scr -> println ( c1.getRGB ( ), HEX ) ;    // Output: 306498
 
 Color c2;
 c2.setColor ( c1 );     // Set the color content same as c1
@@ -84,7 +84,7 @@ B:0x99 = 10011001
 The color will store to 16bit as follow:
 ```
 R: 00110011, to 5-bit: 00110---
-G: 01100110, to 6-bit: 011001--
+G: 01100110, to 6-bit: 011001---
 B: 10011001, to 5-bit: 10011---
 ```
 When we get back 24-bit value, distortion as follow:
