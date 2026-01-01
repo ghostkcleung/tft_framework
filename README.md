@@ -13,29 +13,29 @@ A lightweight and flexible graphics framework for TFT displays on embedded syste
 
 ## Documentation
 
-- [Getting Started](./md/getting_start.md)
-- [Supported Hardware](./md/hardware.md)
-- [Installation](./md/installation.md)
+- [Getting Started](./docs/getting_start.md)
+- [Supported Hardware](./docs/hardware.md)
+- [Installation](./docs/installation.md)
 
 ### Core Concepts
 
-- [Point Usage](./md/PointUsage.md)
-- [Color Usage](./md/ColorUsage.md)
-- [Shapes and Fillable Objects](./md/shape.md)
+- [Point Usage](./docs/PointUsage.md)
+- [Color Usage](./docs/ColorUsage.md)
+- [Shapes and Fillable Objects](./docs/shape.md)
 
 ### Drawing Shapes
 
-- [Dot Usage](./md/DotUsage.md)
-- [Line Usage](./md/LineUsage.md)
-- [Rectangle Usage](./md/RectangleUsage.md)
-- [Other Shapes](./md/otherShape.md)
+- [Dot Usage](./docs/DotUsage.md)
+- [Line Usage](./docs/LineUsage.md)
+- [Rectangle Usage](./docs/RectangleUsage.md)
+- [Other Shapes](./docs/otherShape.md)
 
 ### Advanced Features
 
-- [Font Usage](./md/fontUsage.md)
-- [Screen Printing](./md/print.md)
-- [Buffered Screen](./md/buffered_screen.md)
-- [BMP Images](./md/bitmap.md)
+- [Font Usage](./docs/fontUsage.md)
+- [Screen Printing](./docs/print.md)
+- [Buffered Screen](./docs/buffered_screen.md)
+- [BMP Images](./docs/bitmap.md)
 
 ## Roadmap
 
