@@ -123,8 +123,7 @@ void setup() {
 ## Supported Format
 
 - **File Type:** BMP (Bitmap)
-- **Color Depth:** Typically 24-bit RGB (converted to RGB565)
-- **Compression:** Uncompressed BMP recommended
+- **Color Depth:** Typically 24-bit RGB (RGB565 is recommanded)
 
 ## Notes
 
