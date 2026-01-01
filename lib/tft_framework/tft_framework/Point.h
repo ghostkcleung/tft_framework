@@ -1,0 +1,73 @@
+#ifndef POINT_H
+#define POINT_H
+
+/**
+ * @class Point
+ * @brief Represents a 2D coordinate point on the screen.
+ * 
+ * The Point class encapsulates X and Y coordinates for positioning objects on the display.
+ * Origin (0, 0) is at the top-left corner of the screen.
+ */
+class Point {
+   private:
+	int16_t x, y;  ///< X and Y coordinates
+
+   public:
+	/**
+	 * @brief Default constructor - initializes point at origin (0, 0)
+	 */
+	Point() : x(0), y(0) {};
+	
+	/**
+	 * @brief Constructor with initial coordinates
+	 * @param x X coordinate
+	 * @param y Y coordinate
+	 */
+	Point(int16_t x, int16_t y) : x(x), y(y) {};
+
+	/**
+	 * @brief Get the X coordinate
+	 * @return Current X coordinate value
+	 */
+	int16_t getX();
+	
+	/**
+	 * @brief Get the Y coordinate
+	 * @return Current Y coordinate value
+	 */
+	int16_t getY();
+	
+	/**
+	 * @brief Set the X coordinate
+	 * @param x New X coordinate value
+	 */
+	void setX(int16_t x);
+	
+	/**
+	 * @brief Set the Y coordinate
+	 * @param y New Y coordinate value
+	 */
+	void setY(int16_t y);
+
+	/**
+	 * @brief Set point coordinates from another Point object
+	 * @param p Source Point object to copy coordinates from
+	 */
+	void setPoint(Point p);
+	
+	/**
+	 * @brief Set point coordinates directly
+	 * @param x New X coordinate
+	 * @param y New Y coordinate
+	 */
+	void setPoint(int16_t x, int16_t y);
+
+	/**
+	 * @brief Move the point by a direction and distance
+	 * @param direction Angle in degrees (0-359). 0° = North (up), 90° = East (right)
+	 * @param distance Distance to move in pixels
+	 */
+	virtual void move(double direction, double distance);
+};
+
+#endif
