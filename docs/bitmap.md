@@ -60,7 +60,7 @@ Display only a portion of the image using a viewport rectangle.
 
 To display a 140×80 region starting at (40, 135) from the source image:
 
-![Original Image](/docs/320x240.jpg)
+![Original Image](320x240.jpg)
 
 ```cpp
 // Define viewport
@@ -75,7 +75,7 @@ img->fill(scr);
 
 ### Result
 
-![Viewport Result](docs//viewport.jpg)
+![Viewport Result](viewport.jpg)
 
 ## Complete Example
 
