@@ -107,7 +107,7 @@ void setup() {
 
     // Initialize display
     scr = new ILI9488_SPI_18BIT(dc);
-    // Or: scr = new ST7796s_SPI_16Bit(dc);
+    // Or: scr = new ST_7796s_SPI_16Bit(dc);
     scr->init();
 }
 ```
