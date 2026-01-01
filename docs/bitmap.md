@@ -75,7 +75,7 @@ img->fill(scr);
 
 ### Result
 
-![Viewport Result](/viewport.jpg)
+![Viewport Result](docs//viewport.jpg)
 
 ## Complete Example
 
