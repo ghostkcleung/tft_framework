@@ -1,8 +1,20 @@
 #ifdef ESP32
+
+/**
+ * @file ST7796s_SPI_16Bit.cpp
+ * @brief Implementation of ST7796s TFT display driver
+ */
+
 #include <ST7796s_SPI_16Bit.h>
 
 using namespace tft_framework;
 
+/**
+ * @brief Initialize ST7796s display
+ * 
+ * Performs software reset, configures power control, gamma correction and display settings.
+ * Sets 16-bit color mode (RGB565).
+ */
 void ST_7796s_SPI_16Bit::init() {
 	pinMode(cs, OUTPUT);
 	pinMode(dc, OUTPUT);
@@ -61,6 +73,14 @@ void ST_7796s_SPI_16Bit::init() {
 	writeCom(0x29);
 }
 
+/**
+ * @brief Fill rectangle area with single color
+ *
+ * Uses SPI writePattern function to quickly fill rectangle.
+ * Each pixel uses 2 bytes (high byte and low byte).
+ *
+ * @param r Pointer to rectangle object
+ */
 void ST_7796s_SPI_16Bit::fillRect(Rectangle* r) {
 	setWindow(r);
 
@@ -79,6 +99,14 @@ void ST_7796s_SPI_16Bit::fillRect(Rectangle* r) {
 	GPIO.out_w1ts = (1 << cs);
 };
 
+/**
+ * @brief Set display rotation direction
+ *
+ * Supports 8 different rotation directions.
+ * Uses 0x36 command (Memory Access Control) to set scan direction.
+ *
+ * @param rotate Rotation value (0-7)
+ */
 void ST_7796s_SPI_16Bit::setRotate(uint8_t rotate) {
 	rotate %= 8;
 	if (getRotate() == rotate) {
@@ -122,6 +150,14 @@ void ST_7796s_SPI_16Bit::setRotate(uint8_t rotate) {
 	}
 }
 
+/**
+ * @brief Display buffer screen content
+ *
+ * Transfers buffer screen's 16-bit RGB565 data to display.
+ * Supports scaling feature.
+ *
+ * @param buf Pointer to buffer screen object
+ */
 void ST_7796s_SPI_16Bit::fillShape(BufferScreen* buf) {
 	uint8_t scale = buf->getScale();
 
@@ -168,6 +204,14 @@ void ST_7796s_SPI_16Bit::fillShape(BufferScreen* buf) {
 	GPIO.out_w1ts = (1 << cs);
 }
 
+/**
+ * @brief Draw single pixel point
+ *
+ * Draws a pixel point at specified coordinates.
+ * Uses 16-bit color format.
+ *
+ * @param d Pointer to dot object
+ */
 void ST_7796s_SPI_16Bit::drawShape(Dot* d) {
 	uint16_t x = d->getX(), y = d->getY(), c = d->getColor();
 
@@ -192,6 +236,16 @@ void ST_7796s_SPI_16Bit::drawShape(Dot* d) {
 	GPIO.out_w1ts = (1 << cs);
 }
 
+/**
+ * @brief Display bitmap
+ * 
+ * Reads 16-bit bitmap from storage media and displays on screen.
+ * Supports viewport feature, only displays partial area of bitmap.
+ * Handles byte order conversion (endianness swap).
+ * If color depth is not 16-bit, uses generic drawing method.
+ * 
+ * @param bmp Pointer to bitmap object
+ */
 void ST_7796s_SPI_16Bit::fillShape(Bitmap* bmp) {
 	if (bmp->getColorDepth() == 16) {
 		Rectangle viewport = bmp->getViewport();

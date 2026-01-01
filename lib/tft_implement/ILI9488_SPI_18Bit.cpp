@@ -1,8 +1,20 @@
 #ifdef ESP32
+
+/**
+ * @file ILI9488_SPI_18Bit.cpp
+ * @brief Implementation of ILI9488 TFT display driver
+ */
+
 #include <ILI9488_SPI_18Bit.h>
 
 using namespace tft_framework;
 
+/**
+ * @brief Initialize ILI9488 display
+ *
+ * Performs software reset, configures power control, gamma correction and display settings.
+ * Sets 18-bit color mode (RGB666).
+ */
 void ILI9488_SPI_18Bit::init() {
 	pinMode(cs, OUTPUT);
 	pinMode(dc, OUTPUT);
@@ -43,6 +55,14 @@ void ILI9488_SPI_18Bit::init() {
 	writeCom(0x29);
 }
 
+/**
+ * @brief Fill rectangle area with single color
+ *
+ * Uses SPI writePattern function to quickly fill rectangle.
+ * Each pixel uses 3 bytes (R, G, B).
+ *
+ * @param r Pointer to rectangle object
+ */
 void ILI9488_SPI_18Bit::fillRect(Rectangle* r) {
 	setWindow(r);
 
@@ -60,6 +80,14 @@ void ILI9488_SPI_18Bit::fillRect(Rectangle* r) {
 	GPIO.out_w1ts = (1 << cs);
 };
 
+/**
+ * @brief Set display rotation direction
+ *
+ * Supports 8 different rotation directions.
+ * Uses 0x36 command (Memory Access Control) to set scan direction.
+ *
+ * @param rotate Rotation value (0-7)
+ */
 void ILI9488_SPI_18Bit::setRotate(uint8_t rotate) {
 	rotate %= 8;
 	if (getRotate() == rotate) {
@@ -103,6 +131,14 @@ void ILI9488_SPI_18Bit::setRotate(uint8_t rotate) {
 	}
 }
 
+/**
+ * @brief Display buffer screen content
+ *
+ * Converts buffer screen's 16-bit RGB565 data to 18-bit RGB666 format and transfers to display.
+ * Supports scaling feature.
+ *
+ * @param buf Pointer to buffer screen object
+ */
 void ILI9488_SPI_18Bit::fillShape(BufferScreen* buf) {
 	uint8_t scale = buf->getScale();
 
@@ -154,6 +190,14 @@ void ILI9488_SPI_18Bit::fillShape(BufferScreen* buf) {
 	GPIO.out_w1ts = (1 << cs);
 }
 
+/**
+ * @brief Draw single pixel point
+ *
+ * Draws a pixel point at specified coordinates.
+ * Uses 18-bit color format (one byte per color channel).
+ *
+ * @param d Pointer to dot object
+ */
 void ILI9488_SPI_18Bit::drawShape(Dot* d) {
 	uint16_t x = d->getX(), y = d->getY();
 
@@ -179,6 +223,15 @@ void ILI9488_SPI_18Bit::drawShape(Dot* d) {
 	GPIO.out_w1ts = (1 << cs);
 }
 
+/**
+ * @brief Display bitmap
+ *
+ * Reads 24-bit bitmap from storage media and displays on screen.
+ * Supports viewport feature, only displays partial area of bitmap.
+ * If color depth is not 24-bit, uses generic drawing method.
+ *
+ * @param bmp Pointer to bitmap object
+ */
 void ILI9488_SPI_18Bit::fillShape(Bitmap* bmp) {
 	if (bmp->getColorDepth() == 24) {
 		Rectangle viewport = bmp->getViewport();

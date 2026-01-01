@@ -1,9 +1,20 @@
 #if defined(__AVR_ATmega2560__) || defined(__SAM3X8E__)
 
+/**
+ * @file ILI9486_Parallel_16Bit.cpp
+ * @brief Implementation of ILI9486 TFT display driver
+ */
+
 #include <ILI9486_Parallel_16Bit.h>
 
 using namespace tft_framework;
 
+/**
+ * @brief Initialize ILI9486 display
+ * 
+ * Configures data bus pins, performs hardware reset sequence, and sends initialization command sequence.
+ * Includes power control, gamma correction, interface pixel format and display orientation settings.
+ */
 void ILI9486_Parallel_16Bit::init() {
 #ifdef __AVR_ATmega2560__
 	DDRA = 0xFF;
@@ -96,6 +107,14 @@ void ILI9486_Parallel_16Bit::init() {
 	sbi(ports[2], bitmasks[2]);
 }
 
+/**
+ * @brief Fill rectangle area with single color
+ * 
+ * After setting display window, quickly fills specified color to entire rectangle area.
+ * Uses direct bit operations for improved efficiency.
+ * 
+ * @param r Pointer to rectangle object
+ */
 void ILI9486_Parallel_16Bit::fillRect(Rectangle* r) {
 	setWindow(r);
 
@@ -110,6 +129,14 @@ void ILI9486_Parallel_16Bit::fillRect(Rectangle* r) {
 	sbi(ports[2], bitmasks[2]);
 };
 
+/**
+ * @brief Set display rotation direction
+ * 
+ * Supports 8 different rotation directions (0-7), including 4 basic directions and their mirrored versions.
+ * Uses 0x36 command (Memory Access Control) to set scan direction.
+ * 
+ * @param rotate Rotation value (0-7)
+ */
 void ILI9486_Parallel_16Bit::setRotate(uint8_t rotate) {
 	rotate %= 8;
 	if (getRotate() == rotate) {
@@ -149,6 +176,14 @@ void ILI9486_Parallel_16Bit::setRotate(uint8_t rotate) {
 	sbi(ports[2], bitmasks[2]);
 }
 
+/**
+ * @brief Display buffer screen content
+ * 
+ * Transfers buffer screen content to TFT display.
+ * Supports scaling feature, each pixel can be enlarged to scale x scale pixels.
+ * 
+ * @param buf Pointer to buffer screen object
+ */
 void ILI9486_Parallel_16Bit::fillShape(BufferScreen* buf) {
 	uint8_t scale = buf->getScale();
 
@@ -194,6 +229,14 @@ void ILI9486_Parallel_16Bit::fillShape(BufferScreen* buf) {
 	sbi(ports[2], bitmasks[2]);
 }
 
+/**
+ * @brief Draw single pixel point
+ * 
+ * Draws a pixel point at specified coordinates.
+ * Sets a 1x1 window area and writes color data.
+ * 
+ * @param d Pointer to dot object
+ */
 void ILI9486_Parallel_16Bit::drawShape(Dot* d) {
 	uint16_t x = d->getX(), y = d->getY(), color = d->getColor();
 
@@ -217,6 +260,15 @@ void ILI9486_Parallel_16Bit::drawShape(Dot* d) {
 	sbi(ports[2], bitmasks[2]);
 }
 
+/**
+ * @brief Display bitmap
+ * 
+ * Reads 16-bit bitmap from SD card or other storage media and displays on screen.
+ * Supports viewport feature, only displays partial area of bitmap.
+ * If color depth is not 16-bit, uses generic drawing method.
+ * 
+ * @param bmp Pointer to bitmap object
+ */
 void ILI9486_Parallel_16Bit::fillShape(Bitmap* bmp) {
 	if (bmp->getColorDepth() == 16) {
 		Rectangle viewport = bmp->getViewport();
