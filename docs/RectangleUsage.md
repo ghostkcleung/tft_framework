@@ -560,14 +560,23 @@ void drawCenteredRect(Screen* scr, int16_t cx, int16_t cy,
 }
 ```
 
-### Pattern 2: Clear Screen Region
+### Pattern 2: Inset Rectangle (Padding)
 ```cpp
-void clearRegion(Screen* scr, int16_t x, int16_t y, 
-                 int16_t width, int16_t height) {
-    Rectangle rect(x, y, width, height);
-    rect.setColor(0x0000);  // Black
-    rect.fill(scr);
+void drawInsetRect(Screen* scr, const Rectangle& outer, 
+                   int16_t padding, uint16_t color) {
+    Rectangle inner;
+    inner.setPoint(outer.getX() + padding, outer.getY() + padding);
+    inner.setSize(outer.getWidth() - padding * 2, 
+                  outer.getHeight() - padding * 2);
+    inner.setColor(color);
+    inner.fill(scr);
 }
+
+// Usage: Create rectangle with padding
+Rectangle outer(50, 50, 200, 150);
+outer.setColor(0xF800);  // Red border
+outer.fill(scr);
+drawInsetRect(scr, outer, 10, 0xFFFF);  // White inner with 10px padding
 ```
 
 ### Pattern 3: Screen Border
@@ -601,24 +610,29 @@ void drawScreenBorder(Screen* scr, int16_t thickness, uint16_t color) {
 }
 ```
 
-### Pattern 4: Grid Layout
+### Pattern 4: Tile Pattern
 ```cpp
-void drawGrid(Screen* scr, int16_t cellSize, uint16_t lineColor) {
-    Rectangle line;
-    line.setColor(lineColor);
+void drawTilePattern(Screen* scr, int16_t tileSize, 
+                     uint16_t color1, uint16_t color2) {
+    Rectangle tile;
+    tile.setSize(tileSize, tileSize);
     
-    // Vertical lines
-    for (int16_t x = 0; x < scr->getWidth(); x += cellSize) {
-        line.setPoint(x, 0);
-        line.setSize(1, scr->getHeight());
-        line.fill(scr);
-    }
+    int rows = scr->getHeight() / tileSize;
+    int cols = scr->getWidth() / tileSize;
     
-    // Horizontal lines
-    for (int16_t y = 0; y < scr->getHeight(); y += cellSize) {
-        line.setPoint(0, y);
-        line.setSize(scr->getWidth(), 1);
-        line.fill(scr);
+    for (int row = 0; row < rows; row++) {
+        for (int col = 0; col < cols; col++) {
+            tile.setPoint(col * tileSize, row * tileSize);
+            
+            // Alternate colors
+            if ((row + col) % 2 == 0) {
+                tile.setColor(color1);
+            } else {
+                tile.setColor(color2);
+            }
+            
+            tile.fill(scr);
+        }
     }
 }
 ```
