@@ -46,34 +46,34 @@ class Color {
 	 * @brief Get the current 16-bit color value
 	 * @return RGB565 color value
 	 */
-	uint16_t getColor();
+	uint16_t getColor() const;
 
 	/**
 	 * @brief Set color from another Color object
 	 * @param c Source Color object to copy from
 	 */
-	void setColor(Color c);
+	void setColor(const Color& c);
 
 	/**
 	 * @brief Get the red component (8-bit)
 	 * @return Red value (0-255)
 	 * @note Converted from 5-bit to 8-bit with slight precision loss
 	 */
-	uint8_t getR();
+	uint8_t getR() const;
 	
 	/**
 	 * @brief Get the green component (8-bit)
 	 * @return Green value (0-255)
 	 * @note Converted from 6-bit to 8-bit with slight precision loss
 	 */
-	uint8_t getG();
+	uint8_t getG() const;
 	
 	/**
 	 * @brief Get the blue component (8-bit)
 	 * @return Blue value (0-255)
 	 * @note Converted from 5-bit to 8-bit with slight precision loss
 	 */
-	uint8_t getB();
+	uint8_t getB() const;
 
 	/**
 	 * @brief Set the red component
@@ -101,7 +101,7 @@ class Color {
 	 * @return 24-bit RGB value (0x00RRGGBB)
 	 * @note Converted from RGB565 with slight precision loss
 	 */
-	uint32_t getRGB();
+	uint32_t getRGB() const;
 	
 	/**
 	 * @brief Set color using 24-bit RGB value
@@ -109,6 +109,40 @@ class Color {
 	 * @note Converted to RGB565 with slight precision loss
 	 */
 	void setRGB(uint32_t rgb);
+
+	/**
+	 * @brief Set color using individual RGB components
+	 * @param r Red value (0-255)
+	 * @param g Green value (0-255)
+	 * @param b Blue value (0-255)
+	 * @note More efficient than calling setR(), setG(), setB() separately
+	 */
+	void setRGB(uint8_t r, uint8_t g, uint8_t b);
+
+	// Operators
+	/**
+	 * @brief Equality operator
+	 * @param other Color to compare with
+	 * @return true if both colors have the same RGB565 value
+	 */
+	bool operator==(const Color& other) const;
+
+	/**
+	 * @brief Inequality operator
+	 * @param other Color to compare with
+	 * @return true if colors have different RGB565 values
+	 */
+	bool operator!=(const Color& other) const;
+
+	// Static color constants
+	static const Color BLACK;     ///< Black color (0x0000)
+	static const Color WHITE;     ///< White color (0xFFFF)
+	static const Color RED;       ///< Red color (0xF800)
+	static const Color GREEN;     ///< Green color (0x07E0)
+	static const Color BLUE;      ///< Blue color (0x001F)
+	static const Color YELLOW;    ///< Yellow color (0xFFE0)
+	static const Color CYAN;      ///< Cyan color (0x07FF)
+	static const Color MAGENTA;   ///< Magenta color (0xF81F)
 };
 
 #endif
