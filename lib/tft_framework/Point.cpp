@@ -8,9 +8,9 @@
 using namespace tft_framework;
 
 // Getter methods
-int16_t Point::getX() { return x; }
+int16_t Point::getX() const { return x; }
 
-int16_t Point::getY() { return y; }
+int16_t Point::getY() const { return y; }
 
 // Setter methods
 void Point::setX(int16_t x) { this->x = x; }
@@ -22,7 +22,7 @@ void Point::setPoint(int16_t x, int16_t y) {
 	this->y = y;
 }
 
-void Point::setPoint(Point p) {
+void Point::setPoint(const Point& p) {
 	x = p.x;
 	y = p.y;
 }
@@ -65,4 +65,72 @@ void Point::move(double direction, double distance) {
 	// Calculate new position using trigonometry
 	x = x + round(distance * sin(direction * M_PI / 180));
 	y = y + round(-distance * cos(direction * M_PI / 180));
+}
+
+/**
+ * @brief Offset the point by dx and dy.
+ * 
+ * @param dx Amount to offset in X direction
+ * @param dy Amount to offset in Y direction
+ */
+void Point::offset(int16_t dx, int16_t dy) {
+	x += dx;
+	y += dy;
+}
+
+/**
+ * @brief Offset the point in X direction only.
+ * 
+ * @param dx Amount to offset in X direction
+ */
+void Point::offsetX(int16_t dx) {
+	x += dx;
+}
+
+/**
+ * @brief Offset the point in Y direction only.
+ * 
+ * @param dy Amount to offset in Y direction
+ */
+void Point::offsetY(int16_t dy) {
+	y += dy;
+}
+
+/**
+ * @brief Calculate the midpoint between this point and another point.
+ * 
+ * @param p The other point
+ * @return A new Point at the midpoint between the two points
+ */
+Point Point::midPoint(const Point& p) const {
+	return Point((x + p.x) / 2, (y + p.y) / 2);
+}
+
+// Operators
+bool Point::operator==(const Point& other) const {
+	return (x == other.x && y == other.y);
+}
+
+bool Point::operator!=(const Point& other) const {
+	return !(*this == other);
+}
+
+Point Point::operator+(const Point& other) const {
+	return Point(x + other.x, y + other.y);
+}
+
+Point Point::operator-(const Point& other) const {
+	return Point(x - other.x, y - other.y);
+}
+
+Point& Point::operator+=(const Point& other) {
+	x += other.x;
+	y += other.y;
+	return *this;
+}
+
+Point& Point::operator-=(const Point& other) {
+	x -= other.x;
+	y -= other.y;
+	return *this;
 }
