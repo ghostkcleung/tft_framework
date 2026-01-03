@@ -395,7 +395,7 @@ void loop() {
 }
 ```
 
-### Example 9: Connecting Multiple Points
+### Example 9: Connecting Multiple Points (Polygon)
 ```cpp
 void connectPoints(Screen* scr, Point points[], int count, uint16_t color) {
     Line line;
@@ -409,14 +409,17 @@ void connectPoints(Screen* scr, Point points[], int count, uint16_t color) {
 }
 
 void setup() {
-    Point triangle[] = {
+    // Draw a pentagon
+    Point pentagon[] = {
         Point(160, 50),
-        Point(100, 150),
-        Point(220, 150),
-        Point(160, 50)  // Close the triangle
+        Point(220, 100),
+        Point(200, 170),
+        Point(120, 170),
+        Point(100, 100),
+        Point(160, 50)  // Close the shape
     };
     
-    connectPoints(scr, triangle, 4, 0xF800);  // Red triangle
+    connectPoints(scr, pentagon, 6, 0xF800);  // Red pentagon
 }
 ```
 
