@@ -20,6 +20,11 @@ class Shape : public Color, public Point {
 
    public:
 	/**
+	 * @brief Virtual destructor - ensures proper cleanup of derived classes
+	 */
+	virtual ~Shape() = default;
+
+	/**
 	 * @brief Pure virtual function to draw the shape on screen
 	 * @param scr Pointer to the Screen object to draw on
 	 * 
