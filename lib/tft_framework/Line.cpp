@@ -9,17 +9,25 @@
 #include "tft_framework.h"
 using namespace tft_framework;
 
-int16_t Line::getEndX() { return endPoint.getX(); }
+Line::Line(int16_t x0, int16_t y0, int16_t x1, int16_t y1) : Shape(), endPoint(x1, y1) {
+	setPoint(x0, y0);
+}
 
-int16_t Line::getEndY() { return endPoint.getY(); }
+Line::Line(const Point& start, const Point& end) : Shape(), endPoint(end) {
+	setPoint(start);
+}
+
+int16_t Line::getEndX() const { return endPoint.getX(); }
+
+int16_t Line::getEndY() const { return endPoint.getY(); }
 
 void Line::setEndX(int16_t x) { endPoint.setX(x); }
 
 void Line::setEndY(int16_t y) { endPoint.setY(y); }
 
-Point Line::getEndPoint() { return endPoint; }
+Point Line::getEndPoint() const { return endPoint; }
 
-void Line::setEndPoint(Point p) { endPoint = p; }
+void Line::setEndPoint(const Point& p) { endPoint = p; }
 
 void Line::setEndPoint(int16_t x, int16_t y) { endPoint.setPoint(x, y); }
 
@@ -86,7 +94,7 @@ void Line::draw(Screen* scr) {
 	}
 }
 
-void Line::moveTo(Point p) {
+void Line::moveTo(const Point& p) {
 	int16_t _x = p.getX() - getX() + getEndX();
 	int16_t _y = p.getY() - getY() + getEndY();
 

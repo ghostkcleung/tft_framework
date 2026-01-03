@@ -15,18 +15,38 @@ private:
     Point endPoint;  ///< End point of the line
 
 public:
+    /**
+     * @brief Default constructor
+     */
+    Line() : Shape(), endPoint() {}
+
+    /**
+     * @brief Constructor with two point coordinates
+     * @param x0 Start point X coordinate
+     * @param y0 Start point Y coordinate
+     * @param x1 End point X coordinate
+     * @param y1 End point Y coordinate
+     */
+    Line(int16_t x0, int16_t y0, int16_t x1, int16_t y1);
+
+    /**
+     * @brief Constructor with two Point objects
+     * @param start Start point
+     * @param end End point
+     */
+    Line(const Point& start, const Point& end);
 
     /**
      * @brief Get the X coordinate of the line's end point
      * @return End point X coordinate
      */
-    int16_t getEndX();
+    int16_t getEndX() const;
     
     /**
      * @brief Get the Y coordinate of the line's end point
      * @return End point Y coordinate
      */
-    int16_t getEndY();
+    int16_t getEndY() const;
 
     /**
      * @brief Set the X coordinate of the line's end point
@@ -44,13 +64,13 @@ public:
      * @brief Get the end point as a Point object
      * @return End point object
      */
-    Point getEndPoint();
+    Point getEndPoint() const;
     
     /**
      * @brief Set the end point from a Point object
      * @param p New end point
      */
-    void setEndPoint(Point p);
+    void setEndPoint(const Point& p);
     
     /**
      * @brief Set the end point coordinates
@@ -70,7 +90,7 @@ public:
      * @brief Move the line to a new start position (end point follows)
      * @param p New start point
      */
-	void moveTo ( Point p );
+	void moveTo(const Point& p);
 	
 	/**
 	 * @brief Move the line to a new start position (end point follows)
