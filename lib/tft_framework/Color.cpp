@@ -120,15 +120,6 @@ void Color::setRGB(uint8_t r, uint8_t g, uint8_t b) {
 	color = (r565 << 11) | (g565 << 5) | b565;
 }
 
-// Operators
-bool Color::operator==(const Color& other) const {
-	return color == other.color;
-}
-
-bool Color::operator!=(const Color& other) const {
-	return color != other.color;
-}
-
 // Static color constants (RGB565 values)
 const Color Color::BLACK(0x0000);      // Black:   RGB(0, 0, 0)
 const Color Color::WHITE(0xFFFF);      // White:   RGB(255, 255, 255)

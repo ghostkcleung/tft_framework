@@ -119,21 +119,6 @@ class Color {
 	 */
 	void setRGB(uint8_t r, uint8_t g, uint8_t b);
 
-	// Operators
-	/**
-	 * @brief Equality operator
-	 * @param other Color to compare with
-	 * @return true if both colors have the same RGB565 value
-	 */
-	bool operator==(const Color& other) const;
-
-	/**
-	 * @brief Inequality operator
-	 * @param other Color to compare with
-	 * @return true if colors have different RGB565 values
-	 */
-	bool operator!=(const Color& other) const;
-
 	// Static color constants
 	static const Color BLACK;     ///< Black color (0x0000)
 	static const Color WHITE;     ///< White color (0xFFFF)

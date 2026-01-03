@@ -94,49 +94,6 @@ class Point {
 	 * @param distance Distance to move in pixels
 	 */
 	virtual void move(double direction, double distance);
-
-	// Operators
-	/**
-	 * @brief Equality operator
-	 * @param other Point to compare with
-	 * @return true if both points have the same coordinates
-	 */
-	bool operator==(const Point& other) const;
-
-	/**
-	 * @brief Inequality operator
-	 * @param other Point to compare with
-	 * @return true if points have different coordinates
-	 */
-	bool operator!=(const Point& other) const;
-
-	/**
-	 * @brief Addition operator - returns a new point
-	 * @param other Point to add
-	 * @return New Point with summed coordinates
-	 */
-	Point operator+(const Point& other) const;
-
-	/**
-	 * @brief Subtraction operator - returns a new point
-	 * @param other Point to subtract
-	 * @return New Point with subtracted coordinates
-	 */
-	Point operator-(const Point& other) const;
-
-	/**
-	 * @brief Addition assignment operator
-	 * @param other Point to add
-	 * @return Reference to this point after addition
-	 */
-	Point& operator+=(const Point& other);
-
-	/**
-	 * @brief Subtraction assignment operator
-	 * @param other Point to subtract
-	 * @return Reference to this point after subtraction
-	 */
-	Point& operator-=(const Point& other);
 };
 
 #endif

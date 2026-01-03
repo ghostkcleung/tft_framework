@@ -1,6 +1,6 @@
 # Point Usage
 
-The `Point` class represents a 2D coordinate point on the screen with comprehensive manipulation capabilities. It provides efficient coordinate management, polar movement, offset operations, operator overloading, and geometric calculations.
+The `Point` class represents a 2D coordinate point on the screen with comprehensive manipulation capabilities. It provides efficient coordinate management, polar movement, offset operations, and geometric calculations.
 
 > **Important Note:** The Point class is **not a drawable object**. It only stores coordinate information and provides manipulation methods. If you need to draw a single pixel on the screen, use the [Dot class](DotUsage.md) instead.
 
@@ -148,53 +148,6 @@ Point center = a.midPoint(b); // center = (60, 70)
 - Bisecting distances
 - Centering objects between two positions
 
-## Operator Overloading
-
-### Comparison Operators
-
-```cpp
-bool operator==(const Point& other) const    // Equality
-bool operator!=(const Point& other) const    // Inequality
-```
-
-**Example:**
-```cpp
-Point p1(10, 20);
-Point p2(10, 20);
-Point p3(30, 40);
-
-if (p1 == p2) {               // true - same coordinates
-    // Points are at same location
-}
-
-if (p1 != p3) {               // true - different coordinates
-    // Points are at different locations
-}
-```
-
-### Arithmetic Operators
-
-```cpp
-Point operator+(const Point& other) const     // Vector addition
-Point operator-(const Point& other) const     // Vector subtraction
-Point& operator+=(const Point& other)         // Add and assign
-Point& operator-=(const Point& other)         // Subtract and assign
-```
-
-**Example:**
-```cpp
-Point p1(10, 20);
-Point p2(30, 40);
-
-// Create new points
-Point p3 = p1 + p2;           // p3 = (40, 60)
-Point p4 = p2 - p1;           // p4 = (20, 20) - offset from p1 to p2
-
-// Modify existing points
-p1 += Point(5, 5);            // p1 = (15, 25)
-p2 -= Point(10, 10);          // p2 = (20, 30)
-```
-
 ## Drawing Points on Screen
 
 ⚠️ **Important**: The Point class itself **cannot be drawn** on the screen. It only represents coordinate information.
@@ -234,10 +187,9 @@ See [Dot Usage](DotUsage.md) for more information on drawing pixels.
 ```cpp
 // Position an object on screen
 Point objectPos(100, 100);
-Point velocity(5, -3);
 
-// Update position each frame
-objectPos += velocity;        // Move by velocity vector
+// Update position each frame using offset
+objectPos.offset(5, -3);      // Move by delta
 
 // Center object in bounding box
 Point topLeft(50, 50);
@@ -251,8 +203,9 @@ Point center = topLeft.midPoint(bottomRight);  // center = (100, 100)
 Point player(100, 100);
 Point target(200, 150);
 
-// Calculate direction vector
-Point direction = target - player;  // (100, 50)
+// Calculate direction manually
+int16_t dx = target.getX() - player.getX();  // 100
+int16_t dy = target.getY() - player.getY();  // 50
 
 // Move towards target
 player.offset(5, 0);          // Move 5 pixels right
@@ -303,9 +256,10 @@ float t = 0.5;                // 50% along path
 Point current = start.midPoint(end);  // For t=0.5
 
 // Or calculate manually for any t value
-Point delta = end - start;
+int16_t dx = end.getX() - start.getX();
+int16_t dy = end.getY() - start.getY();
 Point current2 = start;
-current2.offset(delta.getX() * t, delta.getY() * t);
+current2.offset(dx * t, dy * t);
 ```
 
 ### Circular Movement
@@ -327,30 +281,29 @@ angle += 5;                   // Increment angle
 ### Vector Operations
 
 ```cpp
-// Calculate direction vector
+// Calculate direction vector manually
 Point from(50, 50);
 Point to(150, 100);
-Point direction = to - from;  // (100, 50)
+int16_t dx = to.getX() - from.getX();  // 100
+int16_t dy = to.getY() - from.getY();  // 50
 
 // Calculate reverse direction
-Point reverse = from - to;    // (-100, -50)
+int16_t rdx = from.getX() - to.getX();  // -100
+int16_t rdy = from.getY() - to.getY();  // -50
 
-// Scale movement (manual)
-Point movement = direction;
-movement.offset(direction.getX(), direction.getY());  // Double the vector
+// Apply movement
+from.offset(dx, dy);          // Move from to to's position
 ```
 
 ### Relative Positioning
 
 ```cpp
 Point anchor(100, 100);
-Point offset1(-20, 0);        // Left offset
-Point offset2(20, 0);         // Right offset
-Point offset3(0, -20);        // Top offset
 
-Point left = anchor + offset1;     // (80, 100)
-Point right = anchor + offset2;    // (120, 100)
-Point top = anchor + offset3;      // (100, 80)
+// Calculate positions relative to anchor
+Point left(anchor.getX() - 20, anchor.getY());      // (80, 100)
+Point right(anchor.getX() + 20, anchor.getY());     // (120, 100)
+Point top(anchor.getX(), anchor.getY() - 20);       // (100, 80)
 ```
 
 ### Path Following
@@ -368,13 +321,14 @@ int currentWaypoint = 1;
 
 // Simple waypoint following
 Point target = waypoints[currentWaypoint];
-Point direction = target - position;
+int16_t dx = target.getX() - position.getX();
+int16_t dy = target.getY() - position.getY();
 
-if (direction.getX() != 0 || direction.getY() != 0) {
+if (dx != 0 || dy != 0) {
     // Move towards waypoint
     position.offset(
-        direction.getX() > 0 ? 1 : (direction.getX() < 0 ? -1 : 0),
-        direction.getY() > 0 ? 1 : (direction.getY() < 0 ? -1 : 0)
+        dx > 0 ? 1 : (dx < 0 ? -1 : 0),
+        dy > 0 ? 1 : (dy < 0 ? -1 : 0)
     );
 }
 ```
@@ -410,17 +364,13 @@ if (position.getY() < minBounds.getY()) {
 | `getX()`, `getY()` | Instant | Const methods, zero overhead |
 | `offset*()` | Very Fast | Simple addition |
 | `move()` cardinal | Fast | Integer arithmetic only |
-| `move()` arbitrary | Moderate | Uses sin/cos |
-| `midPoint()` | Fast | Division only |
-| Operators | Fast | Simple arithmetic |
 
 ### Optimization Tips
 
 1. **Use offset methods** for simple translations instead of `move()`
 2. **Prefer cardinal directions** (0°, 90°, 180°, 270°) when using `move()`
-3. **Use operators** for vector arithmetic - they're clear and efficient
-4. **Const correctness** allows compiler optimizations
-5. **Integer arithmetic** - all coordinates are int16_t for speed
+3. **Const correctness** allows compiler optimizations
+4. **Integer arithmetic** - all coordinates are int16_t for speed
 
 **Example:**
 ```cpp
@@ -484,33 +434,31 @@ mid_y = (y1 + y2) / 2
 ```
 For odd sums, the result rounds down.
 
-### Operator Semantics
-- **Addition/Subtraction**: Treats points as 2D vectors
-- **Comparison**: Checks coordinate equality
-- **Assignment operators**: Modify the point in place, return reference for chaining
-
 ## Common Patterns
 
 ### Creating an offset from origin
 ```cpp
 Point offset(10, 20);
 Point position(100, 100);
-Point newPos = position + offset;  // (110, 120)
+Point newPos(position.getX() + offset.getX(), 
+             position.getY() + offset.getY());  // (110, 120)
 ```
 
 ### Calculating relative position
 ```cpp
 Point anchor(50, 50);
 Point object(80, 90);
-Point relative = object - anchor;  // (30, 40)
+int16_t relX = object.getX() - anchor.getX();  // 30
+int16_t relY = object.getY() - anchor.getY();  // 40
 ```
 
 ### Symmetric positioning
 ```cpp
 Point center(160, 120);
-Point offset(30, 20);
-Point topLeft = center - offset;      // (130, 100)
-Point bottomRight = center + offset;  // (190, 140)
+int16_t offsetX = 30;
+int16_t offsetY = 20;
+Point topLeft(center.getX() - offsetX, center.getY() - offsetY);      // (130, 100)
+Point bottomRight(center.getX() + offsetX, center.getY() + offsetY);  // (190, 140)
 ```
 
 ### Iterative movement
@@ -530,7 +478,7 @@ Point minBounds(0, 0);
 Point maxBounds(320, 240);
 
 // Each frame
-pos += velocity;
+pos.offset(velocity.getX(), velocity.getY());
 
 // Bounce off edges
 if (pos.getX() <= minBounds.getX() || pos.getX() >= maxBounds.getX()) {
@@ -565,14 +513,6 @@ if (pos.getY() <= minBounds.getY() || pos.getY() >= maxBounds.getY()) {
 
 ### Calculations
 - `midPoint(p)` const - Calculate midpoint
-
-### Operators
-- `==` - Compare equality
-- `!=` - Compare inequality
-- `+` - Vector addition
-- `-` - Vector subtraction
-- `+=` - Add and assign
-- `-=` - Subtract and assign
 
 ## See Also
 

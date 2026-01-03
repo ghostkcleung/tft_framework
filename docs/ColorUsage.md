@@ -176,35 +176,6 @@ c.setRGB(255, 128, 64);       // Orange
 
 **Performance Note:** `setRGB(r, g, b)` is more efficient than calling `setR()`, `setG()`, `setB()` separately, as it performs all conversions in a single operation.
 
-## Comparison Operators
-
-```cpp
-bool operator==(const Color& other) const
-bool operator!=(const Color& other) const
-```
-
-Compare colors for equality based on their RGB565 values.
-
-**Example:**
-```cpp
-Color c1(255, 0, 0);
-Color c2 = Color::RED;
-Color c3 = Color::BLUE;
-
-if (c1 == c2) {               // true - both are red
-    // Colors match
-}
-
-if (c1 != c3) {               // true - different colors
-    // Colors are different
-}
-
-// Useful for checking states
-if (object.getColor() == Color::RED) {
-    // Object is red
-}
-```
-
 ## Color Conversion and Precision
 
 ### RGB888 to RGB565 Conversion
@@ -315,7 +286,7 @@ Color getStateColor(State state) {
 State currentState = State::ACTIVE;
 Color indicatorColor = getStateColor(currentState);
 
-if (indicatorColor == Color::RED) {
+if (indicatorColor.getColor() == Color::RED.getColor()) {
     // Handle error state
 }
 ```
@@ -539,10 +510,6 @@ uint8_t r8 = (r5 << 3) | (r5 >> 2);  // Better
 - `getRGB()` const - Get 0x00RRGGBB
 - `setRGB(uint32_t)` - Set from 0x00RRGGBB
 - `setRGB(r, g, b)` - Set from components (efficient)
-
-### Operators
-- `==` - Compare equality
-- `!=` - Compare inequality
 
 ### Static Constants
 - `BLACK`, `WHITE`, `RED`, `GREEN`, `BLUE`
