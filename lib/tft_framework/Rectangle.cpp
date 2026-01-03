@@ -9,7 +9,7 @@
 #include "tft_framework.h"
 using namespace tft_framework;
 
-int16_t Rectangle::getHeight() {
+int16_t Rectangle::getHeight() const {
 	int16_t h = getEndY() - getY();
 	if (h < 0) {
 		h--;
@@ -19,7 +19,7 @@ int16_t Rectangle::getHeight() {
 	return h;
 }
 
-int16_t Rectangle::getWidth() {
+int16_t Rectangle::getWidth() const {
 	int16_t w = getEndX() - getX();
 	if (w < 0) {
 		w--;
@@ -60,7 +60,7 @@ void Rectangle::setSize(int16_t w, int16_t h) {
 	setHeight(h);
 }
 
-void Rectangle::setSize(Rectangle rect) {
+void Rectangle::setSize(const Rectangle& rect) {
 	setWidth(rect.getWidth());
 	setHeight(rect.getHeight());
 }

@@ -18,14 +18,14 @@ class Rectangle : public Line, public Fillable {
 	 * @return Width in pixels (can be negative)
 	 * @note Negative width places end point to the left of start point
 	 */
-	int16_t getWidth();
+	int16_t getWidth() const;
 	
 	/**
 	 * @brief Get the height of the rectangle
 	 * @return Height in pixels (can be negative)
 	 * @note Negative height places end point above start point
 	 */
-	int16_t getHeight();
+	int16_t getHeight() const;
 
 	/**
 	 * @brief Set the width of the rectangle
@@ -50,7 +50,7 @@ class Rectangle : public Line, public Fillable {
 	 * @brief Set size from another Rectangle object
 	 * @param rect Source Rectangle to copy dimensions from
 	 */
-	void setSize(Rectangle rect);
+	void setSize(const Rectangle& rect);
 	
 	/**
 	 * @brief Fill the rectangle with solid color
