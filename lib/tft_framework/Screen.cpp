@@ -15,6 +15,8 @@ Screen::Screen(uint16_t w, uint16_t h) {
 	this->h = h;
 	rotate = 0;
 	printBuffer = false;
+	charLength = 0;
+	ch = 0;
 	f = new Font5X7();
 	f->setColor(0xFFFF);
 }
@@ -81,36 +83,53 @@ bool Screen::isPrintBuffer() { return printBuffer; }
 void Screen::setPrintBuffer(bool buf) { printBuffer = buf; }
 
 size_t Screen::write(uint8_t data) {
-	if (data & 0b10000000) {
-		if (data & 0b01000000) {
-			uint8_t mask = 0b11000000;
-			charLength = 0;
-
-			while ((data & mask) == mask) {
-				charLength++;
-				mask >>= 1;
-				mask |= 0b10000000;
-			}
-
-			ch = data << (charLength * 8);
-			return 0;
-		} else {
-			charLength--;
-			ch += data << (charLength * 8);
-
-			if (charLength) {
-				return 0;
-			}
-
-			f->setChar(ch);
-		}
-	} else {
+	// ASCII (0xxxxxxx) - single byte character
+	if ((data & 0x80) == 0x00) {
 		f->setChar(data);
+		f->write(this);
+		return 1;
 	}
-
-	f->write(this);
-
-	return 1;
+	
+	// Start of multi-byte UTF-8 sequence
+	if ((data & 0xE0) == 0xC0) {
+		// 110xxxxx - 2-byte sequence
+		charLength = 1;
+		ch = (data & 0x1F);
+		return 1;
+	} else if ((data & 0xF0) == 0xE0) {
+		// 1110xxxx - 3-byte sequence
+		charLength = 2;
+		ch = (data & 0x0F);
+		return 1;
+	} else if ((data & 0xF8) == 0xF0) {
+		// 11110xxx - 4-byte sequence
+		charLength = 3;
+		ch = (data & 0x07);
+		return 1;
+	}
+	
+	// Continuation byte (10xxxxxx)
+	if ((data & 0xC0) == 0x80) {
+		if (charLength > 0) {
+			// Accumulate character code
+			ch = (ch << 6) | (data & 0x3F);
+			charLength--;
+			
+			// Complete character received
+			if (charLength == 0) {
+				f->setChar(ch);
+				f->write(this);
+				ch = 0;
+				return 1;
+			}
+		}
+		return 1;
+	}
+	
+	// Invalid UTF-8 sequence - reset and ignore
+	charLength = 0;
+	ch = 0;
+	return 0;
 }
 
 void Screen::resetCursor() { f->setPoint(cursor); }
