@@ -8,6 +8,10 @@
  * Circle is defined by a center point (inherited from Shape) and a radius.
  * It can be drawn as an outline or filled with solid color.
  */
+#include <stdint.h>
+#include "Fillable.h"
+#include "Shape.h"
+
 class Circle : public Shape, public Fillable {
    private:
 	uint16_t radius;  ///< Radius of the circle in pixels
@@ -23,7 +27,7 @@ class Circle : public Shape, public Fillable {
 	 * @brief Get the circle radius
 	 * @return Radius in pixels
 	 */
-	uint16_t getRadius();
+	uint16_t getRadius() const;
 
 	/**
 	 * @brief Draw the circle outline on the screen

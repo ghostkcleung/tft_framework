@@ -8,6 +8,10 @@
  * Triangle is defined by three points: the base point (inherited from Shape),
  * p2, and p3. It can be drawn as an outline or filled with solid color.
  */
+#include "Fillable.h"
+#include "Point.h"
+#include "Shape.h"
+
 class Triangle : public Shape, public Fillable {
    private:
 	Point p2, p3;  ///< Second and third vertices of the triangle
@@ -55,13 +59,13 @@ class Triangle : public Shape, public Fillable {
 	 * @brief Get the second vertex
 	 * @return Second vertex as Point object
 	 */
-	Point getP2();
+	Point getP2() const;
 	
 	/**
 	 * @brief Get the third vertex
 	 * @return Third vertex as Point object
 	 */
-	Point getP3();
+	Point getP3() const;
 	
 	/**
 	 * @brief Move all three vertices by direction and distance

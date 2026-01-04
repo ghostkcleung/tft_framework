@@ -9,6 +9,10 @@
  * horizontal radius (rx) and vertical radius (ry).
  * It can be drawn as an outline or filled with solid color.
  */
+#include <stdint.h>
+#include "Fillable.h"
+#include "Shape.h"
+
 class Ellipse : public Shape, public Fillable {
    private:
 	uint16_t rx, ry;  ///< Horizontal and vertical radii in pixels
@@ -30,13 +34,13 @@ class Ellipse : public Shape, public Fillable {
 	 * @brief Get the horizontal radius
 	 * @return Horizontal radius in pixels
 	 */
-	uint16_t getRx();
+	uint16_t getRx() const;
 	
 	/**
 	 * @brief Get the vertical radius
 	 * @return Vertical radius in pixels
 	 */
-	uint16_t getRy();
+	uint16_t getRy() const;
 
 	/**
 	 * @brief Draw the ellipse outline on the screen

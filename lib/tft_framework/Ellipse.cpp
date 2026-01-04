@@ -10,16 +10,17 @@
 
 using namespace tft_framework;
 
-uint16_t Ellipse::getRx() { return rx; }
+uint16_t Ellipse::getRx() const { return rx; }
 
-uint16_t Ellipse::getRy() { return ry; }
+uint16_t Ellipse::getRy() const { return ry; }
 
 void Ellipse::setRx(uint16_t rx) { this->rx = rx; }
 
 void Ellipse::setRy(uint16_t ry) { this->ry = ry; }
 
 void Ellipse::draw(Screen* scr) {
-	int16_t cx = getX(), cy = getY(), rx = getRx(), ry = getRy();
+	int16_t cx = getX(), cy = getY();
+	int32_t rx = getRx(), ry = getRy();
 
 	if (!rx) {
 		return;
@@ -28,10 +29,11 @@ void Ellipse::draw(Screen* scr) {
 		return;
 	}
 
-	int32_t x, y, xChange, yChange, error, aSqr, bSqr, sx, sy, cond;
+	int32_t x, y;
+	int64_t xChange, yChange, error, aSqr, bSqr, sx, sy, cond;
 
-	aSqr = (int32_t)2 * rx * rx;
-	bSqr = (int32_t)2 * ry * ry;
+	aSqr = (int64_t)2 * rx * rx;
+	bSqr = (int64_t)2 * ry * ry;
 
 	x = rx;
 	y = 0;
@@ -39,9 +41,9 @@ void Ellipse::draw(Screen* scr) {
 	xChange = 1 - 2 * rx;
 	xChange *= ry;
 	xChange *= ry;
-	yChange = (int32_t)rx * rx;
+	yChange = (int64_t)rx * rx;
 	error = 0;
-	sx = (int32_t)bSqr * rx;
+	sx = (int64_t)bSqr * rx;
 	sy = 0;
 
 	Dot d;
@@ -75,13 +77,13 @@ void Ellipse::draw(Screen* scr) {
 
 	x = 0;
 	y = ry;
-	xChange = (int32_t)ry * ry;
+	xChange = (int64_t)ry * ry;
 	yChange = 1 - 2 * ry;
 	yChange *= rx;
 	yChange *= rx;
 	error = 0;
 	sx = 0;
-	sy = (int32_t)aSqr * ry;
+	sy = (int64_t)aSqr * ry;
 
 	while (sx <= sy) {
 		d.setPoint(cx + x, cy + y);
@@ -111,7 +113,8 @@ void Ellipse::draw(Screen* scr) {
 }
 
 void Ellipse::fill(Screen* scr) {
-	int16_t cx = getX(), cy = getY(), rx = getRx(), ry = getRy();
+	int16_t cx = getX(), cy = getY();
+	int32_t rx = getRx(), ry = getRy();
 
 	if (!rx) {
 		return;
@@ -120,10 +123,11 @@ void Ellipse::fill(Screen* scr) {
 		return;
 	}
 
-	int32_t x, y, xChange, yChange, error, aSqr, bSqr, sx, sy, cond;
+	int32_t x, y;
+	int64_t xChange, yChange, error, aSqr, bSqr, sx, sy, cond;
 
-	aSqr = (int32_t)2 * rx * rx;
-	bSqr = (int32_t)2 * ry * ry;
+	aSqr = (int64_t)2 * rx * rx;
+	bSqr = (int64_t)2 * ry * ry;
 
 	x = rx;
 	y = 0;
@@ -131,9 +135,9 @@ void Ellipse::fill(Screen* scr) {
 	xChange = 1 - 2 * rx;
 	xChange *= ry;
 	xChange *= ry;
-	yChange = (int32_t)rx * rx;
+	yChange = (int64_t)rx * rx;
 	error = 0;
-	sx = (int32_t)bSqr * rx;
+	sx = (int64_t)bSqr * rx;
 	sy = 0;
 
 	Line l;
@@ -166,13 +170,13 @@ void Ellipse::fill(Screen* scr) {
 
 	x = 0;
 	y = ry;
-	xChange = (int32_t)ry * ry;
+	xChange = (int64_t)ry * ry;
 	yChange = 1 - 2 * ry;
 	yChange *= rx;
 	yChange *= rx;
 	error = 0;
 	sx = 0;
-	sy = (int32_t)aSqr * ry;
+	sy = (int64_t)aSqr * ry;
 
 	while (sx <= sy) {
 		l.setPoint(cx + x, cy + y);

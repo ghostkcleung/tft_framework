@@ -10,7 +10,7 @@
 
 using namespace tft_framework;
 
-uint16_t Circle::getRadius() { return radius; }
+uint16_t Circle::getRadius() const { return radius; }
 
 void Circle::setRadius(uint16_t r) { radius = r; }
 
@@ -64,38 +64,36 @@ void Circle::fill(Screen* scr) {
 		return;
 	}
 
-	if (r == 1) {
-		Dot d;
-		d.setPoint(*this);
-		d.draw(scr);
-		return;
-	}
-
-	int x = getX(), y = getY(), _y = 0;
-
-	uint32_t sqr = r;
-	sqr *= r;
+	int16_t xc = getX(), yc = getY();
+	int16_t x = 0, y = r;
+	int16_t d = 3 - 2 * r;
 
 	Line l;
 	l.setColor(*this);
-	l.setPoint(*this);
-	l.move(270, r - 1);
-	l.lineTo(90, r + r - 2);
-	l.draw(scr);
 
-	while (_y++ < r - 1) {
-		uint32_t sqrY = _y;
-		sqrY *= _y;
-
-		uint32_t _x = sqr;
-		_x -= sqrY;
-		_x = sqrt(_x);
-
-		l.setPoint(-_x + x, _y + y);
-		l.setEndPoint(_x + x, _y + y);
+	auto drawSpan = [&](int16_t spanX, int16_t spanY) {
+		l.setPoint(xc - spanX, yc + spanY);
+		l.setEndPoint(xc + spanX, yc + spanY);
 		l.draw(scr);
-		l.setY(y - _y);
-		l.setEndY(y - _y);
-		l.draw(scr);
+		if (spanY != 0) {
+			l.setPoint(xc - spanX, yc - spanY);
+			l.setEndPoint(xc + spanX, yc - spanY);
+			l.draw(scr);
+		}
+	};
+
+	while (y >= x) {
+		drawSpan(x, y);
+		if (x != y) {
+			drawSpan(y, x);
+		}
+
+		x++;
+		if (d > 0) {
+			y--;
+			d += 4 * (x - y) + 10;
+		} else {
+			d += 4 * x + 6;
+		}
 	}
 }

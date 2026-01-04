@@ -21,9 +21,9 @@ void Triangle::draw(Screen* scr) {
 	l.draw(scr);
 }
 
-Point Triangle::getP2() { return p2; }
+Point Triangle::getP2() const { return p2; }
 
-Point Triangle::getP3() { return p3; }
+Point Triangle::getP3() const { return p3; }
 
 void Triangle::setP2(Point p2) { this->p2 = p2; }
 
@@ -41,7 +41,8 @@ void Triangle::move(double direction, double distance) {
 
 void Triangle::fill(Screen* scr) {
 	int16_t x0 = getX(), y0 = getY(), x1 = getP2().getX(), y1 = getP2().getY(),
-			x2 = getP3().getX(), y2 = getP3().getY(), a, b, y, last;
+			x2 = getP3().getX(), y2 = getP3().getY();
+	int32_t a, b;
 
 	Line l;
 	l.setColor(*this);
@@ -60,56 +61,111 @@ void Triangle::fill(Screen* scr) {
 	}
 
 	if (y0 == y2) {
-		a = b = x0;
-		if (x1 < a)
-			a = x1;
-		else if (x1 > b)
-			b = x1;
-		if (x2 < a)
-			a = x2;
-		else if (x2 > b)
-			b = x2;
+		int32_t minX = x0, maxX = x0;
+		if (x1 < minX)
+			minX = x1;
+		else if (x1 > maxX)
+			maxX = x1;
+		if (x2 < minX)
+			minX = x2;
+		else if (x2 > maxX)
+			maxX = x2;
 
-		l.setPoint(a, y0);
-		l.lineTo(90, b - a + 1);
+		l.setPoint(static_cast<int16_t>(minX), y0);
+		l.lineTo(90, static_cast<double>(maxX - minX + 1));
 		l.draw(scr);
 		return;
 	}
 
+	// Flat-top triangle (avoids division by zero when y0 == y1)
+	if (y0 == y1) {
+		const int16_t dy02 = y2 - y0;
+		const int16_t dy12 = y2 - y1;  // same as dy02
+		const int16_t dx02 = x2 - x0;
+		const int16_t dx12 = x2 - x1;
+
+		for (int16_t y = y0; y <= y2; y++) {
+			a = x0 + (int32_t)dx02 * (y - y0) / dy02;
+			b = x1 + (int32_t)dx12 * (y - y1) / dy12;
+
+			if (a > b) {
+				int32_t t = a;
+				a = b;
+				b = t;
+			}
+
+			l.setPoint(static_cast<int16_t>(a), y);
+			l.lineTo(90, static_cast<double>(b - a + 1));
+
+			l.draw(scr);
+		}
+		return;
+	}
+
+	// Flat-bottom triangle (avoids division by zero when y1 == y2)
+	if (y1 == y2) {
+		const int16_t dy01 = y1 - y0;
+		const int16_t dy02 = y2 - y0;  // same as dy01
+		const int16_t dx01 = x1 - x0;
+		const int16_t dx02 = x2 - x0;
+
+		for (int16_t y = y0; y <= y2; y++) {
+			a = x0 + (int32_t)dx01 * (y - y0) / dy01;
+			b = x0 + (int32_t)dx02 * (y - y0) / dy02;
+
+			if (a > b) {
+				int32_t t = a;
+				a = b;
+				b = t;
+			}
+
+			l.setPoint(static_cast<int16_t>(a), y);
+			l.lineTo(90, static_cast<double>(b - a + 1));
+
+			l.draw(scr);
+		}
+		return;
+	}
+
+	// General triangle
 	int16_t dx01 = x1 - x0, dy01 = y1 - y0, dx02 = x2 - x0, dy02 = y2 - y0,
 			dx12 = x2 - x1, dy12 = y2 - y1;
 	int32_t sa = 0, sb = 0;
+	int16_t last = (y1 == y2) ? y1 : y1 - 1;
 
-	if (y1 == y2)
-		last = y1;
-	else
-		last = y1 - 1;
-
-	for (y = y0; y <= last; y++) {
+	for (int16_t y = y0; y <= last; y++) {
 		a = x0 + sa / dy01;
 		b = x0 + sb / dy02;
 		sa += dx01;
 		sb += dx02;
 
-		if (a > b) swap_16(a, b);
-		l.setPoint(a, y);
-		l.lineTo(90, b - a + 1);
+		if (a > b) {
+			int32_t t = a;
+			a = b;
+			b = t;
+		}
+		l.setPoint(static_cast<int16_t>(a), y);
+		l.lineTo(90, static_cast<double>(b - a + 1));
 
 		l.draw(scr);
 	}
 
-	sa = (int32_t)dx12 * (y - y1);
-	sb = (int32_t)dx02 * (y - y0);
-	for (; y <= y2; y++) {
+	sa = (int32_t)dx12 * (last + 1 - y1);
+	sb = (int32_t)dx02 * (last + 1 - y0);
+	for (int16_t y = last + 1; y <= y2; y++) {
 		a = x1 + sa / dy12;
 		b = x0 + sb / dy02;
 		sa += dx12;
 		sb += dx02;
 
-		if (a > b) swap_16(a, b);
+		if (a > b) {
+			int32_t t = a;
+			a = b;
+			b = t;
+		}
 
-		l.setPoint(a, y);
-		l.lineTo(90, b - a + 1);
+		l.setPoint(static_cast<int16_t>(a), y);
+		l.lineTo(90, static_cast<double>(b - a + 1));
 
 		l.draw(scr);
 	}
